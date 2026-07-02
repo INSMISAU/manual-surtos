@@ -17279,6 +17279,36 @@ var DISEASES={
     "p",
     "Quando necessário, o Ministério da Saúde pode envolver outros parceiros nacionais e internacionais para apoio técnico e logístico, especialmente em surtos de grandes proporções ou de doenças emergentes e reemergentes. Manual para DETECÇÃO E INVESTIGAÇÃO DE SURTOS EM MOÇAMBIQUE MAIO DE 2026"
    ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "Esta secção enquadra a investigação de surtos em Moçambique — porque importam, o que o manual propõe e a quem se destina."
+   ],
+   [
+    "li",
+    "Panorama geral da ocorrência de surtos em"
+   ],
+   [
+    "li",
+    "Objectivos do Manual"
+   ],
+   [
+    "li",
+    "Princípios orientadores da investigação"
+   ],
+   [
+    "li",
+    "Integração com normas nacionais e"
+   ],
+   [
+    "li",
+    "Público-alvo"
+   ],
+   [
+    "li",
+    "Quem deve investigar um surto?"
+   ]
   ]
  },
  "s2": {
@@ -17316,6 +17346,16 @@ var DISEASES={
    [
     "p",
     "Nivel Distrital Nível Provincial Nível Central Investigação"
+   ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "As competências que os profissionais de saúde precisam de ter e o fluxo de notificação e resposta quando surge um surto."
+   ],
+   [
+    "p",
+    "profissionais de saúde e fluxo de notificação e resposta a surtos A investigação de surtos de doenças exige uma abordagem estruturada e multidisciplinar para garantir uma resposta rápida e eficaz. Este capítulo descreve as…"
    ]
   ]
  },
@@ -17591,6 +17631,36 @@ var DISEASES={
     "p",
     "Manual para DETECÇÃO E INVESTIGAÇÃO DE SURTOS EM MOÇAMBIQUE MAIO DE 2026"
    ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "O que é um surto, porque e quando ocorre, como detetá-lo a tempo (limiares e curva epidemiológica) e os tipos de surto."
+   ],
+   [
+    "li",
+    "Definição de surto"
+   ],
+   [
+    "li",
+    "Porque ocorrem os surtos?"
+   ],
+   [
+    "li",
+    "Quando ocorre um surto?"
+   ],
+   [
+    "li",
+    "Importância da deteção atempada e investigação de"
+   ],
+   [
+    "li",
+    "Como identificar um surto?"
+   ],
+   [
+    "li",
+    "Curva epidemiológica e tipos de surtos"
+   ]
   ]
  },
  "s4": {
@@ -17668,6 +17738,16 @@ var DISEASES={
    [
     "p",
     "A avaliação clínica precisa e, quando possível, a confirmação laboratorial são fundamentais para orientar respostas adequadas em saúde pública e garantir um controlo eficaz dos surtos."
+   ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "A vigilância organizada por síndromes: agrupar doenças com sintomas semelhantes para detetar e responder mais depressa."
+   ],
+   [
+    "li",
+    "Doenças Febris Agudas Exantemáticas"
    ]
   ]
  },
@@ -18135,6 +18215,20 @@ var DISEASES={
     "p",
     "Esta divulgação contribui para o corpo de conhecimento epidemiológico em Moçambique e oferece um recurso valioso para futuras investigações e respostas a surtos. A elaboração do relatório técnico e a comunicação dos resultados completam a resposta ao surto,"
    ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "Como conduzir uma investigação de surto no terreno, passo a passo — dos aspetos operacionais ao relatório final."
+   ],
+   [
+    "li",
+    "Aspectos operacionais para o trabalho de campo"
+   ],
+   [
+    "li",
+    "Conduzindo uma investigação de surto"
+   ]
   ]
  },
  "s6": {
@@ -18204,6 +18298,16 @@ var DISEASES={
    [
     "p",
     "Manual de Vigilância do Sarampo e Rubéola . Ministério da Saúde, Direcção Nacional de Saú\u0002de Pública, Departamento de Vigilância em Saúde, 1ª edição"
+   ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "As considerações éticas na investigação de surtos: consentimento informado, confidencialidade e proteção dos direitos das populações."
+   ],
+   [
+    "p",
+    "As considerações éticas durante as investigações de surtos são fundamentais para proteger os direitos das populações afetadas, assegurar a justiça e promover a confiança nas respostas de saúde pública, daí que em função da…"
    ]
   ]
  },
@@ -18299,6 +18403,16 @@ var DISEASES={
     "p",
     "A compreensão das doenças zoonóticas é crucial na gestão de surtos, especialmente em áreas onde a interação homem\u0002animal é frequente."
    ]
+  ],
+  "resumo": [
+   [
+    "p",
+    "Principais conceitos epidemiológicos e a lista de abreviaturas usadas no manual."
+   ],
+   [
+    "p",
+    "Abreviaturas Abreviatura Significado BSL Nível de Biossegurança (Biosafety Level) CDC Centros para Controlo e Prevenção de Doenças dos EUA (Centers for Disease Control and pre\u0002vention) CHIKV Vírus da Chikungunya (Chikungunya…"
+   ]
   ]
  }
 };var ICONS={
@@ -18347,9 +18461,13 @@ function renderStructure(){
  window.scrollTo(0,0);
 }
 function renderSection(id){var s=SECTIONS[id];if(!s){renderStructure();return;}
- document.getElementById('app').innerHTML=
- '<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderStructure()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Estrutura</button><span>Manual</span><span class="spacer"></span></div><h1 class="page-title">'+s.title+'</h1></header>'+
- '<main class="body"><div class="note">Texto reproduzido do Manual Nacional (pendente de validação do INS).</div>'+renderBlocks(s.blocks)+'<p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("renderStructure()");
+ document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderStructure()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Estrutura</button><span>Manual</span><span class="spacer"></span></div><h1 class="page-title">'+s.title+'</h1><p class="page-sub">Resumo · toque em «Ver texto completo» para o detalhe</p></header>'+
+ '<main class="body">'+renderBlocks(s.resumo||s.blocks)+'<button class="fullbtn" style="margin-top:14px" onclick="renderSectionFull(\''+id+'\')"><svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg> Ver texto completo</button><p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("renderStructure()");
+ window.scrollTo(0,0);
+}
+function renderSectionFull(id){var s=SECTIONS[id];if(!s){renderStructure();return;}
+ document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderSection(\''+id+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Resumo</button><span>Texto completo</span><span class="spacer"></span></div><h1 class="page-title">'+s.title+'</h1></header>'+
+ '<main class="body"><div class="note">Texto reproduzido <b>integralmente</b> do Manual Nacional (pendente de validação do INS).</div>'+renderBlocks(s.blocks)+'<p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("renderSection('"+id+"')");
  window.scrollTo(0,0);
 }
 function renderSindromes(){

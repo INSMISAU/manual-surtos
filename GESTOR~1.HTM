@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestor de Conteúdos — Manual de Surtos · INS</title>
+<style>
+:root{
+  --azul:#0f5b78; --azul2:#0b465d; --verde:#1f8a5b; --verde2:#166b46;
+  --laranja:#c9762a; --vermelho:#b4402f; --cinza:#f4f6f8; --linha:#e2e8ec;
+  --txt:#1c2b33; --txt2:#5a6b74; --branco:#fff; --amarelo:#c9992a;
+  --sombra:0 1px 3px rgba(10,40,60,.08),0 4px 16px rgba(10,40,60,.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--txt);background:var(--cinza);font-size:15px;line-height:1.5}
+a{color:var(--azul);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:8px;font-size:14px;padding:9px 14px;font-weight:600}
+button:disabled{opacity:.45;cursor:not-allowed}
+.btn-p{background:var(--azul);color:#fff}
+.btn-p:hover{background:var(--azul2)}
+.btn-g{background:var(--verde);color:#fff}
+.btn-g:hover{background:var(--verde2)}
+.btn-o{background:#fff;color:var(--azul);border:1.5px solid var(--linha)}
+.btn-o:hover{border-color:var(--azul)}
+.btn-w{background:var(--laranja);color:#fff}
+.btn-r{background:#fff;color:var(--vermelho);border:1.5px solid #e9cfc9}
+input,select,textarea{font-family:inherit;font-size:14px;padding:9px 11px;border:1.5px solid var(--linha);border-radius:8px;width:100%;background:#fff;color:var(--txt)}
+textarea{resize:vertical;line-height:1.55}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--azul)}
+label{font-weight:600;font-size:13px;color:var(--txt2);display:block;margin:0 0 5px}
+
+/* LOGIN */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:linear-gradient(135deg,#0f5b78,#0b465d)}
+.login-card{background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25);max-width:430px;width:100%;padding:34px 30px}
+.login-card h1{font-size:20px;margin:0 0 4px}
+.login-card .sub{color:var(--txt2);font-size:13.5px;margin:0 0 22px}
+.brand-badge{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--azul);letter-spacing:.5px;margin-bottom:16px}
+.brand-badge .dot{width:26px;height:26px;border-radius:7px;background:var(--azul);color:#fff;display:grid;place-items:center;font-size:13px}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 18px}
+.role{border:1.5px solid var(--linha);border-radius:10px;padding:11px;cursor:pointer;transition:.12s}
+.role:hover{border-color:var(--azul)}
+.role.sel{border-color:var(--azul);background:#eef6f9;box-shadow:inset 0 0 0 1px var(--azul)}
+.role b{display:block;font-size:14px}
+.role span{font-size:11.5px;color:var(--txt2)}
+
+/* APP LAYOUT */
+#app{display:none;min-height:100vh}
+.app-grid{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+.side{background:var(--azul2);color:#dce9ee;padding:16px 12px;display:flex;flex-direction:column;gap:2px}
+.side .logo{display:flex;align-items:center;gap:9px;font-weight:800;color:#fff;padding:6px 8px 16px;font-size:15px}
+.side .logo .dot{width:28px;height:28px;border-radius:8px;background:#fff;color:var(--azul);display:grid;place-items:center}
+.nav a{display:flex;align-items:center;gap:10px;color:#c4dae2;padding:10px 12px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer}
+.nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav a.active{background:#fff;color:var(--azul)}
+.nav a .ic{width:18px;text-align:center}
+.nav .sep{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#7fa7b5;padding:14px 12px 6px;font-weight:700}
+.side .foot{margin-top:auto;font-size:11.5px;color:#8fb2bf;padding:10px 8px;border-top:1px solid rgba(255,255,255,.12)}
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--linha);padding:11px 22px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:20}
+.topbar h2{font-size:16px;margin:0;flex:1}
+.who{display:flex;align-items:center;gap:9px;font-size:13px}
+.who .av{width:32px;height:32px;border-radius:50%;background:var(--azul);color:#fff;display:grid;place-items:center;font-weight:700}
+.who .role-tag{background:#eef6f9;color:var(--azul);border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700}
+.content{padding:22px;max-width:1080px;width:100%}
+
+/* CARDS / TABLES */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:22px}
+.card{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--sombra)}
+.card .n{font-size:28px;font-weight:800;color:var(--azul)}
+.card .l{font-size:12.5px;color:var(--txt2);font-weight:600}
+.panel{background:#fff;border-radius:12px;box-shadow:var(--sombra);overflow:hidden;margin-bottom:20px}
+.panel-h{padding:13px 18px;border-bottom:1px solid var(--linha);font-weight:700;display:flex;align-items:center;gap:10px}
+.panel-h .flex{flex:1}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;padding:13px 18px;border-bottom:1px solid var(--linha)}
+.toolbar input,.toolbar select{width:auto;min-width:150px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);padding:10px 18px;border-bottom:1px solid var(--linha)}
+td{padding:11px 18px;border-bottom:1px solid var(--linha);font-size:14px;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:#fafcfd}
+.chip{display:inline-block;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700}
+.chip.pub{background:#e5f4ec;color:var(--verde2)}
+.chip.rev{background:#fdf3e2;color:var(--laranja)}
+.chip.rasc{background:#eef1f3;color:var(--txt2)}
+.chip.aprov{background:#e6eefb;color:#2b5bb4}
+.mut{color:var(--txt2);font-size:12.5px}
+
+/* EDITOR */
+.editor-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.editor-head h1{font-size:20px;margin:0;flex:1;min-width:200px}
+.field{background:#fff;border-radius:12px;box-shadow:var(--sombra);padding:15px 18px;margin-bottom:14px}
+.field .fh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.field .fh label{margin:0;font-size:14px;color:var(--txt);flex:1}
+.field .fh .oblig{color:var(--vermelho);font-size:11px;font-weight:700}
+.imgs{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.imgs .thumb{position:relative;width:88px;height:66px;border-radius:8px;overflow:hidden;border:1.5px solid var(--linha)}
+.imgs .thumb img{width:100%;height:100%;object-fit:cover}
+.imgs .thumb button{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;width:20px;height:20px;padding:0;font-size:12px;line-height:1}
+.addimg{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--azul);cursor:pointer;font-weight:600;padding:6px 10px;border:1.5px dashed var(--linha);border-radius:8px}
+.addimg:hover{border-color:var(--azul)}
+.savebar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--linha);padding:12px 18px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;box-shadow:0 -4px 14px rgba(10,40,60,.06);border-radius:0 0 12px 12px;margin-top:4px}
+.savebar .flex{flex:1}
+.wf{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt2)}
+.wf .step{padding:3px 9px;border-radius:20px;background:#eef1f3;font-weight:700}
+.wf .step.on{background:var(--azul);color:#fff}
+.wf .arr{color:#bcc9cf}
+
+/* modal / preview */
+.modal-bg{position:fixed;inset:0;background:rgba(10,30,40,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal{background:#fff;border-radius:14px;max-width:720px;width:100%;max-height:88vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.modal-h{padding:15px 20px;border-bottom:1px solid var(--linha);display:flex;align-items:center;gap:10px;position:sticky;top:0;background:#fff}
+.modal-h h3{margin:0;font-size:16px;flex:1}
+.modal-b{padding:18px 22px}
+.prev-sec{margin-bottom:16px}
+.prev-sec h4{margin:0 0 6px;color:var(--azul);font-size:14px;border-bottom:2px solid #eef6f9;padding-bottom:4px}
+.prev-sec p{margin:0 0 6px;white-space:pre-wrap;font-size:13.5px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--txt);color:#fff;padding:11px 20px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:80;transition:.3s;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.empty{text-align:center;color:var(--txt2);padding:40px 20px}
+.help{background:#eef6f9;border-left:4px solid var(--azul);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--azul2);margin-bottom:18px}
+@media(max-width:760px){
+  .app-grid{grid-template-columns:1fr}
+  .side{flex-direction:row;flex-wrap:wrap;position:sticky;top:0;z-index:30}
+  .side .foot{display:none}
+  .nav{display:flex;flex-wrap:wrap;gap:4px}
+  .nav .sep{display:none}
+  .content{padding:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="login">
+  <div class="login-card">
+    <div class="brand-badge"><span class="dot">INS</span> MANUAL DE SURTOS</div>
+    <h1>Gestor de Conteúdos</h1>
+    <p class="sub">Plataforma de gestão do Manual para Detecção e Investigação de Surtos. Entre com o seu perfil para editar e publicar conteúdos.</p>
+    <label>Escolha o perfil de acesso (demonstração)</label>
+    <div class="roles" id="roles"></div>
+    <label>O seu nome</label>
+    <input id="loginName" placeholder="ex.: Percília Muianga" value="">
+    <div style="margin-top:16px"><button class="btn-p" style="width:100%" onclick="doLogin()">Entrar</button></div>
+    <p class="mut" style="margin-top:14px;text-align:center">Demonstração local — os dados ficam guardados neste navegador. A ligação ao servidor/API é a fase seguinte.</p>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app">
+ <div class="app-grid">
+  <aside class="side">
+    <div class="logo"><span class="dot">INS</span> Surtos CMS</div>
+    <nav class="nav" id="nav">
+      <a data-view="painel" class="active"><span class="ic">▤</span> Painel</a>
+      <div class="sep">Conteúdo</div>
+      <a data-view="doencas"><span class="ic">✚</span> Doenças</a>
+      <a data-view="sindromes"><span class="ic">◆</span> Síndromes</a>
+      <a data-view="seccoes"><span class="ic">§</span> Secções</a>
+      <a data-view="glossario"><span class="ic">A</span> Glossário</a>
+      <div class="sep">Gestão</div>
+      <a data-view="emendas"><span class="ic">⟳</span> Emendas / Versões</a>
+      <a data-view="ficheiros"><span class="ic">▣</span> Ficheiros</a>
+      <a data-view="publicar"><span class="ic">↥</span> Publicar / Exportar</a>
+      <a data-view="utilizadores" id="navUsers"><span class="ic">☺</span> Utilizadores</a>
+    </nav>
+    <div class="foot">Manual de Surtos · INS/MISAU<br>Demo do gestor de conteúdos</div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h2 id="viewTitle">Painel</h2>
+      <div class="who">
+        <span class="role-tag" id="whoRole">—</span>
+        <span id="whoName">—</span>
+        <span class="av" id="whoAv">?</span>
+        <button class="btn-o" onclick="logout()" style="padding:6px 12px">Sair</button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+ </div>
+</div>
+
+<!-- preview / emenda modal -->
+<div class="modal-bg" id="modalBg"><div class="modal">
+  <div class="modal-h"><h3 id="modalTitle">Pré-visualização</h3><button class="btn-o" onclick="closeModal()" style="padding:5px 11px">Fechar</button></div>
+  <div class="modal-b" id="modalBody"></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="cms_data.js"></script>
+<script>
+/* ============ ESTADO ============ */
+const ROLES = {
+  admin:{n:"Administrador",d:"Acesso total, gere utilizadores",can:["edit","review","publish","users"]},
+  editor:{n:"Editor",d:"Cria e edita, submete p/ revisão",can:["edit"]},
+  revisor:{n:"Revisor",d:"Revê e aprova conteúdo",can:["review"]},
+  publicador:{n:"Publicador",d:"Publica o que foi aprovado",can:["publish"]},
+};
+const STORE_KEY="ins_cms_v1";
+let DB=null, USER=null, VIEW="painel", curSlug=null;
+
+/* ============ PERSISTÊNCIA ============ */
+function loadDB(){
+  let saved=null;
+  try{ saved=JSON.parse(localStorage.getItem(STORE_KEY)); }catch(e){}
+  if(saved && saved.diseases){ DB=saved; return; }
+  // seed a partir de cms_data.js
+  const s=window.CMS_SEED;
+  DB={
+    diseases:s.diseases,
+    field_order:s.field_order,
+    field_label:s.field_label,
+    sindromes:s.sindromes,
+    emendas:[],
+    glossario:seedGloss(),
+    seccoes:seedSeccoes(),
+    ficheiros:[]
+  };
+  saveDB();
+}
+function saveDB(){ try{ localStorage.setItem(STORE_KEY,JSON.stringify(DB)); }catch(e){ toast("Aviso: memória do navegador cheia"); } }
+function seedGloss(){return [
+  {termo:"Surto",def:"Ocorrência de casos de uma doença em número superior ao esperado numa área e período determinados."},
+  {termo:"Caso suspeito",def:"Pessoa que preenche os critérios clínicos/epidemiológicos definidos, ainda sem confirmação laboratorial."},
+  {termo:"Caso confirmado",def:"Caso confirmado por método laboratorial ou por critério definido para a doença."},
+  {termo:"Definição de caso",def:"Conjunto de critérios usados para classificar uma pessoa como caso (suspeito, provável, confirmado)."},
+];}
+function seedSeccoes(){return [
+  {titulo:"Introdução",resumo:"Enquadramento e objectivos do manual.",estado:"Publicado",ordem:1},
+  {titulo:"Como usar o manual",resumo:"Orientações de navegação e utilização.",estado:"Publicado",ordem:2},
+  {titulo:"Vigilância e notificação",resumo:"Princípios de vigilância e fluxos de notificação.",estado:"Publicado",ordem:3},
+  {titulo:"Investigação de surtos",resumo:"Passos da investigação de surtos no terreno.",estado:"Publicado",ordem:4},
+];}
+
+/* ============ LOGIN ============ */
+function buildRoles(){
+  const box=document.getElementById('roles');
+  box.innerHTML=Object.entries(ROLES).map(([k,r],i)=>
+    `<div class="role${i===0?' sel':''}" data-role="${k}" onclick="pickRole('${k}')"><b>${r.n}</b><span>${r.d}</span></div>`).join('');
+}
+let selRole="admin";
+function pickRole(k){ selRole=k; document.querySelectorAll('.role').forEach(e=>e.classList.toggle('sel',e.dataset.role===k)); }
+function doLogin(){
+  const name=(document.getElementById('loginName').value||"").trim()||ROLES[selRole].n;
+  USER={role:selRole,name:name};
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('whoName').textContent=name;
+  document.getElementById('whoRole').textContent=ROLES[selRole].n;
+  document.getElementById('whoAv').textContent=name.trim()[0]?.toUpperCase()||"?";
+  document.getElementById('navUsers').style.display = can("users")?"flex":"none";
+  render("painel");
+}
+function logout(){ USER=null; document.getElementById('app').style.display='none'; document.getElementById('login').style.display='flex'; }
+function can(x){ return USER && ROLES[USER.role].can.includes(x); }
+
+/* ============ NAV ============ */
+document.getElementById('nav').addEventListener('click',e=>{
+  const a=e.target.closest('a'); if(!a)return; render(a.dataset.view);
+});
+function setActive(v){ document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active',a.dataset.view===v)); }
+const TITLES={painel:"Painel",doencas:"Doenças",sindromes:"Síndromes",seccoes:"Secções",glossario:"Glossário",emendas:"Emendas / Versões",ficheiros:"Ficheiros",publicar:"Publicar / Exportar",utilizadores:"Utilizadores",editar:"Editar doença"};
+function render(v){
+  VIEW=v; if(v!=="editar"){ setActive(v); }
+  document.getElementById('viewTitle').textContent=TITLES[v]||v;
+  const c=document.getElementById('content');
+  if(v==="painel") c.innerHTML=viewPainel();
+  else if(v==="doencas") c.innerHTML=viewDoencas();
+  else if(v==="sindromes") c.innerHTML=viewSindromes();
+  else if(v==="seccoes") c.innerHTML=viewSeccoes();
+  else if(v==="glossario") c.innerHTML=viewGlossario();
+  else if(v==="emendas") c.innerHTML=viewEmendas();
+  else if(v==="ficheiros") c.innerHTML=viewFicheiros();
+  else if(v==="publicar") c.innerHTML=viewPublicar();
+  else if(v==="utilizadores") c.innerHTML=viewUsers();
+  else if(v==="editar") c.innerHTML=viewEditar(curSlug);
+  window.scrollTo(0,0);
+}
+
+/* ============ HELPERS ============ */
+function estChip(e){
+  const m={"Publicado":"pub","Em revisão":"rev","Rascunho":"rasc","Aprovado":"aprov"};
+  return `<span class="chip ${m[e]||'rasc'}">${e}</span>`;
+}
+function diseaseArr(){ return Object.values(DB.diseases); }
+function countBy(est){ return diseaseArr().filter(d=>d.estado===est).length; }
+function esc(s){ return (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ============ PAINEL ============ */
+function viewPainel(){
+  const t=diseaseArr().length;
+  const em=DB.emendas.slice(-6).reverse();
+  return `
+  <div class="help">Bem-vindo(a), <b>${esc(USER.name)}</b>. Está no perfil <b>${ROLES[USER.role].n}</b>. Aqui gere todo o conteúdo do manual — as alterações geram automaticamente uma nova versão e ficam registadas nas <b>Emendas</b>.</div>
+  <div class="cards">
+    <div class="card"><div class="n">${t}</div><div class="l">Doenças no manual</div></div>
+    <div class="card"><div class="n">${countBy("Publicado")}</div><div class="l">Publicadas</div></div>
+    <div class="card"><div class="n">${countBy("Em revisão")}</div><div class="l">Em revisão</div></div>
+    <div class="card"><div class="n">${countBy("Rascunho")+countBy("Aprovado")}</div><div class="l">Rascunho / aprovadas</div></div>
+    <div class="card"><div class="n">${DB.sindromes.length}</div><div class="l">Síndromes</div></div>
+    <div class="card"><div class="n">${DB.emendas.length}</div><div class="l">Emendas registadas</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span class="flex">Últimas emendas</span><button class="btn-o" onclick="render('emendas')">Ver todas</button></div>
+    ${em.length? `<table><thead><tr><th>Data</th><th>Conteúdo</th><th>Versão</th><th>Autor</th><th>Descrição</th></tr></thead><tbody>
+      ${em.map(e=>`<tr><td class="mut">${e.data}</td><td><b>${esc(e.alvo)}</b></td><td>v${e.versao}</td><td>${esc(e.autor)}</td><td class="mut">${esc(e.desc)}</td></tr>`).join('')}
+    </tbody></table>`
+    : `<div class="empty">Ainda não há emendas. Edite uma doença para gerar a primeira versão nova.</div>`}
+  </div>`;
+}
+
+/* ============ DOENÇAS ============ */
+function viewDoencas(){
+  const sinOpts=["<option value=''>Todas as síndromes</option>"].concat(DB.sindromes.map(s=>`<option>${esc(s)}</option>`)).join('');
+  return `
+  <div class="panel">
+    <div class="toolbar">
+      <input id="q" placeholder="Pesquisar doença…" oninput="filterDoe()" style="flex:1;min-width:200px">
+      <select id="fSin" onchange="filterDoe()">${sinOpts}</select>
+      <select id="fEst" onchange="filterDoe()">
+        <option value="">Todos os estados</option><option>Publicado</option><option>Em revisão</option><option>Aprovado</option><option>Rascunho</option>
+      </select>
+    </div>
+    <table>
+      <thead><tr><th>Doença</th><th>Síndrome</th><th>Estado</th><th>Versão</th><th style="text-align:right">Ação</th></tr></thead>
+      <tbody id="doeBody">${rowsDoe(diseaseArr())}</tbody>
+    </table>
+  </div>`;
+}
+function rowsDoe(arr){
+  if(!arr.length) return `<tr><td colspan="5"><div class="empty">Nenhuma doença encontrada.</div></td></tr>`;
+  return arr.sort((a,b)=>a.nome.localeCompare(b.nome)).map(d=>`
+    <tr>
+      <td><b>${esc(d.nome)}</b></td>
+      <td class="mut">${esc(d.sindrome||'—')}</td>
+      <td>${estChip(d.estado)}</td>
+      <td class="mut">v${d.versao}</td>
+      <td style="text-align:right"><button class="btn-o" onclick="editDoe('${d.slug}')">Abrir</button></td>
+    </tr>`).join('');
+}
+function filterDoe(){
+  const q=(document.getElementById('q').value||"").toLowerCase();
+  const s=document.getElementById('fSin').value, e=document.getElementById('fEst').value;
+  let arr=diseaseArr().filter(d=>
+    (!q||d.nome.toLowerCase().includes(q)) && (!s||d.sindrome===s) && (!e||d.estado===e));
+  document.getElementById('doeBody').innerHTML=rowsDoe(arr);
+}
+function editDoe(slug){ curSlug=slug; render("editar"); }
+
+/* ============ EDITOR DE DOENÇA ============ */
+function viewEditar(slug){
+  const d=DB.diseases[slug]; if(!d) return `<div class="empty">Doença não encontrada. <a onclick="render('doencas')">Voltar</a></div>`;
+  const sinOpts=DB.sindromes.map(s=>`<option ${s===d.sindrome?'selected':''}>${esc(s)}</option>`).join('');
+  const fields=DB.field_order.map((f,i)=>{
+    const lbl=DB.field_label[f]; const val=d.fields[f]||"";
+    const imgs=(d.imagens||[]).filter(im=>im.field===f);
+    return `
+    <div class="field">
+      <div class="fh"><label>${lbl}</label>${['pontos_chave','definicao_caso'].includes(f)?'<span class="oblig">obrigatório</span>':''}</div>
+      <textarea id="fld_${f}" rows="${Math.min(14,Math.max(3,Math.round(val.length/70)+2))}" ${can('edit')?'':'readonly'}>${esc(val)}</textarea>
+      <div class="imgs" id="imgs_${f}">
+        ${imgs.map((im,ix)=>`<div class="thumb"><img src="${im.data}" alt=""><button onclick="rmImg('${slug}','${f}',${DB.diseases[slug].imagens.indexOf(im)})">×</button></div>`).join('')}
+        ${can('edit')?`<label class="addimg">+ Adicionar foto<input type="file" accept="image/*" style="display:none" onchange="addImg('${slug}','${f}',this)"></label>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  return `
+  <div class="editor-head">
+    <button class="btn-o" onclick="render('doencas')">← Voltar</button>
+    <h1>${esc(d.nome)}</h1>
+    ${estChip(d.estado)} <span class="mut">v${d.versao}</span>
+    <button class="btn-o" onclick="previewDoe('${slug}')">👁 Pré-visualizar</button>
+  </div>
+  <div class="field">
+    <div class="fh"><label>Nome da doença</label></div>
+    <input id="fld_nome" value="${esc(d.nome)}" ${can('edit')?'':'readonly'}>
+    <div class="fh" style="margin-top:12px"><label>Síndrome</label></div>
+    <select id="fld_sindrome" ${can('edit')?'':'disabled'}>${sinOpts}</select>
+  </div>
+  ${fields}
+  ${workflowBar(d)}`;
+}
+function workflowBar(d){
+  const steps=["Rascunho","Em revisão","Aprovado","Publicado"];
+  const idx=steps.indexOf(d.estado);
+  const wf=`<div class="wf">${steps.map((s,i)=>`<span class="step ${i<=idx?'on':''}">${s}</span>${i<3?'<span class="arr">→</span>':''}`).join('')}</div>`;
+  let actions='';
+  if(can('edit')) actions+=`<button class="btn-o" onclick="saveDoe(false)">Guardar rascunho</button>
+    <button class="btn-w" onclick="saveDoe(true)">Guardar & submeter p/ revisão</button>`;
+  if(can('review')) actions+=`<button class="btn-g" onclick="changeState('Aprovado')">✔ Aprovar</button>
+    <button class="btn-r" onclick="changeState('Rascunho')">↩ Devolver</button>`;
+  if(can('publish')) actions+=`<button class="btn-p" onclick="changeState('Publicado')">↥ Publicar</button>`;
+  return `<div class="savebar">${wf}<span class="flex"></span>${actions||'<span class="mut">O seu perfil não permite editar esta ficha.</span>'}</div>`;
+}
+function collectFields(slug){
+  const d=DB.diseases[slug]; const changed=[];
+  const nome=document.getElementById('fld_nome').value.trim();
+  if(nome && nome!==d.nome){ changed.push("nome"); d.nome=nome; d.letra=nome[0].toUpperCase(); }
+  const sin=document.getElementById('fld_sindrome').value;
+  if(sin!==d.sindrome){ changed.push("síndrome"); d.sindrome=sin; }
+  DB.field_order.forEach(f=>{
+    const el=document.getElementById('fld_'+f); if(!el)return;
+    const v=el.value;
+    if(v!==(d.fields[f]||"")){ changed.push(DB.field_label[f]); d.fields[f]=v; }
+  });
+  return changed;
+}
+function bump(v){ const p=(v||"1.0").split('.'); p[1]=(parseInt(p[1]||0)+1); return p[0]+"."+p[1]; }
+function addEmenda(d,desc){
+  DB.emendas.push({data:today(),alvo:d.nome,tipo:"Doença",versao:d.versao,autor:USER.name,desc:desc,estado:d.estado});
+}
+function today(){ const n=new Date(); return n.toISOString().slice(0,10); }
+function saveDoe(submit){
+  const d=DB.diseases[curSlug];
+  const changed=collectFields(curSlug);
+  if(changed.length){
+    d.versao=bump(d.versao);
+    addEmenda(d, "Alterado: "+changed.join(", "));
+  }
+  if(submit){ d.estado="Em revisão"; if(!changed.length) addEmenda(d,"Submetido para revisão"); else DB.emendas[DB.emendas.length-1].estado="Em revisão"; }
+  else if(changed.length && d.estado==="Publicado"){ d.estado="Rascunho"; }
+  saveDB();
+  toast(changed.length? `Guardado — nova versão v${d.versao}`+(submit?" e submetido":""): (submit?"Submetido para revisão":"Sem alterações a guardar"));
+  render("editar");
+}
+function changeState(st){
+  const d=DB.diseases[curSlug];
+  d.estado=st;
+  if(st==="Publicado"){ addEmenda(d,"Publicado no manual"); }
+  else if(st==="Aprovado"){ addEmenda(d,"Aprovado pela revisão"); }
+  else if(st==="Rascunho"){ addEmenda(d,"Devolvido para correcção"); }
+  saveDB(); toast("Estado: "+st); render("editar");
+}
+function addImg(slug,field,input){
+  const file=input.files[0]; if(!file)return;
+  if(file.size>1.5*1024*1024){ toast("Imagem muito grande (máx ~1.5MB)"); return; }
+  const r=new FileReader();
+  r.onload=()=>{ DB.diseases[slug].imagens=DB.diseases[slug].imagens||[];
+    DB.diseases[slug].imagens.push({field,data:r.result,nome:file.name});
+    const d=DB.diseases[slug]; d.versao=bump(d.versao); addEmenda(d,"Adicionada imagem em “"+DB.field_label[field]+"”");
+    saveDB(); toast("Foto adicionada — v"+d.versao); render("editar"); };
+  r.readAsDataURL(file);
+}
+function rmImg(slug,field,idx){
+  DB.diseases[slug].imagens.splice(idx,1); saveDB(); render("editar");
+}
+function previewDoe(slug){
+  const d=DB.diseases[slug];
+  let h=`<div class="prev-sec"><h4>${esc(d.nome)}</h4><p class="mut">Síndrome: ${esc(d.sindrome)} · ${estChip(d.estado)} · v${d.versao}</p></div>`;
+  DB.field_order.forEach(f=>{
+    if(d.fields[f]) h+=`<div class="prev-sec"><h4>${DB.field_label[f]}</h4><p>${esc(d.fields[f])}</p>
+      ${(d.imagens||[]).filter(im=>im.field===f).map(im=>`<img src="${im.data}" style="max-width:220px;border-radius:8px;margin-top:6px">`).join('')}
+    </div>`;
+  });
+  openModal("Como aparece no manual — "+d.nome, h);
+}
+
+/* ============ SÍNDROMES ============ */
+function viewSindromes(){
+  return `<div class="help">As síndromes agrupam as doenças (ex.: Síndromes gastrointestinais). No manual servem para navegar por grupo.</div>
+  <div class="panel"><table><thead><tr><th>Síndrome</th><th>Doenças associadas</th></tr></thead><tbody>
+  ${DB.sindromes.map(s=>{const n=diseaseArr().filter(d=>d.sindrome===s).map(d=>d.nome);
+    return `<tr><td><b>${esc(s)}</b></td><td class="mut">${n.length} — ${esc(n.slice(0,6).join(", "))}${n.length>6?'…':''}</td></tr>`;}).join('')}
+  </tbody></table></div>`;
+}
+
+/* ============ SECÇÕES ============ */
+function viewSeccoes(){
+  return `<div class="help">Secções narrativas do manual (Introdução, Vigilância, etc.). Cada uma tem um resumo curto + texto completo — para o manual "não cansar".</div>
+  <div class="panel"><table><thead><tr><th>Ordem</th><th>Secção</th><th>Resumo</th><th>Estado</th></tr></thead><tbody>
+  ${DB.seccoes.sort((a,b)=>a.ordem-b.ordem).map(s=>`<tr><td class="mut">${s.ordem}</td><td><b>${esc(s.titulo)}</b></td><td class="mut">${esc(s.resumo)}</td><td>${estChip(s.estado)}</td></tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+/* ============ GLOSSÁRIO ============ */
+function viewGlossario(){
+  return `<div class="panel">
+    <div class="panel-h"><span class="flex">Termos do glossário</span>${can('edit')?`<button class="btn-p" onclick="addGloss()">+ Novo termo</button>`:''}</div>
+    <table><thead><tr><th>Termo</th><th>Definição</th></tr></thead><tbody>
+    ${DB.glossario.map(g=>`<tr><td><b>${esc(g.termo)}</b></td><td class="mut">${esc(g.def)}</td></tr>`).join('')}
+    </tbody></table></div>`;
+}
+function addGloss(){
+  const t=prompt("Termo:"); if(!t)return; const d=prompt("Definição:")||"";
+  DB.glossario.push({termo:t,def:d}); saveDB(); toast("Termo adicionado"); render("glossario");
+}
+
+/* ============ EMENDAS ============ */
+function viewEmendas(){
+  const em=DB.emendas.slice().reverse();
+  return `<div class="help">Registo automático de todas as alterações — quem, quando, o quê. Esta é a "janela de emendas" que o técnico vê no manual. Cada alteração gera uma versão.</div>
+  <div class="panel">
+    <div class="panel-h"><span class="flex">Histórico de emendas (${em.length})</span>${em.length?`<button class="btn-o" onclick="clearEmendas()">Limpar histórico</button>`:''}</div>
+    ${em.length?`<table><thead><tr><th>Data</th><th>Conteúdo</th><th>Versão</th><th>Autor</th><th>Descrição</th><th>Estado</th></tr></thead><tbody>
+      ${em.map(e=>`<tr><td class="mut">${e.data}</td><td><b>${esc(e.alvo)}</b> <span class="mut">(${e.tipo})</span></td><td>v${e.versao}</td><td>${esc(e.autor)}</td><td class="mut">${esc(e.desc)}</td><td>${estChip(e.estado)}</td></tr>`).join('')}
+    </tbody></table>`:`<div class="empty">Sem emendas ainda. Edite uma doença para começar o histórico.</div>`}
+  </div>`;
+}
+function clearEmendas(){ if(confirm("Limpar todo o histórico de emendas?")){ DB.emendas=[]; saveDB(); render("emendas"); } }
+
+/* ============ FICHEIROS ============ */
+function viewFicheiros(){
+  const imgs=[]; diseaseArr().forEach(d=>(d.imagens||[]).forEach(im=>imgs.push({...im,doe:d.nome})));
+  return `<div class="help">Biblioteca de imagens e ficheiros. Aqui juntam-se todas as fotos adicionadas às fichas.</div>
+  <div class="panel"><div class="panel-h">Imagens carregadas (${imgs.length})</div>
+  ${imgs.length?`<div style="padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px">
+    ${imgs.map(im=>`<div class="thumb" style="width:100%;height:96px"><img src="${im.data}" style="width:100%;height:100%;object-fit:cover;border-radius:8px" title="${esc(im.doe)} — ${esc(im.nome||'')}"></div>`).join('')}
+  </div>`:`<div class="empty">Ainda sem ficheiros. Adicione fotos ao editar uma doença.</div>`}
+  </div>`;
+}
+
+/* ============ PUBLICAR / EXPORTAR ============ */
+function viewPublicar(){
+  return `<div class="help">Depois de aprovado, o conteúdo é exportado para alimentar o site (GitHub Pages) e a app. Isto é a "única fonte de verdade": edita-se aqui, publica-se em todo o lado.</div>
+  <div class="panel"><div class="panel-h">Exportar conteúdo</div>
+    <div style="padding:18px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn-p" onclick="exportJSON()">⤓ Exportar tudo (JSON)</button>
+      <button class="btn-o" onclick="exportMD()">⤓ Exportar manual (Markdown)</button>
+      <button class="btn-o" onclick="exportEmendas()">⤓ Exportar emendas (CSV)</button>
+    </div>
+    <div style="padding:0 18px 18px" class="mut">O JSON serve para o site estático e a API. O Markdown é legível e serve de cópia. As emendas em CSV documentam o histórico de versões.</div>
+  </div>
+  <div class="panel"><div class="panel-h">Estado da publicação</div>
+    <table><thead><tr><th>Estado</th><th>Nº de doenças</th></tr></thead><tbody>
+      <tr><td>${estChip("Publicado")}</td><td>${countBy("Publicado")}</td></tr>
+      <tr><td>${estChip("Aprovado")}</td><td>${countBy("Aprovado")}</td></tr>
+      <tr><td>${estChip("Em revisão")}</td><td>${countBy("Em revisão")}</td></tr>
+      <tr><td>${estChip("Rascunho")}</td><td>${countBy("Rascunho")}</td></tr>
+    </tbody></table>
+  </div>`;
+}
+function download(name,txt,type){
+  const b=new Blob([txt],{type:type||'text/plain;charset=utf-8'});
+  const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download=name; a.click(); URL.revokeObjectURL(u);
+}
+function exportJSON(){
+  const out={diseases:DB.diseases,sindromes:DB.sindromes,seccoes:DB.seccoes,glossario:DB.glossario,emendas:DB.emendas,exportado:new Date().toISOString(),por:USER.name};
+  download("manual_conteudo.json",JSON.stringify(out,null,1),'application/json'); toast("JSON exportado");
+}
+function exportMD(){
+  let m=`# Manual para Detecção e Investigação de Surtos\n\n> Exportado do gestor de conteúdos em ${today()} por ${USER.name}\n\n`;
+  diseaseArr().sort((a,b)=>a.nome.localeCompare(b.nome)).forEach(d=>{
+    m+=`\n## ${d.nome}\n\n*Síndrome: ${d.sindrome} · versão ${d.versao} · ${d.estado}*\n\n`;
+    DB.field_order.forEach(f=>{ if(d.fields[f]) m+=`### ${DB.field_label[f]}\n\n${d.fields[f]}\n\n`; });
+  });
+  download("manual_surtos.md",m,'text/markdown'); toast("Markdown exportado");
+}
+function exportEmendas(){
+  let c="data,conteudo,tipo,versao,autor,descricao,estado\n";
+  DB.emendas.forEach(e=>{ c+=[e.data,e.alvo,e.tipo,e.versao,e.autor,'"'+(e.desc||'').replace(/"/g,'""')+'"',e.estado].join(",")+"\n"; });
+  download("emendas.csv",c,'text/csv'); toast("Emendas exportadas");
+}
+
+/* ============ UTILIZADORES ============ */
+function viewUsers(){
+  if(!can('users')) return `<div class="empty">Sem permissão.</div>`;
+  return `<div class="help">Perfis e permissões. No sistema real, o Administrador cria as contas do INS/MISAU e define os papéis.</div>
+  <div class="panel"><table><thead><tr><th>Perfil</th><th>Pode fazer</th></tr></thead><tbody>
+  ${Object.entries(ROLES).map(([k,r])=>`<tr><td><b>${r.n}</b></td><td class="mut">${r.d}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="panel"><div class="panel-h">Fluxo editorial</div><div style="padding:18px" class="wf">
+    <span class="step on">Editor cria/edita</span><span class="arr">→</span>
+    <span class="step on">Revisor aprova</span><span class="arr">→</span>
+    <span class="step on">Publicador publica</span><span class="arr">→</span>
+    <span class="step on">Site + App actualizam</span>
+  </div></div>`;
+}
+
+/* ============ MODAL / TOAST ============ */
+function openModal(title,html){ document.getElementById('modalTitle').textContent=title; document.getElementById('modalBody').innerHTML=html; document.getElementById('modalBg').style.display='flex'; }
+function closeModal(){ document.getElementById('modalBg').style.display='none'; }
+document.getElementById('modalBg').addEventListener('click',e=>{ if(e.target.id==='modalBg') closeModal(); });
+let toastT=null;
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* ============ ARRANQUE ============ */
+buildRoles();
+loadDB();
+</script>
+</body>
+</html>

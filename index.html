@@ -17287,27 +17287,27 @@ var DISEASES={
    ],
    [
     "li",
-    "Panorama geral da ocorrência de surtos em"
+    "Panorama dos surtos: as doenças que mais afetam Moçambique e o papel do clima."
    ],
    [
     "li",
-    "Objectivos do Manual"
+    "Objetivos: um guia padronizado para detetar, notificar e investigar surtos."
    ],
    [
     "li",
-    "Princípios orientadores da investigação"
+    "Princípios orientadores: os seis princípios de uma resposta eficaz."
    ],
    [
     "li",
-    "Integração com normas nacionais e"
+    "Integração com normas: alinhamento com RSI 2005, PESS, PASS, GHSA e VIDR."
    ],
    [
     "li",
-    "Público-alvo"
+    "Público-alvo: profissionais e equipas a todos os níveis do sistema."
    ],
    [
     "li",
-    "Quem deve investigar um surto?"
+    "Quem investiga: as equipas responsáveis pela investigação de surtos."
    ]
   ]
  },
@@ -17351,11 +17351,15 @@ var DISEASES={
   "resumo": [
    [
     "p",
-    "As competências que os profissionais de saúde precisam de ter e o fluxo de notificação e resposta quando surge um surto."
+    "As competências dos profissionais e o fluxo de notificação e resposta quando surge um surto."
    ],
    [
-    "p",
-    "profissionais de saúde e fluxo de notificação e resposta a surtos A investigação de surtos de doenças exige uma abordagem estruturada e multidisciplinar para garantir uma resposta rápida e eficaz. Este capítulo descreve as…"
+    "li",
+    "Competências: o que cada nível de saúde precisa de saber fazer."
+   ],
+   [
+    "li",
+    "Fluxo de notificação: como e a quem comunicar quando surge um caso."
    ]
   ]
  },
@@ -17635,31 +17639,27 @@ var DISEASES={
   "resumo": [
    [
     "p",
-    "O que é um surto, porque e quando ocorre, como detetá-lo a tempo (limiares e curva epidemiológica) e os tipos de surto."
+    "O que é um surto, porque e quando ocorre, e como detetá-lo a tempo."
    ],
    [
     "li",
-    "Definição de surto"
+    "Definição de surto: o que se considera um surto."
    ],
    [
     "li",
-    "Porque ocorrem os surtos?"
+    "Porquê e quando: fatores que os desencadeiam e sinais de início."
    ],
    [
     "li",
-    "Quando ocorre um surto?"
+    "Deteção atempada: porque a rapidez reduz o impacto."
    ],
    [
     "li",
-    "Importância da deteção atempada e investigação de"
+    "Limiares: valores que desencadeiam notificação e investigação."
    ],
    [
     "li",
-    "Como identificar um surto?"
-   ],
-   [
-    "li",
-    "Curva epidemiológica e tipos de surtos"
+    "Curva epidemiológica: ler a curva e classificar o tipo de surto."
    ]
   ]
  },
@@ -17747,7 +17747,11 @@ var DISEASES={
    ],
    [
     "li",
-    "Doenças Febris Agudas Exantemáticas"
+    "Vigilância por síndromes: agrupar doenças com sinais parecidos."
+   ],
+   [
+    "li",
+    "Dez grupos sindrómicos: das febris exantemáticas às zoonoses."
    ]
   ]
  },
@@ -18219,15 +18223,15 @@ var DISEASES={
   "resumo": [
    [
     "p",
-    "Como conduzir uma investigação de surto no terreno, passo a passo — dos aspetos operacionais ao relatório final."
+    "Como conduzir uma investigação de surto no terreno, passo a passo."
    ],
    [
     "li",
-    "Aspectos operacionais para o trabalho de campo"
+    "Aspetos operacionais: preparação, equipa e logística no terreno."
    ],
    [
     "li",
-    "Conduzindo uma investigação de surto"
+    "Passo a passo: conduzir a investigação, do terreno ao relatório."
    ]
   ]
  },
@@ -18303,11 +18307,19 @@ var DISEASES={
   "resumo": [
    [
     "p",
-    "As considerações éticas na investigação de surtos: consentimento informado, confidencialidade e proteção dos direitos das populações."
+    "As considerações éticas na investigação de surtos."
    ],
    [
-    "p",
-    "As considerações éticas durante as investigações de surtos são fundamentais para proteger os direitos das populações afetadas, assegurar a justiça e promover a confiança nas respostas de saúde pública, daí que em função da…"
+    "li",
+    "Consentimento informado: informar e obter concordância das pessoas."
+   ],
+   [
+    "li",
+    "Confidencialidade: proteger os dados e a identidade dos envolvidos."
+   ],
+   [
+    "li",
+    "Proteção de direitos: respeitar as populações afetadas."
    ]
   ]
  },
@@ -18407,11 +18419,15 @@ var DISEASES={
   "resumo": [
    [
     "p",
-    "Principais conceitos epidemiológicos e a lista de abreviaturas usadas no manual."
+    "Principais conceitos epidemiológicos e a lista de abreviaturas do manual."
    ],
    [
-    "p",
-    "Abreviaturas Abreviatura Significado BSL Nível de Biossegurança (Biosafety Level) CDC Centros para Controlo e Prevenção de Doenças dos EUA (Centers for Disease Control and pre\u0002vention) CHIKV Vírus da Chikungunya (Chikungunya…"
+    "li",
+    "Conceitos-chave: surto, epidemia, endemia, incidência, prevalência…"
+   ],
+   [
+    "li",
+    "Abreviaturas: siglas usadas no manual (RSI, VIDR, BSL…)."
    ]
   ]
  }
@@ -18461,8 +18477,8 @@ function renderStructure(){
  window.scrollTo(0,0);
 }
 function renderSection(id){var s=SECTIONS[id];if(!s){renderStructure();return;}
- document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderStructure()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Estrutura</button><span>Manual</span><span class="spacer"></span></div><h1 class="page-title">'+s.title+'</h1><p class="page-sub">Resumo · toque em «Ver texto completo» para o detalhe</p></header>'+
- '<main class="body">'+renderBlocks(s.resumo||s.blocks)+'<button class="fullbtn" style="margin-top:14px" onclick="renderSectionFull(\''+id+'\')"><svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg> Ver texto completo</button><p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("renderStructure()");
+ document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderStructure()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Estrutura</button><span>Manual</span><span class="spacer"></span></div><h1 class="page-title">'+s.title+'</h1><p class="page-sub">Resumo</p></header>'+
+ '<main class="body"><div class="note">Resumo da secção — para o detalhe integral do manual, toque em «Ver texto completo».</div><button class="fullbtn" onclick="renderSectionFull(\''+id+'\')"><svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg> Ver texto completo</button>'+renderBlocks(s.resumo||s.blocks)+'<p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("renderStructure()");
  window.scrollTo(0,0);
 }
 function renderSectionFull(id){var s=SECTIONS[id];if(!s){renderStructure();return;}

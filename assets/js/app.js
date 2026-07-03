@@ -377,3 +377,114 @@ window.MANUAL={"meta":{"title":"Manual Nacional para Detecção e Investigação
   if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
 })();
 /* ===== FIM BLOCO MELHORIAS ===== */
+;/* ===== MELHORIAS DO MANUAL (navegacao + leitura) — colar no fim do app.js ===== */
+/* ===== INICIO BLOCO MELHORIAS ===== */
+(function(){
+  // (1) Fonte Raleway garantida em todas as paginas
+  if(!document.getElementById('ral-font')){
+    var lf=document.createElement('link'); lf.id='ral-font'; lf.rel='stylesheet';
+    lf.href='https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap';
+    document.head.appendChild(lf);
+  }
+  var st=document.createElement('style');
+  st.textContent=[
+   // ---- Menu de navegacao (cores do manual) ----
+   '.mnav-ov{position:fixed;inset:0;background:rgba(6,40,52,.5);z-index:60;display:none}',
+   '.mnav-ov.on{display:block}',
+   '.mnav{position:fixed;top:0;left:50%;width:100%;max-width:480px;background:#fff;',
+     'border-radius:0 0 22px 22px;box-shadow:0 14px 34px rgba(0,0,0,.3);overflow:hidden;',
+     'z-index:61;transform:translate(-50%,-102%);transition:transform .25s}',
+   '.mnav.on{transform:translate(-50%,0)}',
+   '.mnav .mh{background:linear-gradient(160deg,#0a7d96 0%,#066b83 45%,#0a90ab 100%);color:#fff;',
+     'padding:16px 16px 14px;display:flex;align-items:center}',
+   '.mnav .mh b{font-family:"Raleway","Segoe UI",sans-serif;font-size:16px;font-weight:800;flex:1}',
+   '.mnav .mx{background:rgba(255,255,255,.2);border:none;border-radius:50%;width:32px;height:32px;',
+     'font-size:15px;cursor:pointer;color:#fff}',
+   '.mnav .ml{padding:8px 10px 14px}',
+   '.mnav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;',
+     'color:#243038;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none}',
+   '.mnav a:active{background:#eef4f6}',
+   '.mnav a .mi{width:26px;height:26px;flex:none;border-radius:8px;background:#eef4f6;color:#007088;',
+     'display:grid;place-items:center;font-size:14px;font-weight:800}',
+   '.mnav a.adm{margin-top:6px;border-top:1px solid #e4e9ed;padding-top:14px;color:#b02040}',
+   '.mnav a.adm .mi{background:#f7e6ea;color:#b02040}',
+   // ---- Botoes flutuantes (cores do manual) ----
+   '.fab-nav{position:fixed;bottom:92px;right:calc(50% - 234px);z-index:45;display:flex;flex-direction:column;gap:10px}',
+   '@media(max-width:520px){.fab-nav{right:14px}}',
+   '.fab-nav button{width:48px;height:48px;border-radius:50%;border:none;background:#007088;color:#fff;',
+     'box-shadow:0 5px 14px rgba(0,0,0,.28);cursor:pointer;display:grid;place-items:center;font-size:22px;line-height:1}',
+   '.fab-nav button.menu{background:#b02040;font-size:20px}',
+   // ---- Ver texto integral (igual ao das fichas: topo, largo, contorno petroleo) ----
+   '.rm-clip{max-height:460px;overflow:hidden;position:relative}',
+   '.rm-clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80px;',
+     'background:linear-gradient(rgba(242,248,250,0),#f2f8fa);pointer-events:none}',
+   '.rm-btn{width:100%;border:1px solid #007088;background:#eef7f8;color:#005c70;font:inherit;',
+     'font-size:13.5px;font-weight:700;padding:11px;border-radius:11px;cursor:pointer;display:flex;',
+     'align-items:center;justify-content:center;gap:8px;margin:0 0 14px;font-family:"Raleway",sans-serif}'
+  ].join('');
+  document.head.appendChild(st);
+ 
+  var MENU=[
+    ['index.html','⌂','Inicio',''],
+    ['explorar-seccao.html','§','Explorar por Seccao',''],
+    ['explorar-sindrome.html','◆','Explorar por Sindrome',''],
+    ['explorar-abecedario.html','AZ','Explorar por Abecedario',''],
+    ['emendas.html','↻','Emendas / Versoes',''],
+    ['glossario.html','◈','Glossario',''],
+    ['perfil.html','☺','Perfil',''],
+    ['gestor-conteudos.html','⚙','Administracao (CMS)','adm']
+  ];
+  function buildMenu(){
+    if(document.getElementById('mnav'))return;
+    var ov=document.createElement('div'); ov.className='mnav-ov'; ov.id='mnav-ov';
+    var m=document.createElement('div'); m.className='mnav'; m.id='mnav';
+    m.innerHTML='<div class="mh"><b>Navegacao</b><button class="mx" aria-label="fechar">✕</button></div>'+
+      '<div class="ml">'+MENU.map(function(x){
+        return '<a class="'+x[3]+'" href="'+x[0]+'"><span class="mi">'+x[1]+'</span>'+x[2]+'</a>';
+      }).join('')+'</div>';
+    document.body.appendChild(ov); document.body.appendChild(m);
+    ov.addEventListener('click',closeMenu);
+    m.querySelector('.mx').addEventListener('click',closeMenu);
+  }
+  function openMenu(){ buildMenu(); document.getElementById('mnav-ov').classList.add('on'); document.getElementById('mnav').classList.add('on'); }
+  function closeMenu(){ var o=document.getElementById('mnav-ov'),m=document.getElementById('mnav'); if(o)o.classList.remove('on'); if(m)m.classList.remove('on'); }
+  window.MenuToggle=openMenu;
+ 
+  function enhance(){
+    var b=document.querySelector('.burger');
+    if(b && !b.dataset.wired){ b.dataset.wired='1'; b.addEventListener('click',openMenu); }
+    var tops=document.querySelectorAll('.hdr-top .icon-btn:not(.burger)');
+    if(tops[0] && !tops[0].dataset.wired){ tops[0].dataset.wired='1'; tops[0].style.cursor='pointer';
+      tops[0].addEventListener('click',function(){ location.href='pesquisa.html'; }); }
+    if(tops[1] && !tops[1].dataset.wired){ tops[1].dataset.wired='1'; tops[1].style.cursor='pointer';
+      tops[1].addEventListener('click',function(){ location.href='emendas.html'; }); }
+    if(!document.getElementById('fab-nav')){
+      var f=document.createElement('div'); f.className='fab-nav'; f.id='fab-nav';
+      var back=document.createElement('button'); back.title='Voltar'; back.innerHTML='‹';
+      back.addEventListener('click',function(){ if(history.length>1) history.back(); else location.href='index.html'; });
+      var men=document.createElement('button'); men.title='Menu'; men.className='menu'; men.innerHTML='≡';
+      men.addEventListener('click',openMenu);
+      f.appendChild(back); f.appendChild(men);
+      document.body.appendChild(f);
+    }
+    var blocks=document.querySelectorAll('.content.card');
+    for(var i=0;i<blocks.length;i++){ collapseLong(blocks[i]); }
+  }
+  function collapseLong(box){
+    if(box.dataset.rm) return;
+    if(box.scrollHeight <= 560) return;
+    box.dataset.rm='1';
+    box.classList.add('rm-clip');
+    // botao no TOPO, igual ao das fichas
+    var btn=document.createElement('button'); btn.className='rm-btn';
+    btn.innerHTML='&#128196; Ver texto integral do manual';
+    btn.addEventListener('click',function(){
+      if(box.classList.contains('rm-clip')){ box.classList.remove('rm-clip'); btn.innerHTML='&#128196; Ver menos'; }
+      else { box.classList.add('rm-clip'); btn.innerHTML='&#128196; Ver texto integral do manual'; box.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    box.parentNode.insertBefore(btn, box);
+  }
+  function run(){ setTimeout(enhance,90); }
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
+})();
+/* ===== FIM BLOCO MELHORIAS ===== */

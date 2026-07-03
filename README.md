@@ -44,3 +44,4 @@ O conteúdo é regenerado pelo script `../ingest.py`.
 - Polimento: painéis de leitura com o tom do impresso e barra carmim no rodapé do conteúdo.
 
 Assets novos: `assets/fig/fig1..7.png`, `assets/img/cover.jpg`, `assets/img/lockup.png`, `assets/img/logos.png`.
+atualizacao

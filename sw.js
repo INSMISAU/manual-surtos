@@ -4,7 +4,7 @@
    depois abre offline. Muda o numero em CACHE_VERSION quando publicares
    conteudo novo (surtos-v1 -> surtos-v2) para forcar a atualizacao.
 */
-const CACHE_VERSION = "surtos-v1";
+const CACHE_VERSION = "surtos-v2";
 const CORE = [
   "./",
   "./index.html",
@@ -22,7 +22,7 @@ const CORE = [
   "./assets/js/content.js",
   "./assets/js/app.js"
 ];
- 
+
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open(CACHE_VERSION)
@@ -30,7 +30,7 @@ self.addEventListener("install", (e) => {
       .then(() => self.skipWaiting())
   );
 });
- 
+
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
@@ -38,7 +38,7 @@ self.addEventListener("activate", (e) => {
       .then(() => self.clients.claim())
   );
 });
- 
+
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;

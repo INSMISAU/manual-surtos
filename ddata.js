@@ -13085,7 +13085,7 @@ var DISEASES={
    },
    {
     "k": "s",
-    "label": "Suspeito",
+    "label": "Sintomas",
     "body": "Pacientes com TB que não respondem ao tratamento inicial padrão, pacientes que retornam com infecção activa após tratamento, ou indivíduos expostos a casos confirmados de MDR-TB.",
     "media": "<svg viewBox=\"0 0 100 108\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"100\" height=\"108\" fill=\"#f7fbfa\"/><rect x=\"8\" y=\"8\" width=\"84\" height=\"92\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><rect x=\"41\" y=\"33\" width=\"18\" height=\"22\" rx=\"2\" fill=\"#eef2f3\" stroke=\"#9fb0b4\"/><path d=\"M46 41h8M46 46h8\" stroke=\"#9fb0b4\" stroke-width=\"2\"/><text x=\"50\" y=\"78\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9\" font-weight=\"700\" fill=\"#333\">Sinais</text><text x=\"50\" y=\"90\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9\" font-weight=\"700\" fill=\"#333\">clínicos</text></svg>"
    },

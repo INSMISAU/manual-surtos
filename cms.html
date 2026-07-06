@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestor de Conteúdos (ligado) — Manual de Surtos · INS</title>
+<style>
+:root{--azul:#0f5b78;--azul2:#0b465d;--verde:#1f8a5b;--verde2:#166b46;--laranja:#c9762a;
+--vermelho:#b4402f;--cinza:#f4f6f8;--linha:#e2e8ec;--txt:#1c2b33;--txt2:#5a6b74;
+--sombra:0 1px 3px rgba(10,40,60,.08),0 4px 16px rgba(10,40,60,.06)}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--txt);background:var(--cinza);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:8px;font-size:14px;padding:9px 14px;font-weight:600}
+button:disabled{opacity:.5;cursor:not-allowed}
+.btn-p{background:var(--azul);color:#fff}.btn-g{background:var(--verde);color:#fff}
+.btn-o{background:#fff;color:var(--azul);border:1.5px solid var(--linha)}
+.btn-w{background:var(--laranja);color:#fff}.btn-r{background:#fff;color:var(--vermelho);border:1.5px solid #e9cfc9}
+input,select,textarea{font-family:inherit;font-size:14px;padding:9px 11px;border:1.5px solid var(--linha);border-radius:8px;width:100%;background:#fff}
+textarea{resize:vertical;line-height:1.55}
+label{font-weight:600;font-size:13px;color:var(--txt2);display:block;margin:0 0 5px}
+.wrap{max-width:520px;margin:0 auto;padding:24px}
+.card{background:#fff;border-radius:14px;box-shadow:var(--sombra);padding:22px;margin-bottom:16px}
+h1{font-size:20px;margin:0 0 4px}.mut{color:var(--txt2);font-size:13px}
+.badge{display:inline-block;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700}
+.pub{background:#e5f4ec;color:var(--verde2)}.rev{background:#fdf3e2;color:var(--laranja)}
+.rasc{background:#eef1f3;color:var(--txt2)}.aprov{background:#e6eefb;color:#2b5bb4}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.top{background:#fff;border-bottom:1px solid var(--linha);padding:11px 18px;display:flex;gap:12px;align-items:center;position:sticky;top:0;z-index:10}
+.top h2{font-size:16px;margin:0;flex:1}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11.5px;text-transform:uppercase;color:var(--txt2);padding:9px 14px;border-bottom:1px solid var(--linha)}
+td{padding:10px 14px;border-bottom:1px solid var(--linha);font-size:14px}tr:hover td{background:#fafcfd}
+.field{margin-bottom:12px}
+.pill{background:#eef6f9;color:var(--azul);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--txt);color:#fff;padding:11px 20px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:80;transition:.3s;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.hide{display:none!important}
+.hint{background:#fff7e8;border-left:4px solid var(--laranja);border-radius:8px;padding:11px 14px;font-size:13px;color:#7a5a17;margin-bottom:14px}
+.ok-banner{background:#e5f4ec;border-left:4px solid var(--verde);border-radius:8px;padding:9px 13px;font-size:13px;color:var(--verde2);margin-bottom:12px}
+a{color:var(--azul)}
+</style>
+</head>
+<body>
+
+<div id="cfg" class="wrap">
+  <div class="card">
+    <h1>Ligar ao Supabase</h1>
+    <p class="mut">Cole os dados do seu projecto Supabase (Project Settings &rarr; API). Ficam guardados neste navegador.</p>
+    <div class="hint">Precisa de: <b>Project URL</b> e a chave <b>anon public</b>. A segurança é garantida pelas regras RLS na base de dados.</div>
+    <div class="field"><label>Project URL</label><input id="cfgUrl" placeholder="https://xxxx.supabase.co"></div>
+    <div class="field"><label>Chave anon public</label><input id="cfgKey" placeholder="eyJhbGciOi..."></div>
+    <button class="btn-p" style="width:100%" onclick="saveCfg()">Ligar</button>
+  </div>
+</div>
+
+<div id="login" class="wrap hide">
+  <div class="card">
+    <h1>Gestor de Conteúdos</h1>
+    <p class="mut">Manual de Surtos &middot; INS/MISAU. Entre com a sua conta.</p>
+    <div id="loginErr" class="hint hide"></div>
+    <div class="field"><label>Email</label><input id="email" type="email" placeholder="nome@ins.gov.mz"></div>
+    <div class="field"><label>Palavra-passe</label><input id="pass" type="password"></div>
+    <div class="row">
+      <button class="btn-p" onclick="doLogin()">Entrar</button>
+      <button class="btn-o" onclick="doSignup()">Criar conta</button>
+      <button class="btn-o" onclick="resetCfg()" style="margin-left:auto">Trocar de projecto</button>
+    </div>
+    <p class="mut" style="margin-top:12px">A primeira conta criada deve ser promovida a <b>admin</b> na tabela <b>perfis</b>.</p>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <div class="top">
+    <h2 id="viewTitle">Doenças</h2>
+    <span class="pill" id="whoRole">&mdash;</span>
+    <span id="whoName" class="mut"></span>
+    <button class="btn-o" onclick="location.href='index.html'" style="padding:6px 12px" title="Voltar ao manual">&larr; Manual</button>
+    <button class="btn-o" onclick="doLogout()" style="padding:6px 12px">Sair</button>
+  </div>
+  <div class="wrap" id="content"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+var CFG_KEY='ins_supabase_cfg';
+/* ===== CONFIGURAÇÃO FIXA (para a equipa não ter de configurar) =====
+   Cola aqui, entre as aspas, o teu Project URL e a Publishable key.
+   A Publishable key é SEGURA para ser pública (a proteção é a RLS).
+   Se deixares vazio, o gestor pede a configuração no 1.º uso.        */
+var HARD_URL='https://watlfdjcgfxmzymztmvc.supabase.co';
+var HARD_KEY='sb_publishable_ZxGOBZcm1IGp36e7Qh2nyg_S8Tb56B4';
+var sb=null, USER=null, PERFIL=null;
+var FIELDS=[
+ ['pontos_chave','Pontos-chave'],['definicao_caso','Definição de caso'],
+ ['limiares_notificacao','Limiar de notificação e surto'],['agente_infeccioso','Agente infeccioso'],
+ ['fonte_periodo_infeccao','Fonte e período de infecção'],['grupos_risco','Grupos de risco'],
+ ['protocolo_investigacao','Protocolo de investigação'],['colheita_manuseio_amostras','Laboratório e amostras']
+];
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2800);}
+function show(id){['cfg','login','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function badge(e){var m={publicado:'pub',revisao:'rev',rascunho:'rasc',aprovado:'aprov'};return '<span class="badge '+(m[e]||'rasc')+'">'+e+'</span>';}
+
+function loadCfg(){ if(HARD_URL && HARD_KEY) return {url:HARD_URL,key:HARD_KEY}; try{return JSON.parse(localStorage.getItem(CFG_KEY));}catch(e){return null;} }
+function saveCfg(){
+  var url=document.getElementById('cfgUrl').value.trim(), key=document.getElementById('cfgKey').value.trim();
+  if(!url||!key){toast('Preencha URL e chave');return;}
+  localStorage.setItem(CFG_KEY,JSON.stringify({url:url,key:key})); initSb();
+}
+function resetCfg(){ localStorage.removeItem(CFG_KEY); location.reload(); }
+function initSb(){
+  var c=loadCfg(); if(!c){show('cfg');return;}
+  sb=supabase.createClient(c.url,c.key);
+  sb.auth.getSession().then(function(r){
+    if(r.data.session){ afterLogin(r.data.session.user); } else { show('login'); }
+  });
+}
+
+function doLogin(){
+  var email=document.getElementById('email').value.trim(), pass=document.getElementById('pass').value;
+  sb.auth.signInWithPassword({email:email,password:pass}).then(function(r){
+    if(r.error){ var e=document.getElementById('loginErr'); e.textContent=r.error.message; e.classList.remove('hide'); return; }
+    afterLogin(r.data.user);
+  });
+}
+function doSignup(){
+  var email=document.getElementById('email').value.trim(), pass=document.getElementById('pass').value;
+  if(!email||!pass){toast('Preencha email e palavra-passe');return;}
+  sb.auth.signUp({email:email,password:pass}).then(function(r){
+    if(r.error){toast(r.error.message);return;}
+    toast('Conta criada. Peça ao Admin para lhe dar um papel.');
+  });
+}
+function doLogout(){ sb.auth.signOut().then(function(){ location.reload(); }); }
+
+function afterLogin(user){
+  USER=user;
+  sb.from('perfis').select('*').eq('id',user.id).single().then(function(r){
+    PERFIL=r.data||{nome:user.email,papel:'visitante'};
+    document.getElementById('whoName').textContent=PERFIL.nome||user.email;
+    document.getElementById('whoRole').textContent=PERFIL.papel;
+    show('app'); render();
+  });
+}
+function isStaff(){ return PERFIL && ['editor','revisor','publicador','admin'].indexOf(PERFIL.papel)>=0; }
+function can(a){ if(!PERFIL)return false; var p=PERFIL.papel;
+  if(a==='edit')return ['editor','admin'].indexOf(p)>=0;
+  if(a==='review')return ['revisor','admin'].indexOf(p)>=0;
+  if(a==='publish')return ['publicador','admin'].indexOf(p)>=0;
+  return false; }
+
+function render(){
+  var c=document.getElementById('content');
+  if(!isStaff()){
+    c.innerHTML='<div class="card"><div class="hint">A sua conta ainda não tem permissões. O Administrador deve definir o seu papel (editor/revisor/publicador) na tabela <b>perfis</b>.</div></div>';
+    return;
+  }
+  c.innerHTML='<div class="card"><div class="ok-banner">O manual público fica <b>estático e seguro</b>: ao "Publicar para o site", este gestor gera o ficheiro do manual a partir do que está <b>publicado</b>. O leitor nunca depende da base de dados.</div>'+
+    '<div class="row" style="margin-bottom:10px"><b style="flex:1">Doenças</b>'+
+    '<button class="btn-o" onclick="loadEmendas()">Ver emendas</button>'+
+    (can('publish')?'<button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button>':'')+'</div>'+
+    '<div id="lista">A carregar…</div></div>';
+  sb.from('doencas').select('id,nome,slug,estado,versao,sindrome_id').order('nome').then(function(r){
+    if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
+    var rows=r.data.map(function(d){
+      return '<tr><td><b>'+esc(d.nome)+'</b></td><td>'+badge(d.estado)+'</td><td class="mut">v'+d.versao+'</td>'+
+        '<td style="text-align:right"><button class="btn-o" onclick="editDoe(\''+d.id+'\')">Abrir</button></td></tr>';
+    }).join('');
+    document.getElementById('lista').innerHTML='<table><thead><tr><th>Doença</th><th>Estado</th><th>Versão</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+  });
+}
+
+function editDoe(id){
+  sb.from('doencas').select('*').eq('id',id).single().then(function(r){
+    if(r.error){toast('Erro a carregar');return;}
+    var d=r.data;
+    var f=FIELDS.map(function(x){
+      return '<div class="field"><label>'+x[1]+'</label><textarea id="f_'+x[0]+'" rows="5" '+(can('edit')?'':'readonly')+'>'+esc(d[x[0]]||'')+'</textarea></div>';
+    }).join('');
+    document.getElementById('content').innerHTML=
+      '<div class="card"><div class="row"><button class="btn-o" onclick="render()">← Voltar</button>'+
+      '<h1 style="flex:1;margin:0;font-size:18px">'+esc(d.nome)+'</h1>'+badge(d.estado)+' <span class="mut">v'+d.versao+'</span></div></div>'+
+      '<div class="card">'+
+      '<div class="field"><label>Nome</label><input id="f_nome" value="'+esc(d.nome)+'" '+(can('edit')?'':'readonly')+'></div>'+f+
+      '<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;margin-top:6px">'+
+      (can('edit')?'<button class="btn-o" onclick="saveDoe(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveDoe(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
+      (can('review')?'<button class="btn-g" onclick="setEstado(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstado(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'')+
+      (can('publish')?'<button class="btn-p" onclick="setEstado(\''+id+'\',\'publicado\')">↥ Publicar</button>':'')+
+      '</div></div>';
+  });
+}
+function bump(v){var p=(v||'1.0').split('.');p[1]=(parseInt(p[1]||0)+1);return p[0]+'.'+p[1];}
+function saveDoe(id,submit){
+  var patch={nome:document.getElementById('f_nome').value.trim(),atualizado_por:USER.id};
+  FIELDS.forEach(function(x){ patch[x[0]]=document.getElementById('f_'+x[0]).value; });
+  sb.from('doencas').select('versao,estado').eq('id',id).single().then(function(r){
+    patch.versao=bump(r.data.versao);
+    if(submit) patch.estado='revisao';
+    else if(r.data.estado==='publicado') patch.estado='rascunho';
+    sb.from('doencas').update(patch).eq('id',id).then(function(res){
+      if(res.error){toast('Erro: '+res.error.message);return;}
+      toast('Guardado — v'+patch.versao+(submit?' e submetido':''));
+      editDoe(id);
+    });
+  });
+}
+function setEstado(id,estado){
+  sb.from('doencas').update({estado:estado,atualizado_por:USER.id}).eq('id',id).then(function(res){
+    if(res.error){toast('Erro: '+res.error.message);return;}
+    toast('Estado: '+estado); editDoe(id);
+  });
+}
+
+function loadEmendas(){
+  sb.from('emendas').select('*').order('data',{ascending:false}).limit(50).then(function(r){
+    var rows=(r.data||[]).map(function(e){
+      return '<tr><td class="mut">'+(e.data||'').slice(0,10)+'</td><td><b>'+esc(e.alvo_nome||'')+'</b></td><td>v'+(e.versao||'')+'</td><td class="mut">'+esc(e.autor||'')+'</td><td class="mut">'+esc(e.descricao||'')+'</td></tr>';
+    }).join('');
+    document.getElementById('content').innerHTML='<div class="card"><div class="row"><button class="btn-o" onclick="render()">← Voltar</button><b style="flex:1">Emendas / Versões</b></div>'+
+      (rows?'<table><thead><tr><th>Data</th><th>Conteúdo</th><th>Versão</th><th>Autor</th><th>Descrição</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="mut" style="padding:14px">Sem emendas ainda.</div>')+'</div>';
+  });
+}
+
+/* ---- PUBLICAR PARA O SITE: gera content.js estatico a partir do publicado ---- */
+function txtToBlocks(t){
+  var out=[]; (t||'').split('\n').forEach(function(ln){
+    ln=ln.trim(); if(!ln)return;
+    if(ln.indexOf('• ')===0||ln.indexOf('- ')===0){ out.push({type:'li',text:ln.replace(/^[•-]\s*/,'')}); }
+    else out.push({type:'p',text:ln});
+  });
+  return out;
+}
+function publicarSite(){
+  toast('A gerar o manual a partir da base de dados...');
+  Promise.all([
+    sb.from('sindromes').select('*').order('ordem'),
+    sb.from('doencas').select('*').eq('estado','publicado').order('nome'),
+    sb.from('seccoes').select('*').eq('estado','publicado').order('ordem'),
+    sb.from('glossario_abreviaturas').select('*').order('sigla')
+  ]).then(function(res){
+    var sind=res[0].data||[], doe=res[1].data||[], sec=res[2].data||[], ab=res[3].data||[];
+    var sinIndex={}; var groups=sind.map(function(s,i){ sinIndex[s.id]=i+1; return {id:i+1,name:s.nome,icon:'sindrome',diseases:[]}; });
+    var LBL=[['pontos_chave','Pontos-chave'],['definicao_caso','Definicao de caso'],['limiares_notificacao','Limiar de notificacao e surto'],['agente_infeccioso','Agente infeccioso'],['fonte_periodo_infeccao','Fonte e periodo de infeccao'],['grupos_risco','Grupos de risco'],['protocolo_investigacao','Protocolo de investigacao'],['colheita_manuseio_amostras','Laboratorio e amostras']];
+    var diseases=doe.map(function(d){
+      var gid=sinIndex[d.sindrome_id]; if(gid) groups[gid-1].diseases.push(d.slug);
+      return {slug:d.slug,name:d.nome,letter:d.letra||(d.nome||'?').charAt(0),group:gid||0,
+        fields:LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};})};
+    });
+    var sections=sec.map(function(s){return {id:s.ordem,title:s.titulo,label:'SECCAO '+s.ordem,blocks:txtToBlocks(s.conteudo),figures:[]};});
+    var MAN={meta:{title:'Manual Nacional para Deteccao e Investigacao de Surtos',subtitle:'Instituto Nacional de Saude',version:'V1.0'},
+      sections:sections,groups:groups,diseases:diseases,glossary:{abbreviations:ab.map(function(a){return {abbr:a.sigla,meaning:a.significado};})}};
+    var js='window.MANUAL='+JSON.stringify(MAN)+';\n';
+    var b=new Blob([js],{type:'application/javascript'}); var u=URL.createObjectURL(b);
+    var a=document.createElement('a'); a.href=u; a.download='content.js'; a.click(); URL.revokeObjectURL(u);
+    toast('content.js gerado ('+diseases.length+' doencas). Suba-o a assets/js/ no GitHub.');
+  }).catch(function(e){ toast('Erro: '+e.message); });
+}
+
+/* ---- ARRANQUE ---- */
+window.addEventListener('load', initSb);
+</script>
+</body>
+</html>

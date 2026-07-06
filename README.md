@@ -46,3 +46,4 @@ O conteúdo é regenerado pelo script `../ingest.py`.
 Assets novos: `assets/fig/fig1..7.png`, `assets/img/cover.jpg`, `assets/img/lockup.png`, `assets/img/logos.png`.
 atualizacao
 deploy 4 julho
+

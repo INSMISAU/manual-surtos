@@ -172,10 +172,46 @@ function render(){
   });
 }
 
+/* ---- IMAGENS (upload para Supabase Storage) ---- */
+var CURRENT_IMGS=[];
+function imgItemsHTML(){
+  if(!CURRENT_IMGS.length) return '<div class="mut" style="font-size:13px">Sem imagens nesta ficha.</div>';
+  return CURRENT_IMGS.map(function(im,i){
+    return '<div class="row" style="align-items:center;margin-bottom:8px;border:1px solid var(--linha);border-radius:8px;padding:8px">'+
+      '<img src="'+esc(im.url)+'" style="width:64px;height:64px;object-fit:cover;border-radius:6px">'+
+      '<input style="flex:1" placeholder="Legenda (opcional)" value="'+esc(im.caption||'')+'" oninput="CURRENT_IMGS['+i+'].caption=this.value" '+(can('edit')?'':'readonly')+'>'+
+      (can('edit')?'<button class="btn-r" onclick="removeImg('+i+')">Remover</button>':'')+
+    '</div>';
+  }).join('');
+}
+function imgHTML(){
+  return '<div class="field" style="border-top:1px solid var(--linha);padding-top:12px">'+
+    '<label>Imagens da ficha</label>'+
+    '<div id="imgList">'+imgItemsHTML()+'</div>'+
+    (can('edit')?'<div style="margin-top:8px"><input type="file" accept="image/*" id="imgFile" onchange="uploadImg(this)"><div class="mut" style="font-size:12px;margin-top:4px">JPG ou PNG, até 3 MB. É carregada para o Supabase; depois clique em Guardar.</div></div>':'')+
+  '</div>';
+}
+function renderImgs(){ var el=document.getElementById('imgList'); if(el) el.innerHTML=imgItemsHTML(); }
+function removeImg(i){ CURRENT_IMGS.splice(i,1); renderImgs(); }
+function uploadImg(inp){
+  var file=inp.files&&inp.files[0]; if(!file)return;
+  if(file.size>3*1024*1024){ toast('Imagem muito grande (máx 3 MB)'); inp.value=''; return; }
+  toast('A carregar imagem…');
+  var ext=((file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,''))||'jpg';
+  var path='doencas/'+Date.now()+'_'+Math.random().toString(36).slice(2,7)+'.'+ext;
+  sb.storage.from('imagens').upload(path,file).then(function(r){
+    if(r.error){ toast('Erro no upload: '+r.error.message); return; }
+    var pub=sb.storage.from('imagens').getPublicUrl(path);
+    CURRENT_IMGS.push({url:pub.data.publicUrl,caption:''});
+    renderImgs(); inp.value=''; toast('Imagem carregada. Clique em Guardar para gravar.');
+  });
+}
+
 function editDoe(id){
   sb.from('doencas').select('*').eq('id',id).single().then(function(r){
     if(r.error){toast('Erro a carregar');return;}
     var d=r.data;
+    CURRENT_IMGS=Array.isArray(d.imagens)?d.imagens.slice():[];
     var f=FIELDS.map(function(x){
       return '<div class="field"><label>'+x[1]+'</label><textarea id="f_'+x[0]+'" rows="5" '+(can('edit')?'':'readonly')+'>'+esc(d[x[0]]||'')+'</textarea></div>';
     }).join('');
@@ -183,7 +219,7 @@ function editDoe(id){
       '<div class="card"><div class="row"><button class="btn-o" onclick="render()">← Voltar</button>'+
       '<h1 style="flex:1;margin:0;font-size:18px">'+esc(d.nome)+'</h1>'+badge(d.estado)+' <span class="mut">v'+d.versao+'</span></div></div>'+
       '<div class="card">'+
-      '<div class="field"><label>Nome</label><input id="f_nome" value="'+esc(d.nome)+'" '+(can('edit')?'':'readonly')+'></div>'+f+
+      '<div class="field"><label>Nome</label><input id="f_nome" value="'+esc(d.nome)+'" '+(can('edit')?'':'readonly')+'></div>'+f+imgHTML()+
       '<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;margin-top:6px">'+
       (can('edit')?'<button class="btn-o" onclick="saveDoe(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveDoe(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
       (can('review')?'<button class="btn-g" onclick="setEstado(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstado(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'')+
@@ -195,6 +231,7 @@ function bump(v){var p=(v||'1.0').split('.');p[1]=(parseInt(p[1]||0)+1);return p
 function saveDoe(id,submit){
   var patch={nome:document.getElementById('f_nome').value.trim(),atualizado_por:USER.id};
   FIELDS.forEach(function(x){ patch[x[0]]=document.getElementById('f_'+x[0]).value; });
+  patch.imagens=CURRENT_IMGS;
   sb.from('doencas').select('versao,estado').eq('id',id).single().then(function(r){
     patch.versao=bump(r.data.versao);
     if(submit) patch.estado='revisao';
@@ -246,6 +283,7 @@ function publicarSite(){
     var diseases=doe.map(function(d){
       var gid=sinIndex[d.sindrome_id]; if(gid) groups[gid-1].diseases.push(d.slug);
       return {slug:d.slug,name:d.nome,letter:d.letra||(d.nome||'?').charAt(0),group:gid||0,
+        images:(Array.isArray(d.imagens)?d.imagens:[]),
         fields:LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};})};
     });
     var sections=sec.map(function(s){return {id:s.ordem,title:s.titulo,label:'SECCAO '+s.ordem,blocks:txtToBlocks(s.conteudo),figures:[]};});

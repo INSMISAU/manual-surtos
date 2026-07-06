@@ -1,0 +1,16 @@
+{
+  "name": "Manual de Surtos — INS Moçambique",
+  "short_name": "Surtos INS",
+  "description": "Manual para Detecção e Investigação de Surtos em Moçambique. Funciona sem internet.",
+  "lang": "pt",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f5b78",
+  "theme_color": "#007088",
+  "icons": [
+    { "src": "i192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "i512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

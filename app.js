@@ -34,20 +34,44 @@ function boldLabel(t){
   if(m) return '<b>'+esc(m[1])+':</b> '+esc(m[2]);
   return esc(t);
 }
-function renderBlocks(blocks){
+/* --- Tabelas markdown ("| ... | ... |") renderizadas como tabela real --- */
+function isTableRow(b){ return b && b.type!=='li' && b.type!=='h3' && b.type!=='h4' && typeof b.text==='string' && b.text.trim().charAt(0)==='|'; }
+function parseRow(t){ let s=t.trim(); if(s.charAt(0)==='|')s=s.slice(1); if(s.charAt(s.length-1)==='|')s=s.slice(0,-1); return s.split('|').map(c=>c.trim()); }
+function isSep(cells){ return cells.length>0 && cells.every(c=>/^:?-{2,}:?$/.test(c.replace(/\s/g,''))); }
+function tableHtml(texts){
+  const rows=texts.map(parseRow);
+  let sep=-1; for(let i=0;i<rows.length;i++){ if(isSep(rows[i])){ sep=i; break; } }
+  const maxc=Math.max.apply(null,rows.map(r=>r.length));
+  const cells=(r,tag)=>{ let h=''; for(let i=0;i<maxc;i++){ h+='<'+tag+'>'+esc(r[i]!=null?r[i]:'')+'</'+tag+'>'; } return h; };
+  let html='<div class="tbl-wrap"><table class="tbl">';
+  if(sep>=0){
+    html+='<thead>'; for(let i=0;i<sep;i++) html+='<tr>'+cells(rows[i],'th')+'</tr>'; html+='</thead><tbody>';
+    for(let i=sep+1;i<rows.length;i++) html+='<tr>'+cells(rows[i],'td')+'</tr>'; html+='</tbody>';
+  } else { html+='<tbody>'; rows.forEach(r=>{ html+='<tr>'+cells(r,'td')+'</tr>'; }); html+='</tbody>'; }
+  return html+'</table></div>';
+}
+function renderBody(blocks,figs){
+  figs=figs||[]; const used=new Set();
   let html='',inList=false;
   const closeList=()=>{ if(inList){html+='</ul>';inList=false;} };
-  (blocks||[]).forEach(b=>{
+  const arr=blocks||[];
+  for(let i=0;i<arr.length;i++){
+    const b=arr[i];
+    if(isTableRow(b)){ const t=[]; while(i<arr.length&&isTableRow(arr[i])){ t.push(arr[i].text); i++; } i--; closeList(); html+=tableHtml(t); continue; }
     if(b.type==='li'){ if(!inList){html+='<ul>';inList=true;} html+='<li>'+boldLabel(b.text)+'</li>'; }
     else { closeList();
       if(b.type==='h3') html+='<h3>'+esc(b.text)+'</h3>';
       else if(b.type==='h4') html+='<h4>'+esc(b.text)+'</h4>';
       else html+='<p>'+boldLabel(b.text)+'</p>';
     }
-  });
+    for(let k=0;k<figs.length;k++){ const f=figs[k]; if(!used.has(f.num)&&b.text&&b.text.indexOf('Figura '+f.num)>=0){ closeList(); html+=figHtml(f); used.add(f.num);} }
+  }
   closeList();
+  const rest=figs.filter(f=>!used.has(f.num));
+  if(rest.length) html+='<div class="figs-h">Figuras</div>'+rest.map(figHtml).join('');
   return html;
 }
+function renderBlocks(blocks){ return renderBody(blocks); }
 function param(k){return new URLSearchParams(location.search).get(k);}
 function header(o){
   o=o||{};
@@ -110,22 +134,7 @@ function pageExplorarSeccao(){
 }
 function figHtml(f){return '<figure class="fig"><img src="'+f.file+'" alt="'+esc(f.caption)+'" loading="lazy">'+
   '<figcaption><b>Figura '+f.num+'.</b> '+esc(f.caption.replace(/^Figura\s+\d+\.\s*/,''))+'</figcaption></figure>';}
-function renderSectionContent(sec){
-  const figs=(sec.figures||[]).slice(); const used=new Set();
-  let html='',inList=false; const closeList=()=>{ if(inList){html+='</ul>';inList=false;} };
-  (sec.blocks||[]).forEach(b=>{
-    if(b.type==='li'){ if(!inList){html+='<ul>';inList=true;} html+='<li>'+boldLabel(b.text)+'</li>'; }
-    else { closeList();
-      if(b.type==='h3') html+='<h3>'+esc(b.text)+'</h3>';
-      else if(b.type==='h4') html+='<h4>'+esc(b.text)+'</h4>';
-      else html+='<p>'+boldLabel(b.text)+'</p>'; }
-    figs.forEach(f=>{ if(!used.has(f.num) && b.text.indexOf('Figura '+f.num)>=0){ closeList(); html+=figHtml(f); used.add(f.num);} });
-  });
-  closeList();
-  const rest=figs.filter(f=>!used.has(f.num));
-  if(rest.length) html+='<div class="figs-h">Figuras</div>'+rest.map(figHtml).join('');
-  return html;
-}
+function renderSectionContent(sec){ return renderBody((sec.blocks||[]),(sec.figures||[])); }
 function coverBlock(){
   return '<div class="cover"><img class="ph" src="assets/img/cover.jpg" alt="Capa oficial do manual">'+
     '<div class="cv-title"><b>Manual para Detecção e Investigação de Surtos em Moçambique</b>'+

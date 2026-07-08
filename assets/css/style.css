@@ -197,3 +197,10 @@ body{font-family:"Raleway","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-
 .cover .cv-title{background:#fff;padding:12px 14px}
 .cover .cv-title b{font-family:"Raleway",sans-serif;color:var(--petrol);font-size:15px;font-weight:800;display:block;line-height:1.15}
 .cover .cv-title span{font-size:11.5px;color:var(--muted)}
+
+/* Tabelas do manual (Secções 5/6) */
+.tbl-wrap{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch;border:1px solid #e0e9eb;border-radius:8px}
+.tbl{border-collapse:collapse;width:100%;font-size:13px;min-width:440px}
+.tbl th,.tbl td{border:1px solid #dce7ea;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.35}
+.tbl thead th{background:#e6f2f4;color:#0a4a5a;font-weight:700}
+.tbl tbody tr:nth-child(even){background:#f6fafb}

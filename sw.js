@@ -1,10 +1,17 @@
 /* Service Worker — Manual de Surtos INS
-   Torna o manual utilizavel SEM internet.
-   Como funciona: na 1a vez que abrir com internet, guarda o manual;
-   depois abre offline. Muda o numero em CACHE_VERSION quando publicares
-   conteudo novo (surtos-v1 -> surtos-v2) para forcar a atualizacao.
+   Torna o manual utilizavel SEM internet, mostrando SEMPRE a versao mais
+   recente quando ha internet (corrige o problema dos "varios refreshes").
+
+   Estrategia:
+   - Paginas (HTML) e dados (content.js, ddata.js, cms_data.js): NETWORK-FIRST.
+     Com internet, vai buscar a versao fresca ao servidor e actualiza a cache;
+     sem internet, usa a ultima versao guardada. Assim, o que for publicado
+     aparece de imediato, sem obrigar o utilizador a varios refreshes.
+   - Recursos estaticos (css, imagens, fontes, icones): CACHE-FIRST, por rapidez.
+   Sobe o numero em CACHE_VERSION sempre que publicares (v3 -> v4).
 */
-const CACHE_VERSION = "surtos-v2";
+const CACHE_VERSION = "surtos-v3";
+
 const CORE = [
   "./",
   "./index.html",
@@ -18,10 +25,20 @@ const CORE = [
   "./glossario.html",
   "./perfil.html",
   "./pesquisa.html",
-  "./assets/css/style.css",
+  // dados (podem estar na raiz ou em assets/js — allSettled ignora os que faltarem)
+  "./content.js",
+  "./ddata.js",
+  "./cms_data.js",
+  "./app.js",
   "./assets/js/content.js",
-  "./assets/js/app.js"
+  "./assets/js/app.js",
+  "./assets/css/style.css"
 ];
+
+// Extensoes tratadas como "estaticas" (cache-first).
+const STATIC_RX = /\.(css|png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|otf|pdf)$/i;
+// Ficheiros de dados que devem ser sempre frescos (network-first).
+const DATA_RX = /(content|ddata|cms_data)\.js$/i;
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
@@ -44,14 +61,42 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+
+  const isPage = req.mode === "navigate" || url.pathname.endsWith(".html") || url.pathname.endsWith("/");
+  const isData = DATA_RX.test(url.pathname);
+  const isStatic = STATIC_RX.test(url.pathname);
+
+  // NETWORK-FIRST para paginas e dados: mostra sempre o mais recente com internet.
+  if (isPage || (isData && !isStatic)) {
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() =>
+          caches.match(req).then((cached) => cached || caches.match("./index.html"))
+        )
+    );
+    return;
+  }
+
+  // CACHE-FIRST para estaticos: rapido, com actualizacao em segundo plano.
   e.respondWith(
-    caches.open(CACHE_VERSION).then((cache) =>
-      cache.match(req).then((cached) => {
-        const network = fetch(req)
-          .then((res) => { if (res && res.status === 200) cache.put(req, res.clone()); return res; })
-          .catch(() => null);
-        return cached || network.then((res) => res || cache.match("./index.html"));
-      })
-    )
+    caches.match(req).then((cached) => {
+      const network = fetch(req)
+        .then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => null);
+      return cached || network.then((res) => res || caches.match("./index.html"));
+    })
   );
 });

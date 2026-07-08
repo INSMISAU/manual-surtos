@@ -145,7 +145,7 @@ var DISEASES={
     "items": [
      [
       0,
-      "Colheita de dados: Colher informações sobre dados demográficos, sintomas clínicos, histórico de viagem para áreas endémicas, práticas de proteção contra mosquitos (uso de repelentes, mosquiteiros e condições de saúde préexistentes."
+      "Colheita de dados: Colher informações sobre dados demográficos, sintomas clínicos, histórico de viagem para áreas endémicas, práticas de protecção contra mosquitos (uso de repelentes, mosquiteiros e condições de saúde préexistentes."
      ],
      [
       0,
@@ -346,7 +346,7 @@ var DISEASES={
    ],
    [
     0,
-    "Colheita de dados: Colher informações sobre dados demográficos, sintomas clínicos, histórico de viagem para áreas endémicas, práticas de proteção contra mosquitos (uso de repelentes, mosquiteiros e condições de saúde préexistentes."
+    "Colheita de dados: Colher informações sobre dados demográficos, sintomas clínicos, histórico de viagem para áreas endémicas, práticas de protecção contra mosquitos (uso de repelentes, mosquiteiros e condições de saúde préexistentes."
    ],
    [
     0,
@@ -980,7 +980,7 @@ var DISEASES={
      ],
      [
       0,
-      "A infecção é altamente contagiosa e pode ser transmitida antes mesmo do aparecimento de sintomas. Caracteriza-se pelo inchaço doloroso das glândulas parótidas (localizadas abaixo das orelhas), podendo afetar outras glândulas salivares. Em alguns casos, podem ocorrer complicações, como meningite viral, orquite (inflamação dos testículos), ooforite (inflamação dos ovários) e, raramente, surdez permanente."
+      "A infecção é altamente contagiosa e pode ser transmitida antes mesmo do aparecimento de sintomas. Caracteriza-se pelo inchaço doloroso das glândulas parótidas (localizadas abaixo das orelhas), podendo afectar outras glândulas salivares. Em alguns casos, podem ocorrer complicações, como meningite viral, orquite (inflamação dos testículos), ooforite (inflamação dos ovários) e, raramente, surdez permanente."
      ],
      [
       0,
@@ -1001,7 +1001,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso confirmado: Um caso suspeito com confirmação laboratorial através da deteção de Detecção de anticorpos IgM ou detecção de RNA do vírus por PCR."
+      "Caso confirmado: Um caso suspeito com confirmação laboratorial através da detecção de Detecção de anticorpos IgM ou detecção de RNA do vírus por PCR."
      ]
     ]
    },
@@ -1207,7 +1207,7 @@ var DISEASES={
    ],
    [
     0,
-    "A infecção é altamente contagiosa e pode ser transmitida antes mesmo do aparecimento de sintomas. Caracteriza-se pelo inchaço doloroso das glândulas parótidas (localizadas abaixo das orelhas), podendo afetar outras glândulas salivares. Em alguns casos, podem ocorrer complicações, como meningite viral, orquite (inflamação dos testículos), ooforite (inflamação dos ovários) e, raramente, surdez permanente."
+    "A infecção é altamente contagiosa e pode ser transmitida antes mesmo do aparecimento de sintomas. Caracteriza-se pelo inchaço doloroso das glândulas parótidas (localizadas abaixo das orelhas), podendo afectar outras glândulas salivares. Em alguns casos, podem ocorrer complicações, como meningite viral, orquite (inflamação dos testículos), ooforite (inflamação dos ovários) e, raramente, surdez permanente."
    ],
    [
     0,
@@ -1227,7 +1227,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso confirmado: Um caso suspeito com confirmação laboratorial através da deteção de Detecção de anticorpos IgM ou detecção de RNA do vírus por PCR."
+    "Caso confirmado: Um caso suspeito com confirmação laboratorial através da detecção de Detecção de anticorpos IgM ou detecção de RNA do vírus por PCR."
    ],
    [
     "h",
@@ -1484,7 +1484,7 @@ var DISEASES={
      ],
      [
       0,
-      "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infeções secundárias, como pneumonia."
+      "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infecções secundárias, como pneumonia."
      ],
      [
       0,
@@ -1991,7 +1991,7 @@ var DISEASES={
    ],
    [
     0,
-    "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infeções secundárias, como pneumonia."
+    "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infecções secundárias, como pneumonia."
    ],
    [
     0,
@@ -2023,7 +2023,7 @@ var DISEASES={
   "keys": [
    "O Sarampo é uma infecção viral altamente contagiosa, sendo uma das principais causas de mortes evitáveis por vacinação em todo o mundo, afectando principalmente crianças pequenas e indivíduos não vacinados.",
    "Embora a vacinação tenha reduzido os casos, surtos ainda ocorrem em áreas com baixa cobertura vacinal, em algumas regiões da África e da Ásia.",
-   "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infeções secundárias, como pneumonia.",
+   "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infecções secundárias, como pneumonia.",
    "As complicações do sarampo incluem pneumonia, encefalite e cegueira, tornando o sarampo uma preocupação de saúde pública, especialmente em populações desnutridas e imunocomprometidas.",
    "A maioria das mortes por sarampo ocorre em crianças menores de 5 anos e adultos acima de 20, devido a complicações.",
    "Em Moçambique, a vigilância do sarampo é baseada na identificação de cada caso, com confirmação laboratorial e diagnóstico diferencial para rubéola, devido à semelhança dos sintomas entre as duas doenças."
@@ -2056,7 +2056,7 @@ var DISEASES={
      ],
      [
       0,
-      "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infeções secundárias, como pneumonia."
+      "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infecções secundárias, como pneumonia."
      ],
      [
       0,
@@ -2331,7 +2331,7 @@ var DISEASES={
    ],
    [
     0,
-    "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infeções secundárias, como pneumonia."
+    "Em crianças com deficiência de vitamina A e desnutrição, o sarampo pode evoluir para uma doença grave, aumentando o risco de infecções secundárias, como pneumonia."
    ],
    [
     0,
@@ -2719,7 +2719,7 @@ var DISEASES={
      ],
      [
       0,
-      "Período de infecciosidade: Uma pessoa é infeciosa de 1 a 2 dias antes do aparecimento da erupção cutânea até que todas as lesões tenham ficado crostas, normalmente 5 a 7 dias após o início da erupção cutânea."
+      "Período de infecciosidade: Uma pessoa é infecciosa de 1 a 2 dias antes do aparecimento da erupção cutânea até que todas as lesões tenham ficado crostas, normalmente 5 a 7 dias após o início da erupção cutânea."
      ]
     ]
    },
@@ -2736,7 +2736,7 @@ var DISEASES={
      ],
      [
       0,
-      "Profissionais de saúde expostos a materiais infecciosos sem equipamento de proteção individual (EPI) adequado."
+      "Profissionais de saúde expostos a materiais infecciosos sem equipamento de protecção individual (EPI) adequado."
      ]
     ]
    },
@@ -2890,7 +2890,7 @@ var DISEASES={
    ],
    [
     0,
-    "Período de infecciosidade: Uma pessoa é infeciosa de 1 a 2 dias antes do aparecimento da erupção cutânea até que todas as lesões tenham ficado crostas, normalmente 5 a 7 dias após o início da erupção cutânea."
+    "Período de infecciosidade: Uma pessoa é infecciosa de 1 a 2 dias antes do aparecimento da erupção cutânea até que todas as lesões tenham ficado crostas, normalmente 5 a 7 dias após o início da erupção cutânea."
    ],
    [
     "h",
@@ -2906,7 +2906,7 @@ var DISEASES={
    ],
    [
     0,
-    "Profissionais de saúde expostos a materiais infecciosos sem equipamento de proteção individual (EPI) adequado."
+    "Profissionais de saúde expostos a materiais infecciosos sem equipamento de protecção individual (EPI) adequado."
    ],
    [
     "h",
@@ -2983,7 +2983,7 @@ var DISEASES={
    {
     "media": "<svg viewBox=\"0 0 96 84\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"48\" cy=\"28\" r=\"13\" fill=\"#a9714b\"/><path d=\"M24 70q0-22 24-22t24 22Z\" fill=\"#ffffff\" stroke=\"#dfe3e4\"/><path d=\"M44 50h8v20h-8Z\" fill=\"#eef2f3\"/><rect x=\"44\" y=\"56\" width=\"8\" height=\"3\" fill=\"#B02040\"/><rect x=\"46.5\" y=\"53.5\" width=\"3\" height=\"8\" fill=\"#B02040\"/></svg>",
     "title": "Profissionais de saúde",
-    "text": "Profissionais de saúde expostos a materiais infecciosos sem equipamento de proteção individual (EPI) adequado."
+    "text": "Profissionais de saúde expostos a materiais infecciosos sem equipamento de protecção individual (EPI) adequado."
    }
   ]
  },
@@ -3613,7 +3613,7 @@ var DISEASES={
      ],
      [
       0,
-      "Laboratório de referência: Laboratório de Referência em Virologia, INS (Marracuene) 4. Síndromes Gastrointestinais Agudas de Transmissão Hídrica e Alimentar As Gastroenterites Agudas de Transmissão Hídrica e Alimentar, representam um grupo de doenças infeciosas com elevado potencial de causar surtos, particularmente países de baixa e média renda como Moçambique, onde as condições de saneamento básico e acesso a água potável e segura podem ser limitados em determinadas áreas. Essas síndromes são tipicamente caracterizadas por sintomas como diarreia aguda, vómitos, desidratação, dor abdominal, resultantes de infeções que afectam o sistema gastrointestinal. No contexto de saúde pública, a resposta rápida e a vigilância eficaz para estas doenças são essenciais para prevenir a disseminação e mitigar o impacto dos surtos. Nesta abordagem foram incluídas as doenças de maior preocupação no país: as infeções bacterianas transmitidas por alimentos, como aquelas causadas por Vibrio cholerae, Escherichia coli e Shigella, que podem desencadear surtos de diarreia aguda. Adicionalmente, infeções virais gastrointestinais, como as causadas por rotavírus e norovírus, são comuns e altamente contagiosas, afectando principalmente populações vulneráveis, como crianças e idosos. A Salmonelose é outra doença relevante, frequentemente associada a práticas inadequadas de saneamento e manipulação de alimentos. Em Moçambique, os surtos são frequentemente exacerbados por más condições sanitárias, acesso inadequado a água potável e práticas inseguras de manipulação de alimentos, particularmente em áreas urbanas superlotadas e durante a estação chuvosa, quando a contaminação da água é mais frequente. Essas condições criam um ambiente propício para a propagação rápida de agentes patogénicos, aumentando o risco de surtos e epidemias de síndromes gastrointestinais agudas. A implementação de sistemas de vigilância robustos e contínuos é essencial para a detecção precoce e monitoria desses surtos, permitindo uma resposta rápida que minimize o impacto na população."
+      "Laboratório de referência: Laboratório de Referência em Virologia, INS (Marracuene) 4. Síndromes Gastrointestinais Agudas de Transmissão Hídrica e Alimentar As Gastroenterites Agudas de Transmissão Hídrica e Alimentar, representam um grupo de doenças infeciosas com elevado potencial de causar surtos, particularmente países de baixa e média renda como Moçambique, onde as condições de saneamento básico e acesso a água potável e segura podem ser limitados em determinadas áreas. Essas síndromes são tipicamente caracterizadas por sintomas como diarreia aguda, vómitos, desidratação, dor abdominal, resultantes de infecções que afectam o sistema gastrointestinal. No contexto de saúde pública, a resposta rápida e a vigilância eficaz para estas doenças são essenciais para prevenir a disseminação e mitigar o impacto dos surtos. Nesta abordagem foram incluídas as doenças de maior preocupação no país: as infecções bacterianas transmitidas por alimentos, como aquelas causadas por Vibrio cholerae, Escherichia coli e Shigella, que podem desencadear surtos de diarreia aguda. Adicionalmente, infecções virais gastrointestinais, como as causadas por rotavírus e norovírus, são comuns e altamente contagiosas, afectando principalmente populações vulneráveis, como crianças e idosos. A Salmonelose é outra doença relevante, frequentemente associada a práticas inadequadas de saneamento e manipulação de alimentos. Em Moçambique, os surtos são frequentemente exacerbados por más condições sanitárias, acesso inadequado a água potável e práticas inseguras de manipulação de alimentos, particularmente em áreas urbanas superlotadas e durante a estação chuvosa, quando a contaminação da água é mais frequente. Essas condições criam um ambiente propício para a propagação rápida de agentes patogénicos, aumentando o risco de surtos e epidemias de síndromes gastrointestinais agudas. A implementação de sistemas de vigilância robustos e contínuos é essencial para a detecção precoce e monitoria desses surtos, permitindo uma resposta rápida que minimize o impacto na população."
      ]
     ]
    }
@@ -3769,7 +3769,7 @@ var DISEASES={
    ],
    [
     0,
-    "Laboratório de referência: Laboratório de Referência em Virologia, INS (Marracuene) 4. Síndromes Gastrointestinais Agudas de Transmissão Hídrica e Alimentar As Gastroenterites Agudas de Transmissão Hídrica e Alimentar, representam um grupo de doenças infeciosas com elevado potencial de causar surtos, particularmente países de baixa e média renda como Moçambique, onde as condições de saneamento básico e acesso a água potável e segura podem ser limitados em determinadas áreas. Essas síndromes são tipicamente caracterizadas por sintomas como diarreia aguda, vómitos, desidratação, dor abdominal, resultantes de infeções que afectam o sistema gastrointestinal. No contexto de saúde pública, a resposta rápida e a vigilância eficaz para estas doenças são essenciais para prevenir a disseminação e mitigar o impacto dos surtos. Nesta abordagem foram incluídas as doenças de maior preocupação no país: as infeções bacterianas transmitidas por alimentos, como aquelas causadas por Vibrio cholerae, Escherichia coli e Shigella, que podem desencadear surtos de diarreia aguda. Adicionalmente, infeções virais gastrointestinais, como as causadas por rotavírus e norovírus, são comuns e altamente contagiosas, afectando principalmente populações vulneráveis, como crianças e idosos. A Salmonelose é outra doença relevante, frequentemente associada a práticas inadequadas de saneamento e manipulação de alimentos. Em Moçambique, os surtos são frequentemente exacerbados por más condições sanitárias, acesso inadequado a água potável e práticas inseguras de manipulação de alimentos, particularmente em áreas urbanas superlotadas e durante a estação chuvosa, quando a contaminação da água é mais frequente. Essas condições criam um ambiente propício para a propagação rápida de agentes patogénicos, aumentando o risco de surtos e epidemias de síndromes gastrointestinais agudas. A implementação de sistemas de vigilância robustos e contínuos é essencial para a detecção precoce e monitoria desses surtos, permitindo uma resposta rápida que minimize o impacto na população."
+    "Laboratório de referência: Laboratório de Referência em Virologia, INS (Marracuene) 4. Síndromes Gastrointestinais Agudas de Transmissão Hídrica e Alimentar As Gastroenterites Agudas de Transmissão Hídrica e Alimentar, representam um grupo de doenças infeciosas com elevado potencial de causar surtos, particularmente países de baixa e média renda como Moçambique, onde as condições de saneamento básico e acesso a água potável e segura podem ser limitados em determinadas áreas. Essas síndromes são tipicamente caracterizadas por sintomas como diarreia aguda, vómitos, desidratação, dor abdominal, resultantes de infecções que afectam o sistema gastrointestinal. No contexto de saúde pública, a resposta rápida e a vigilância eficaz para estas doenças são essenciais para prevenir a disseminação e mitigar o impacto dos surtos. Nesta abordagem foram incluídas as doenças de maior preocupação no país: as infecções bacterianas transmitidas por alimentos, como aquelas causadas por Vibrio cholerae, Escherichia coli e Shigella, que podem desencadear surtos de diarreia aguda. Adicionalmente, infecções virais gastrointestinais, como as causadas por rotavírus e norovírus, são comuns e altamente contagiosas, afectando principalmente populações vulneráveis, como crianças e idosos. A Salmonelose é outra doença relevante, frequentemente associada a práticas inadequadas de saneamento e manipulação de alimentos. Em Moçambique, os surtos são frequentemente exacerbados por más condições sanitárias, acesso inadequado a água potável e práticas inseguras de manipulação de alimentos, particularmente em áreas urbanas superlotadas e durante a estação chuvosa, quando a contaminação da água é mais frequente. Essas condições criam um ambiente propício para a propagação rápida de agentes patogénicos, aumentando o risco de surtos e epidemias de síndromes gastrointestinais agudas. A implementação de sistemas de vigilância robustos e contínuos é essencial para a detecção precoce e monitoria desses surtos, permitindo uma resposta rápida que minimize o impacto na população."
    ]
   ],
   "risks": [
@@ -4037,7 +4037,7 @@ var DISEASES={
      ],
      [
       1,
-      "Distritos sem surto confirmado/declarado: Rastrear todos os casos suspeitos com RDT e enviar a segunda amostra para o respetivo laboratório de saúde pública provincial para confirmação por cultura/PCR."
+      "Distritos sem surto confirmado/declarado: Rastrear todos os casos suspeitos com RDT e enviar a segunda amostra para o respectivo laboratório de saúde pública provincial para confirmação por cultura/PCR."
      ],
      [
       1,
@@ -4257,7 +4257,7 @@ var DISEASES={
    ],
    [
     1,
-    "Distritos sem surto confirmado/declarado: Rastrear todos os casos suspeitos com RDT e enviar a segunda amostra para o respetivo laboratório de saúde pública provincial para confirmação por cultura/PCR."
+    "Distritos sem surto confirmado/declarado: Rastrear todos os casos suspeitos com RDT e enviar a segunda amostra para o respectivo laboratório de saúde pública provincial para confirmação por cultura/PCR."
    ],
    [
     1,
@@ -5281,7 +5281,7 @@ var DISEASES={
      ],
      [
       0,
-      "Variantes/Estirpes: Existem vários genótipos de Rotavírus, com os mais comuns sendo G1, G2, G3, G4, e G9, os quais causam a maioria das infeções em humanos."
+      "Variantes/Estirpes: Existem vários genótipos de Rotavírus, com os mais comuns sendo G1, G2, G3, G4, e G9, os quais causam a maioria das infecções em humanos."
      ]
     ]
    },
@@ -5465,7 +5465,7 @@ var DISEASES={
    ],
    [
     0,
-    "Variantes/Estirpes: Existem vários genótipos de Rotavírus, com os mais comuns sendo G1, G2, G3, G4, e G9, os quais causam a maioria das infeções em humanos."
+    "Variantes/Estirpes: Existem vários genótipos de Rotavírus, com os mais comuns sendo G1, G2, G3, G4, e G9, os quais causam a maioria das infecções em humanos."
    ],
    [
     "h",
@@ -6045,7 +6045,7 @@ var DISEASES={
    {
     "k": "p",
     "label": "Provável",
-    "body": "Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão ativa de dengue ou exposição a mosquitos do género Aedes.",
+    "body": "Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão activa de dengue ou exposição a mosquitos do género Aedes.",
     "media": "<svg viewBox=\"0 0 360 150\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"360\" height=\"150\" fill=\"#f7fbfa\"/><rect x=\"10\" y=\"8\" width=\"340\" height=\"30\" rx=\"9\" fill=\"#E3F4EF\" stroke=\"#a9e0cd\"/><text x=\"180\" y=\"27\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#0d6b52\">Ligação epidemiológica</text><rect x=\"12\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g><circle cx=\"54\" cy=\"46\" r=\"10\" fill=\"#a9714b\"/><path d=\"M39 78q0-15 15-15t15 15Z\" fill=\"#a9714b\"/></g><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.6\"><circle cx=\"50\" cy=\"43\" r=\"2.6\"/><circle cx=\"58\" cy=\"44\" r=\"2.4\"/></g><g><circle cx=\"76\" cy=\"50\" r=\"9\" fill=\"#c98f63\"/><path d=\"M63 78q0-13 13-13t13 13Z\" fill=\"#c98f63\"/></g><text x=\"64\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Contacto com</text><text x=\"64\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">caso</text><rect x=\"128\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g transform=\"translate(156,44)\"><rect x=\"0\" y=\"6\" width=\"18\" height=\"14\" rx=\"3\" fill=\"#007088\"/><path d=\"M5 6V2h8v4\" stroke=\"#007088\" stroke-width=\"2\" fill=\"none\"/></g><path d=\"M178 40c5 0 9 4 8 8c1 4-1 5 0 8c1 4-3 6-6 5c-5-1-5-8-6-11c-1-4 1-10 4-10Z\" fill=\"#cfe7dd\" stroke=\"#79b7a3\"/><circle cx=\"180\" cy=\"50\" r=\"2.4\" fill=\"#B02040\"/><text x=\"180\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Viagem /</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">área endémica</text><rect x=\"244\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g fill=\"#8a6b52\"><ellipse cx=\"296\" cy=\"52\" rx=\"20\" ry=\"12\"/><circle cx=\"314\" cy=\"47\" r=\"8\"/></g><circle cx=\"317\" cy=\"45\" r=\"1.5\" fill=\"#2b2b2b\"/><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.7\"><circle cx=\"290\" cy=\"50\" r=\"2.6\"/><circle cx=\"300\" cy=\"54\" r=\"2.4\"/></g><text x=\"296\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Exposição a</text><text x=\"296\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">animais</text></svg>"
    },
    {
@@ -6090,7 +6090,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso provável: Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão ativa de dengue ou exposição a mosquitos do género Aedes."
+      "Caso provável: Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão activa de dengue ou exposição a mosquitos do género Aedes."
      ],
      [
       0,
@@ -6162,7 +6162,7 @@ var DISEASES={
      ],
      [
       0,
-      "Indivíduos com infeções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
+      "Indivíduos com infecções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
      ]
     ]
    },
@@ -6179,7 +6179,7 @@ var DISEASES={
      ],
      [
       1,
-      "Busca activa de casos: Implementar busca ativa em áreas endémicas e entre pessoas com sintomas suspeitos."
+      "Busca activa de casos: Implementar busca activa em áreas endémicas e entre pessoas com sintomas suspeitos."
      ],
      [
       1,
@@ -6207,7 +6207,7 @@ var DISEASES={
      ],
      [
       1,
-      "Comunicar ao público sobre a importância do controlo de mosquitos, proteção pessoal e notificação precoce de sintomas."
+      "Comunicar ao público sobre a importância do controlo de mosquitos, protecção pessoal e notificação precoce de sintomas."
      ],
      [
       1,
@@ -6228,7 +6228,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI)"
+      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI)"
      ],
      [
       1,
@@ -6272,7 +6272,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso provável: Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão ativa de dengue ou exposição a mosquitos do género Aedes."
+    "Caso provável: Um caso suspeito com ligação epidemiológica, ou seja, com contacto recente com uma área de transmissão activa de dengue ou exposição a mosquitos do género Aedes."
    ],
    [
     0,
@@ -6364,7 +6364,7 @@ var DISEASES={
    ],
    [
     0,
-    "Indivíduos com infeções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
+    "Indivíduos com infecções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
    ],
    [
     "h",
@@ -6380,7 +6380,7 @@ var DISEASES={
    ],
    [
     1,
-    "Busca activa de casos: Implementar busca ativa em áreas endémicas e entre pessoas com sintomas suspeitos."
+    "Busca activa de casos: Implementar busca activa em áreas endémicas e entre pessoas com sintomas suspeitos."
    ],
    [
     1,
@@ -6408,7 +6408,7 @@ var DISEASES={
    ],
    [
     1,
-    "Comunicar ao público sobre a importância do controlo de mosquitos, proteção pessoal e notificação precoce de sintomas."
+    "Comunicar ao público sobre a importância do controlo de mosquitos, protecção pessoal e notificação precoce de sintomas."
    ],
    [
     1,
@@ -6428,7 +6428,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI)"
+    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI)"
    ],
    [
     1,
@@ -6468,7 +6468,7 @@ var DISEASES={
    {
     "media": "<svg viewBox=\"0 0 96 84\" xmlns=\"http://www.w3.org/2000/svg\"><g><circle cx=\"34\" cy=\"30\" r=\"10\" fill=\"#a9714b\"/><path d=\"M16 64q0-16 18-16t18 16Z\" fill=\"#a9714b\"/></g><g><circle cx=\"62\" cy=\"34\" r=\"9\" fill=\"#c98f63\"/><path d=\"M46 64q0-14 16-14t16 14Z\" fill=\"#c98f63\"/></g></svg>",
     "title": "Populações em risco",
-    "text": "Indivíduos com infeções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
+    "text": "Indivíduos com infecções anteriores por dengue (maior risco de desenvolver a forma hemorrágica)."
    }
   ]
  },
@@ -6652,7 +6652,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI), incluindo luvas, bata, máscara e proteção facial, para evitar qualquer risco de contaminação ou exposição."
+      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI), incluindo luvas, bata, máscara e protecção facial, para evitar qualquer risco de contaminação ou exposição."
      ],
      [
       1,
@@ -6844,7 +6844,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI), incluindo luvas, bata, máscara e proteção facial, para evitar qualquer risco de contaminação ou exposição."
+    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI), incluindo luvas, bata, máscara e protecção facial, para evitar qualquer risco de contaminação ou exposição."
    ],
    [
     1,
@@ -6911,7 +6911,7 @@ var DISEASES={
    "O vírus é endémico em partes da África Ocidental e propaga-se principalmente através da exposição a roedores, especificamente à espécie Mastomys",
    "Estima-se que cerca de 80% das infecções sejam assintomáticas ou leves, enquanto aproximadamente 20% evoluem para formas graves, com uma taxa de letalidade elevada, especialmente em contextos com acesso limitado a cuidados de saúde adequados.",
    "Actualmente, não existe vacina aprovada para a febre de Lassa, embora pesquisas estejam em andamento. O tratamento consiste em medidas de suporte e, em alguns casos, o uso do antiviral, que pode reduzir a gravidade da doença se administrado precocemente.",
-   "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infeções.",
+   "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infecções.",
    "Variantes/Estirpes: Existem várias estirpes do vírus Lassa, embora as manifestações clínicas sejam geralmente consistentes entre elas."
   ],
   "cases": [
@@ -6924,7 +6924,7 @@ var DISEASES={
    {
     "k": "p",
     "label": "Provável",
-    "body": "m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infetada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI).",
+    "body": "m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infectada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI).",
     "media": "<svg viewBox=\"0 0 244 150\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"244\" height=\"150\" fill=\"#f7fbfa\"/><rect x=\"10\" y=\"8\" width=\"224\" height=\"30\" rx=\"9\" fill=\"#E3F4EF\" stroke=\"#a9e0cd\"/><text x=\"122\" y=\"27\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#0d6b52\">Ligação epidemiológica</text><rect x=\"12\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g><circle cx=\"54\" cy=\"46\" r=\"10\" fill=\"#a9714b\"/><path d=\"M39 78q0-15 15-15t15 15Z\" fill=\"#a9714b\"/></g><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.6\"><circle cx=\"50\" cy=\"43\" r=\"2.6\"/><circle cx=\"58\" cy=\"44\" r=\"2.4\"/></g><g><circle cx=\"76\" cy=\"50\" r=\"9\" fill=\"#c98f63\"/><path d=\"M63 78q0-13 13-13t13 13Z\" fill=\"#c98f63\"/></g><text x=\"64\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Contacto com</text><text x=\"64\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">caso</text><rect x=\"128\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g fill=\"#8a6b52\"><ellipse cx=\"180\" cy=\"52\" rx=\"20\" ry=\"12\"/><circle cx=\"198\" cy=\"47\" r=\"8\"/></g><circle cx=\"201\" cy=\"45\" r=\"1.5\" fill=\"#2b2b2b\"/><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.7\"><circle cx=\"174\" cy=\"50\" r=\"2.6\"/><circle cx=\"184\" cy=\"54\" r=\"2.4\"/></g><text x=\"180\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Exposição a</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">animais</text></svg>"
    },
    {
@@ -6956,7 +6956,7 @@ var DISEASES={
      ],
      [
       0,
-      "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infeções."
+      "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infecções."
      ],
      [
       0,
@@ -6973,7 +6973,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso Provável: m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infetada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI)."
+      "Caso Provável: m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infectada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI)."
      ],
      [
       0,
@@ -7115,7 +7115,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI), incluindo luvas, bata, máscara e proteção facial, para evitar qualquer risco de contaminação ou exposição."
+      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI), incluindo luvas, bata, máscara e protecção facial, para evitar qualquer risco de contaminação ou exposição."
      ],
      [
       1,
@@ -7175,7 +7175,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso Provável: m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infetada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI)."
+    "Caso Provável: m caso suspeito com ligações epidemiológicas a um caso confirmado, incluindo: (1) Exposição a excrementos de roedores em residências ou locais de trabalho; Contacto directo com sangue ou outros fluidos corporais de uma pessoa infectada (confirmada ou suspeita); Profissionais de saúde que estiveram em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI)."
    ],
    [
     0,
@@ -7223,7 +7223,7 @@ var DISEASES={
    ],
    [
     0,
-    "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infeções."
+    "A febre de Lassa representa uma ameaça ocupacional para profissionais de saúde em regiões endémicas, tornando essencial a implementação de medidas rigorosas de controlo de infecções."
    ],
    [
     0,
@@ -7339,7 +7339,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI), incluindo luvas, bata, máscara e proteção facial, para evitar qualquer risco de contaminação ou exposição."
+    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI), incluindo luvas, bata, máscara e protecção facial, para evitar qualquer risco de contaminação ou exposição."
    ],
    [
     1,
@@ -7417,7 +7417,7 @@ var DISEASES={
    "A febre do Vale do Rift é uma doença viral zoonótica que afecta principalmente animais de produção, como bovinos, ovinos, caprinos e camelos, mas também pode infectar humanos, especialmente aqueles que mantém contacto próximo com animais infectados ou com produtos de origem animal.",
    "A febre do Vale do Rift é endémica na África Oriental e Austral, ocorrendo com maior frequência após períodos de chuvas intensas e inundações, que levam ao aumento das populações de mosquitos vectores. A doença já foi registada em países como Quénia, Tanzânia, Somália, Sudão, África do Sul, Moçambique e Madagáscar.",
    "Em casos graves de infecção em humanos, podem ocorrer sintomas como hemorragias, icterícia, e inflamação do fígado. Embora raros, os casos hemorrágicos são graves e podem levar a complicações fatais, sendo importante o diagnóstico precoce e o tratamento de suporte adequado.",
-   "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infeção para trabalhadores rurais e comunidades.",
+   "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infecção para trabalhadores rurais e comunidades.",
    "Os hantavírus são uma família de vírus que podem causar doenças graves e morte, como a Síndrome Pulmonar por Hantavírus (SPH) e a Febre Hemorrágica com Síndrome Renal FHSR).",
    "A SPH é uma doença respiratória grave, enquanto a FHSR afecta os rins e pode causar hemorragia. Em casos graves, a FHSR pode levar a complicações renais sérias, sendo importante o diagnóstico precoce e o tratamento de suporte."
   ],
@@ -7431,7 +7431,7 @@ var DISEASES={
    {
     "k": "p",
     "label": "Provável",
-    "body": "Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI).",
+    "body": "Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI).",
     "media": "<svg viewBox=\"0 0 244 150\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"244\" height=\"150\" fill=\"#f7fbfa\"/><rect x=\"10\" y=\"8\" width=\"224\" height=\"30\" rx=\"9\" fill=\"#E3F4EF\" stroke=\"#a9e0cd\"/><text x=\"122\" y=\"27\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#0d6b52\">Ligação epidemiológica</text><rect x=\"12\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g><circle cx=\"54\" cy=\"46\" r=\"10\" fill=\"#a9714b\"/><path d=\"M39 78q0-15 15-15t15 15Z\" fill=\"#a9714b\"/></g><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.6\"><circle cx=\"50\" cy=\"43\" r=\"2.6\"/><circle cx=\"58\" cy=\"44\" r=\"2.4\"/></g><g><circle cx=\"76\" cy=\"50\" r=\"9\" fill=\"#c98f63\"/><path d=\"M63 78q0-13 13-13t13 13Z\" fill=\"#c98f63\"/></g><text x=\"64\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Contacto com</text><text x=\"64\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">caso</text><rect x=\"128\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g fill=\"#8a6b52\"><ellipse cx=\"180\" cy=\"52\" rx=\"20\" ry=\"12\"/><circle cx=\"198\" cy=\"47\" r=\"8\"/></g><circle cx=\"201\" cy=\"45\" r=\"1.5\" fill=\"#2b2b2b\"/><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.7\"><circle cx=\"174\" cy=\"50\" r=\"2.6\"/><circle cx=\"184\" cy=\"54\" r=\"2.4\"/></g><text x=\"180\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Exposição a</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">animais</text></svg>"
    },
    {
@@ -7459,7 +7459,7 @@ var DISEASES={
      ],
      [
       0,
-      "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infeção para trabalhadores rurais e comunidades."
+      "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infecção para trabalhadores rurais e comunidades."
      ],
      [
       0,
@@ -7492,7 +7492,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso Provável: Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI)."
+      "Caso Provável: Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI)."
      ],
      [
       0,
@@ -7609,7 +7609,7 @@ var DISEASES={
      ],
      [
       1,
-      "Iniciar campanhas de sensibilização pública para educar as pessoas sobre a importância de evitar o contacto com animais infectados, técnicas de abate adequadas e a utilização de equipamentos de proteção individual (EPI) durante o manuseamento dos animais."
+      "Iniciar campanhas de sensibilização pública para educar as pessoas sobre a importância de evitar o contacto com animais infectados, técnicas de abate adequadas e a utilização de equipamentos de protecção individual (EPI) durante o manuseamento dos animais."
      ],
      [
       0,
@@ -7658,7 +7658,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI) para evitar qualquer risco de contaminação ou exposição."
+      "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI) para evitar qualquer risco de contaminação ou exposição."
      ],
      [
       1,
@@ -7702,7 +7702,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso Provável: Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Proteção Individual (EPI)."
+    "Caso Provável: Um caso suspeito com vínculo epidemiológico a um caso confirmado, incluindo: (1) exposição directa a animais ou produtos de origem animal infectados, como carne ou leite não pasteurizado; (2) contacto com sangue ou outros fluidos corporais de animais infectados; (3) profissionais de saúde em contacto com pacientes infectados sem uso adequado de Equipamento de Protecção Individual (EPI)."
    ],
    [
     0,
@@ -7738,7 +7738,7 @@ var DISEASES={
    ],
    [
     0,
-    "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infeção para trabalhadores rurais e comunidades."
+    "A febre do Vale do Rift é um grande desafio para a saúde pública e a economia, pois causa perdas no gado devido à morte de animais e redução na produção de carne e leite, além de representar risco de infecção para trabalhadores rurais e comunidades."
    ],
    [
     "h",
@@ -7858,7 +7858,7 @@ var DISEASES={
    ],
    [
     1,
-    "Iniciar campanhas de sensibilização pública para educar as pessoas sobre a importância de evitar o contacto com animais infectados, técnicas de abate adequadas e a utilização de equipamentos de proteção individual (EPI) durante o manuseamento dos animais."
+    "Iniciar campanhas de sensibilização pública para educar as pessoas sobre a importância de evitar o contacto com animais infectados, técnicas de abate adequadas e a utilização de equipamentos de protecção individual (EPI) durante o manuseamento dos animais."
    ],
    [
     0,
@@ -7906,7 +7906,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Proteção Individual (EPI) para evitar qualquer risco de contaminação ou exposição."
+    "As amostras devem ser colhidas em condições estéreis, com uso completo de Equipamento de Protecção Individual (EPI) para evitar qualquer risco de contaminação ou exposição."
    ],
    [
     1,
@@ -7970,7 +7970,7 @@ var DISEASES={
    {
     "k": "p",
     "label": "Provável",
-    "body": "Caso suspeito com ligação epidemiológica a uma área de transmissão ativa de Hantavírus ou contacto com roedores e suas excreções.",
+    "body": "Caso suspeito com ligação epidemiológica a uma área de transmissão activa de Hantavírus ou contacto com roedores e suas excreções.",
     "media": "<svg viewBox=\"0 0 360 150\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"360\" height=\"150\" fill=\"#f7fbfa\"/><rect x=\"10\" y=\"8\" width=\"340\" height=\"30\" rx=\"9\" fill=\"#E3F4EF\" stroke=\"#a9e0cd\"/><text x=\"180\" y=\"27\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#0d6b52\">Ligação epidemiológica</text><rect x=\"12\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g><circle cx=\"54\" cy=\"46\" r=\"10\" fill=\"#a9714b\"/><path d=\"M39 78q0-15 15-15t15 15Z\" fill=\"#a9714b\"/></g><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.6\"><circle cx=\"50\" cy=\"43\" r=\"2.6\"/><circle cx=\"58\" cy=\"44\" r=\"2.4\"/></g><g><circle cx=\"76\" cy=\"50\" r=\"9\" fill=\"#c98f63\"/><path d=\"M63 78q0-13 13-13t13 13Z\" fill=\"#c98f63\"/></g><text x=\"64\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Contacto com</text><text x=\"64\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">caso</text><rect x=\"128\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g transform=\"translate(156,44)\"><rect x=\"0\" y=\"6\" width=\"18\" height=\"14\" rx=\"3\" fill=\"#007088\"/><path d=\"M5 6V2h8v4\" stroke=\"#007088\" stroke-width=\"2\" fill=\"none\"/></g><path d=\"M178 40c5 0 9 4 8 8c1 4-1 5 0 8c1 4-3 6-6 5c-5-1-5-8-6-11c-1-4 1-10 4-10Z\" fill=\"#cfe7dd\" stroke=\"#79b7a3\"/><circle cx=\"180\" cy=\"50\" r=\"2.4\" fill=\"#B02040\"/><text x=\"180\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Viagem /</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">área endémica</text><rect x=\"244\" y=\"46\" width=\"104\" height=\"96\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><g fill=\"#8a6b52\"><ellipse cx=\"296\" cy=\"52\" rx=\"20\" ry=\"12\"/><circle cx=\"314\" cy=\"47\" r=\"8\"/></g><circle cx=\"317\" cy=\"45\" r=\"1.5\" fill=\"#2b2b2b\"/><g fill=\"#B02040\" stroke=\"#fff\" stroke-width=\"0.7\"><circle cx=\"290\" cy=\"50\" r=\"2.6\"/><circle cx=\"300\" cy=\"54\" r=\"2.4\"/></g><text x=\"296\" y=\"120\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Exposição a</text><text x=\"296\" y=\"132\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">animais</text></svg>"
    },
    {
@@ -7990,7 +7990,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso provável: Caso suspeito com ligação epidemiológica a uma área de transmissão ativa de Hantavírus ou contacto com roedores e suas excreções."
+      "Caso provável: Caso suspeito com ligação epidemiológica a uma área de transmissão activa de Hantavírus ou contacto com roedores e suas excreções."
      ],
      [
       0,
@@ -8112,7 +8112,7 @@ var DISEASES={
      ],
      [
       1,
-      "Colher amostras em condições estéreis, utilizando EPI completo (luvas, máscara, avental e proteção facial)."
+      "Colher amostras em condições estéreis, utilizando EPI completo (luvas, máscara, avental e protecção facial)."
      ],
      [
       1,
@@ -8160,7 +8160,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso provável: Caso suspeito com ligação epidemiológica a uma área de transmissão ativa de Hantavírus ou contacto com roedores e suas excreções."
+    "Caso provável: Caso suspeito com ligação epidemiológica a uma área de transmissão activa de Hantavírus ou contacto com roedores e suas excreções."
    ],
    [
     0,
@@ -8276,7 +8276,7 @@ var DISEASES={
    ],
    [
     1,
-    "Colher amostras em condições estéreis, utilizando EPI completo (luvas, máscara, avental e proteção facial)."
+    "Colher amostras em condições estéreis, utilizando EPI completo (luvas, máscara, avental e protecção facial)."
    ],
    [
     1,
@@ -8441,7 +8441,7 @@ var DISEASES={
      ],
      [
       1,
-      "Transmissão entre seres humanos: Ocorre pelo contacto directo com sangue, fluidos corporais ou tecidos de indivíduos infectados, especialmente em contextos de cuidados de saúde com controlo de infeção inadequado."
+      "Transmissão entre seres humanos: Ocorre pelo contacto directo com sangue, fluidos corporais ou tecidos de indivíduos infectados, especialmente em contextos de cuidados de saúde com controlo de infecção inadequado."
      ],
      [
       0,
@@ -8474,11 +8474,11 @@ var DISEASES={
      ],
      [
       0,
-      "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infeção."
+      "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infecção."
      ],
      [
       0,
-      "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infeções hemorrágicas virais."
+      "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infecções hemorrágicas virais."
      ]
     ]
    },
@@ -8515,11 +8515,11 @@ var DISEASES={
      ],
      [
       1,
-      "Implementar estratégias de controlo de vectores, incluindo controlo de carraças em animais e a utilização de vestuário de proteção para pessoas que manuseiam gado ou trabalham em áreas infestadas."
+      "Implementar estratégias de controlo de vectores, incluindo controlo de carraças em animais e a utilização de vestuário de protecção para pessoas que manuseiam gado ou trabalham em áreas infestadas."
      ],
      [
       0,
-      "Sócio-Antropológico: Avaliar práticas comunitárias que possam contribuir para a disseminação de CCHF, como o manejo de gado ou de carraças. Avaliar a sensibilização da comunidade sobre doenças transmitidas por carraças e a utilização de medidas de proteção individual."
+      "Sócio-Antropológico: Avaliar práticas comunitárias que possam contribuir para a disseminação de CCHF, como o manejo de gado ou de carraças. Avaliar a sensibilização da comunidade sobre doenças transmitidas por carraças e a utilização de medidas de protecção individual."
      ],
      [
       0,
@@ -8531,7 +8531,7 @@ var DISEASES={
      ],
      [
       1,
-      "Realizar actividades de sensibilização campanhas educativas sobre o controlo das carraças, os riscos de manusear o gado sem medidas de proteção e a importância da notificação precoce dos sintomas."
+      "Realizar actividades de sensibilização campanhas educativas sobre o controlo das carraças, os riscos de manusear o gado sem medidas de protecção e a importância da notificação precoce dos sintomas."
      ]
     ]
    },
@@ -8648,7 +8648,7 @@ var DISEASES={
    ],
    [
     1,
-    "Transmissão entre seres humanos: Ocorre pelo contacto directo com sangue, fluidos corporais ou tecidos de indivíduos infectados, especialmente em contextos de cuidados de saúde com controlo de infeção inadequado."
+    "Transmissão entre seres humanos: Ocorre pelo contacto directo com sangue, fluidos corporais ou tecidos de indivíduos infectados, especialmente em contextos de cuidados de saúde com controlo de infecção inadequado."
    ],
    [
     0,
@@ -8680,11 +8680,11 @@ var DISEASES={
    ],
    [
     0,
-    "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infeção."
+    "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infecção."
    ],
    [
     0,
-    "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infeções hemorrágicas virais."
+    "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infecções hemorrágicas virais."
    ],
    [
     "h",
@@ -8720,11 +8720,11 @@ var DISEASES={
    ],
    [
     1,
-    "Implementar estratégias de controlo de vectores, incluindo controlo de carraças em animais e a utilização de vestuário de proteção para pessoas que manuseiam gado ou trabalham em áreas infestadas."
+    "Implementar estratégias de controlo de vectores, incluindo controlo de carraças em animais e a utilização de vestuário de protecção para pessoas que manuseiam gado ou trabalham em áreas infestadas."
    ],
    [
     0,
-    "Sócio-Antropológico: Avaliar práticas comunitárias que possam contribuir para a disseminação de CCHF, como o manejo de gado ou de carraças. Avaliar a sensibilização da comunidade sobre doenças transmitidas por carraças e a utilização de medidas de proteção individual."
+    "Sócio-Antropológico: Avaliar práticas comunitárias que possam contribuir para a disseminação de CCHF, como o manejo de gado ou de carraças. Avaliar a sensibilização da comunidade sobre doenças transmitidas por carraças e a utilização de medidas de protecção individual."
    ],
    [
     0,
@@ -8736,7 +8736,7 @@ var DISEASES={
    ],
    [
     1,
-    "Realizar actividades de sensibilização campanhas educativas sobre o controlo das carraças, os riscos de manusear o gado sem medidas de proteção e a importância da notificação precoce dos sintomas."
+    "Realizar actividades de sensibilização campanhas educativas sobre o controlo das carraças, os riscos de manusear o gado sem medidas de protecção e a importância da notificação precoce dos sintomas."
    ],
    [
     "h",
@@ -8781,12 +8781,12 @@ var DISEASES={
    {
     "media": "<svg viewBox=\"0 0 96 84\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#8a6b52\"><ellipse cx=\"44\" cy=\"46\" rx=\"24\" ry=\"15\"/><circle cx=\"68\" cy=\"40\" r=\"10\"/><circle cx=\"68\" cy=\"29\" r=\"5\"/></g><circle cx=\"72\" cy=\"38\" r=\"1.7\" fill=\"#2b2b2b\"/><path d=\"M20 48q-18 2 -16 19\" stroke=\"#8a6b52\" stroke-width=\"3.5\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
     "title": "Contacto com animais",
-    "text": "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infeção."
+    "text": "Membros do agregado familiar: Pessoas em contacto próximo com indivíduos infectados ou com os seus fluidos corporais, especialmente durante a fase aguda da doença ou em práticas de sepultamento, têm um risco maior de contrair a infecção."
    },
    {
     "media": "<svg viewBox=\"0 0 96 84\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#8a6b52\"><ellipse cx=\"44\" cy=\"46\" rx=\"24\" ry=\"15\"/><circle cx=\"68\" cy=\"40\" r=\"10\"/><circle cx=\"68\" cy=\"29\" r=\"5\"/></g><circle cx=\"72\" cy=\"38\" r=\"1.7\" fill=\"#2b2b2b\"/><path d=\"M20 48q-18 2 -16 19\" stroke=\"#8a6b52\" stroke-width=\"3.5\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
     "title": "Contacto com animais",
-    "text": "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infeções hemorrágicas virais."
+    "text": "Gravidez: As mulheres grávidas estão em risco elevado de complicações graves e de mortalidade se infectadas com o vírus da FHCC, tal como acontece com outras infecções hemorrágicas virais."
    }
   ]
  },
@@ -8815,7 +8815,7 @@ var DISEASES={
    {
     "k": "c",
     "label": "Confirmado",
-    "body": "Um caso com confirmação laboratorial da infeção pelo vírus de Marburg, por PCR, ELISA ou cultura viral.",
+    "body": "Um caso com confirmação laboratorial da infecção pelo vírus de Marburg, por PCR, ELISA ou cultura viral.",
     "media": "<svg viewBox=\"0 0 360 168\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"360\" height=\"168\" fill=\"#f7fbfa\"/><rect x=\"8\" y=\"16\" width=\"100\" height=\"112\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><rect x=\"42\" y=\"44\" width=\"32\" height=\"52\" rx=\"5\" fill=\"#fff\" stroke=\"#007088\" stroke-width=\"2\"/><rect x=\"42\" y=\"74\" width=\"32\" height=\"22\" fill=\"#B02040\" opacity=\"0.8\"/><path d=\"M39 44h38\" stroke=\"#007088\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><text x=\"58\" y=\"116\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">Amostra</text><path d=\"M112 72h14l-4-4m4 4l-4 4\" stroke=\"#c3b4a8\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"130\" y=\"16\" width=\"100\" height=\"112\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><rect x=\"150\" y=\"54\" width=\"60\" height=\"40\" rx=\"6\" fill=\"#e6eef0\" stroke=\"#007088\" stroke-width=\"1.6\"/><rect x=\"150\" y=\"49\" width=\"60\" height=\"9\" rx=\"3\" fill=\"#007088\"/><g stroke=\"#007088\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M170 64c14 8 -14 12 0 20\"/><path d=\"M190 64c-14 8 14 12 0 20\"/><path d=\"M171 70h18M171 78h18\"/></g><text x=\"180\" y=\"116\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#333\">PCR</text><path d=\"M234 72h14l-4-4m4 4l-4 4\" stroke=\"#c3b4a8\" stroke-width=\"2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"252\" y=\"16\" width=\"100\" height=\"112\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><rect x=\"272\" y=\"44\" width=\"60\" height=\"46\" rx=\"8\" fill=\"#eafaf1\" stroke=\"#1d9e75\" stroke-width=\"1.8\"/><circle cx=\"302\" cy=\"67\" r=\"13\" fill=\"#1d9e75\"/><path d=\"M295 67l5 5 9-10\" stroke=\"#fff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"302\" y=\"116\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" font-weight=\"700\" fill=\"#1d7d55\">Resultado positivo</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9.5\" fill=\"#666\">Confirmação laboratorial — PCR</text></svg>"
    }
   ],
@@ -8850,7 +8850,7 @@ var DISEASES={
      ],
      [
       0,
-      "Caso confirmado: Um caso com confirmação laboratorial da infeção pelo vírus de Marburg, por PCR, ELISA ou cultura viral."
+      "Caso confirmado: Um caso com confirmação laboratorial da infecção pelo vírus de Marburg, por PCR, ELISA ou cultura viral."
      ]
     ]
    },
@@ -8926,7 +8926,7 @@ var DISEASES={
      ],
      [
       1,
-      "Isolamento: Isolar todos os casos suspeitos ou confirmados em quartos individuais com precauções rigorosas para controlo de infeções."
+      "Isolamento: Isolar todos os casos suspeitos ou confirmados em quartos individuais com precauções rigorosas para controlo de infecções."
      ],
      [
       1,
@@ -9047,7 +9047,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso confirmado: Um caso com confirmação laboratorial da infeção pelo vírus de Marburg, por PCR, ELISA ou cultura viral."
+    "Caso confirmado: Um caso com confirmação laboratorial da infecção pelo vírus de Marburg, por PCR, ELISA ou cultura viral."
    ],
    [
     "h",
@@ -9119,7 +9119,7 @@ var DISEASES={
    ],
    [
     1,
-    "Isolamento: Isolar todos os casos suspeitos ou confirmados em quartos individuais com precauções rigorosas para controlo de infeções."
+    "Isolamento: Isolar todos os casos suspeitos ou confirmados em quartos individuais com precauções rigorosas para controlo de infecções."
    ],
    [
     1,
@@ -9215,7 +9215,7 @@ var DISEASES={
    "A Hepatite A e a Hepatite E têm distribuição epidemiológica global, com maior prevalência em regiões tropicais e subtropicais onde as condições de saneamento são deficientes, facilitando a transmissão fecal-oral.",
    "Em Moçambique, essas doenças são relevantes do ponto de vista epidemiológico, principalmente em comunidades com acesso limitado a água potável e tratamento adequado de esgoto.",
    "A Hepatite A é comum em surtos esporádicos e tende a ocorrer mais em crianças, que geralmente apresentam sintomas leves ou assintomáticos. A infecção por Hepatite E, por outro lado, é mais prevalente em adultos jovens e pode ser particularmente perigosa em mulheres grávidas, com maior risco de evolução para formas graves e até fatais.",
-   "A transmissão é intensificada em áreas afetadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses fatores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
+   "A transmissão é intensificada em áreas afectadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses factores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
   ],
   "cases": [
    {
@@ -9255,7 +9255,7 @@ var DISEASES={
      ],
      [
       1,
-      "A transmissão é intensificada em áreas afetadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses fatores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
+      "A transmissão é intensificada em áreas afectadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses factores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
      ]
     ]
    },
@@ -9410,7 +9410,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Proteção Individual (EPI) básico, incluindo luvas, para proteger o profissional."
+      "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Protecção Individual (EPI) básico, incluindo luvas, para proteger o profissional."
      ],
      [
       1,
@@ -9462,7 +9462,7 @@ var DISEASES={
    ],
    [
     1,
-    "A transmissão é intensificada em áreas afetadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses fatores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
+    "A transmissão é intensificada em áreas afectadas por inundações ou onde o acesso a água limpa é insuficiente, o que aumenta o risco de surtos epidêmicos. Esses factores epidemiológicos reforçam a importância de medidas preventivas, como melhorias de saneamento e programas de vacinação para Hepatite A, especialmente em regiões de maior vulnerabilidade."
    ],
    [
     "h",
@@ -9610,7 +9610,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Proteção Individual (EPI) básico, incluindo luvas, para proteger o profissional."
+    "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Protecção Individual (EPI) básico, incluindo luvas, para proteger o profissional."
    ],
    [
     1,
@@ -9802,7 +9802,7 @@ var DISEASES={
      ],
      [
       1,
-      "Implementar medidas de controlo de roedores e garantir a educação da comunidade sobre estratégias de prevenção, incluindo práticas de higiene, uso de roupas de proteção e segurança da água"
+      "Implementar medidas de controlo de roedores e garantir a educação da comunidade sobre estratégias de prevenção, incluindo práticas de higiene, uso de roupas de protecção e segurança da água"
      ]
     ]
    },
@@ -9819,7 +9819,7 @@ var DISEASES={
      ],
      [
       1,
-      "Urina: no início da infecção a amostra de urina ira permitir a rápida deteção molecular das bactérias e a realização de cultura."
+      "Urina: no início da infecção a amostra de urina ira permitir a rápida detecção molecular das bactérias e a realização de cultura."
      ],
      [
       0,
@@ -9827,7 +9827,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, utilizando Equipamento de Proteção Individual (EPI) básico, incluindo luvas e máscara, para evitar exposição."
+      "As amostras devem ser colhidas em condições estéreis, utilizando Equipamento de Protecção Individual (EPI) básico, incluindo luvas e máscara, para evitar exposição."
      ],
      [
       1,
@@ -9975,7 +9975,7 @@ var DISEASES={
    ],
    [
     1,
-    "Implementar medidas de controlo de roedores e garantir a educação da comunidade sobre estratégias de prevenção, incluindo práticas de higiene, uso de roupas de proteção e segurança da água"
+    "Implementar medidas de controlo de roedores e garantir a educação da comunidade sobre estratégias de prevenção, incluindo práticas de higiene, uso de roupas de protecção e segurança da água"
    ],
    [
     "h",
@@ -9991,7 +9991,7 @@ var DISEASES={
    ],
    [
     1,
-    "Urina: no início da infecção a amostra de urina ira permitir a rápida deteção molecular das bactérias e a realização de cultura."
+    "Urina: no início da infecção a amostra de urina ira permitir a rápida detecção molecular das bactérias e a realização de cultura."
    ],
    [
     0,
@@ -9999,7 +9999,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, utilizando Equipamento de Proteção Individual (EPI) básico, incluindo luvas e máscara, para evitar exposição."
+    "As amostras devem ser colhidas em condições estéreis, utilizando Equipamento de Protecção Individual (EPI) básico, incluindo luvas e máscara, para evitar exposição."
    ],
    [
     1,
@@ -10206,7 +10206,7 @@ var DISEASES={
      ],
      [
       1,
-      "Trabalhar com líderes comunitários para conscientizar sobre a importância do controlo de mosquitos e medidas de proteção individual."
+      "Trabalhar com líderes comunitários para conscientizar sobre a importância do controlo de mosquitos e medidas de protecção individual."
      ],
      [
       1,
@@ -10227,7 +10227,7 @@ var DISEASES={
      ],
      [
       1,
-      "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Proteção Individual (EPI) básico, incluindo luvas."
+      "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Protecção Individual (EPI) básico, incluindo luvas."
      ],
      [
       1,
@@ -10395,7 +10395,7 @@ var DISEASES={
    ],
    [
     1,
-    "Trabalhar com líderes comunitários para conscientizar sobre a importância do controlo de mosquitos e medidas de proteção individual."
+    "Trabalhar com líderes comunitários para conscientizar sobre a importância do controlo de mosquitos e medidas de protecção individual."
    ],
    [
     1,
@@ -10415,7 +10415,7 @@ var DISEASES={
    ],
    [
     1,
-    "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Proteção Individual (EPI) básico, incluindo luvas."
+    "As amostras devem ser colhidas em condições estéreis, com uso de Equipamento de Protecção Individual (EPI) básico, incluindo luvas."
    ],
    [
     1,
@@ -10995,7 +10995,7 @@ var DISEASES={
     "items": [
      [
       0,
-      "Reservatório: Os animais selvagens e os cães domésticos são os principais reservatórios do vírus da raiva em Moçambique e em grande parte da África Subsariana. Os cães são a principal fonte de infeções por raiva humana."
+      "Reservatório: Os animais selvagens e os cães domésticos são os principais reservatórios do vírus da raiva em Moçambique e em grande parte da África Subsariana. Os cães são a principal fonte de infecções por raiva humana."
      ],
      [
       0,
@@ -11210,7 +11210,7 @@ var DISEASES={
    ],
    [
     0,
-    "Reservatório: Os animais selvagens e os cães domésticos são os principais reservatórios do vírus da raiva em Moçambique e em grande parte da África Subsariana. Os cães são a principal fonte de infeções por raiva humana."
+    "Reservatório: Os animais selvagens e os cães domésticos são os principais reservatórios do vírus da raiva em Moçambique e em grande parte da África Subsariana. Os cães são a principal fonte de infecções por raiva humana."
    ],
    [
     0,
@@ -11564,7 +11564,7 @@ var DISEASES={
      ],
      [
       1,
-      "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na proteção em ambientes de risco."
+      "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na protecção em ambientes de risco."
      ]
     ]
    },
@@ -11609,7 +11609,7 @@ var DISEASES={
      ],
      [
       0,
-      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
      ],
      [
       0,
@@ -11777,7 +11777,7 @@ var DISEASES={
    ],
    [
     1,
-    "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na proteção em ambientes de risco."
+    "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na protecção em ambientes de risco."
    ],
    [
     "h",
@@ -11821,7 +11821,7 @@ var DISEASES={
    ],
    [
     0,
-    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
    ],
    [
     0,
@@ -12011,7 +12011,7 @@ var DISEASES={
      ],
      [
       1,
-      "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na proteção em ambientes de risco."
+      "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na protecção em ambientes de risco."
      ]
     ]
    },
@@ -12028,7 +12028,7 @@ var DISEASES={
      ],
      [
       1,
-      "Realizar a higienização das mãos e usar Equipamento de Proteção Individual (EPI), incluindo máscara N95, luvas, avental e proteção ocular, antes de iniciar a colheita"
+      "Realizar a higienização das mãos e usar Equipamento de Protecção Individual (EPI), incluindo máscara N95, luvas, avental e protecção ocular, antes de iniciar a colheita"
      ],
      [
       1,
@@ -12056,7 +12056,7 @@ var DISEASES={
      ],
      [
       0,
-      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
      ],
      [
       0,
@@ -12196,7 +12196,7 @@ var DISEASES={
    ],
    [
     1,
-    "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na proteção em ambientes de risco."
+    "Colaborar com líderes comunitários e profissionais de saúde para educar a população sobre prevenção e controlo, com ênfase na importância das práticas de higiene e na protecção em ambientes de risco."
    ],
    [
     "h",
@@ -12212,7 +12212,7 @@ var DISEASES={
    ],
    [
     1,
-    "Realizar a higienização das mãos e usar Equipamento de Proteção Individual (EPI), incluindo máscara N95, luvas, avental e proteção ocular, antes de iniciar a colheita"
+    "Realizar a higienização das mãos e usar Equipamento de Protecção Individual (EPI), incluindo máscara N95, luvas, avental e protecção ocular, antes de iniciar a colheita"
    ],
    [
     1,
@@ -12240,7 +12240,7 @@ var DISEASES={
    ],
    [
     0,
-    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
    ],
    [
     0,
@@ -12357,7 +12357,7 @@ var DISEASES={
      ],
      [
       0,
-      "Variantes/Cepas: Incluem o SARS-CoV (causador da SARS) ambos pertencentes ao mesmo género, conhecidos por causar infeções respiratórias graves. O diagnostico diferencial deve incluir coronavírus sazonais (229E, OC43, HKU1 e NL63)"
+      "Variantes/Cepas: Incluem o SARS-CoV (causador da SARS) ambos pertencentes ao mesmo género, conhecidos por causar infecções respiratórias graves. O diagnostico diferencial deve incluir coronavírus sazonais (229E, OC43, HKU1 e NL63)"
      ]
     ]
    },
@@ -12386,7 +12386,7 @@ var DISEASES={
      ],
      [
       0,
-      "Período de infecciosidade: Uma pessoa é geralmente infeciosa 1-2 dias antes do início dos sintomas e até 10 dias depois, mais tempo em casos graves ou indivíduos imunocomprometidos."
+      "Período de infecciosidade: Uma pessoa é geralmente infecciosa 1-2 dias antes do início dos sintomas e até 10 dias depois, mais tempo em casos graves ou indivíduos imunocomprometidos."
      ]
     ]
    },
@@ -12473,7 +12473,7 @@ var DISEASES={
      ],
      [
       0,
-      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+      "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
      ],
      [
       0,
@@ -12541,7 +12541,7 @@ var DISEASES={
    ],
    [
     0,
-    "Variantes/Cepas: Incluem o SARS-CoV (causador da SARS) ambos pertencentes ao mesmo género, conhecidos por causar infeções respiratórias graves. O diagnostico diferencial deve incluir coronavírus sazonais (229E, OC43, HKU1 e NL63)"
+    "Variantes/Cepas: Incluem o SARS-CoV (causador da SARS) ambos pertencentes ao mesmo género, conhecidos por causar infecções respiratórias graves. O diagnostico diferencial deve incluir coronavírus sazonais (229E, OC43, HKU1 e NL63)"
    ],
    [
     "h",
@@ -12569,7 +12569,7 @@ var DISEASES={
    ],
    [
     0,
-    "Período de infecciosidade: Uma pessoa é geralmente infeciosa 1-2 dias antes do início dos sintomas e até 10 dias depois, mais tempo em casos graves ou indivíduos imunocomprometidos."
+    "Período de infecciosidade: Uma pessoa é geralmente infecciosa 1-2 dias antes do início dos sintomas e até 10 dias depois, mais tempo em casos graves ou indivíduos imunocomprometidos."
    ],
    [
     "h",
@@ -12653,7 +12653,7 @@ var DISEASES={
    ],
    [
     0,
-    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e proteção ocular, para prevenir contaminações."
+    "Biossegurança: Manusear as amostras em laboratórios com Nível de Biossegurança 2 (BSL-2), utilizando precauções padrão, como uso de luvas, máscaras e protecção ocular, para prevenir contaminações."
    ],
    [
     0,
@@ -13153,7 +13153,7 @@ var DISEASES={
     "items": [
      [
       0,
-      "Agente etiológico: Mycobacterium tuberculosis, bactéria de crescimento lento que causa infeção pulmonar e extrapulmonar."
+      "Agente etiológico: Mycobacterium tuberculosis, bactéria de crescimento lento que causa infecção pulmonar e extrapulmonar."
      ],
      [
       0,
@@ -13329,7 +13329,7 @@ var DISEASES={
    ],
    [
     0,
-    "Agente etiológico: Mycobacterium tuberculosis, bactéria de crescimento lento que causa infeção pulmonar e extrapulmonar."
+    "Agente etiológico: Mycobacterium tuberculosis, bactéria de crescimento lento que causa infecção pulmonar e extrapulmonar."
    ],
    [
     0,
@@ -13630,7 +13630,7 @@ var DISEASES={
      ],
      [
       1,
-      "Realizar a colheita em ambiente bem ventilado, com uso de Equipamento de Proteção Individual (EPI) adequado, incluindo máscara N95, luvas e avental."
+      "Realizar a colheita em ambiente bem ventilado, com uso de Equipamento de Protecção Individual (EPI) adequado, incluindo máscara N95, luvas e avental."
      ],
      [
       1,
@@ -13646,7 +13646,7 @@ var DISEASES={
      ],
      [
       0,
-      "Laboratório de referência: Laboratório de Referência em Virologia do Instituto Nacional de Saúde (Marracuene). 9. Zoonoses com Potencial Epidémico As zoonoses com potencial epidémico representam um conjunto de doenças infecciosas originárias de animais que podem ser transmitidas aos seres humanos, oferecendo um risco elevado para a saúde pública devido ao seu potencial de causar surtos e epidemias. Estas doenças podem afectar diversos sistemas do corpo e espalhar-se rapidamente nas comunidades, especialmente em áreas de alta densidade populacional ou com condições sanitárias inadequadas. Em Moçambique, essas zoonoses representam uma preocupação significativa, pois o acesso a cuidados de saúde pode ser limitado em algumas regiões, e há uma convivência próxima entre humanos e animais em áreas rurais, o que aumenta o risco de transmissão. A identificação precoce, vigilância constante e uma resposta rápida são, portanto, fundamentais para controlar a propagação dessas zoonoses no país. Para os fins deste manual, são abordadas as seguintes zoonoses principais: o Carbúnculo provocado pelo Bacillus anthracis (Antraz), a Peste Bubónica e a doença causada pelo vírus Zika. stas zoonoses apresentam um potencial significativo de propagação internacional, especialmente em um mundo cada vez mais globalizado, com viagens internacionais e comércio de animais e produtos de origem animal. Esse movimento global pode facilitar a disseminação dessas doenças para além das fronteiras nacionais, representando uma ameaça à saúde pública global. Para lidar com essas zoonoses, a abordagem “One Health” é essencial, integrando saúde humana, animal e ambiental. Essa abordagem reconhece que a saúde das pessoas está directamente conectada à saúde dos animais e ao meio ambiente, especialmente em países como Moçambique, onde as interações com animais de criação e vida selvagem são comuns. Estratégias de prevenção e controlo devem, portanto, envolver não apenas o sector de saúde, mas também a agricultura, o meio ambiente e as comunidades locais. A colaboração com o sector de saúde animal é particularmente vital para fortalecer as acções de vigilância e resposta às zoonoses, já que este sector desempenha um papel central na monitoria e controlo de doenças nos animais, prevenindo que cheguem até as populações humanas. Em Moçambique, o sector de saúde animal contribui com a vigilância activa de doenças em animais domésticos e silvestres, a implementação de campanhas de vacinação e o controlo de doenças no gado. Este sector também participa na educação das comunidades sobre práticas de manejo seguro, biossegurança e na criação de animais de forma sustentável e saudável. Esse esforço conjunto permite identificar rapidamente possíveis ameaças zoonóticas, organizar campanhas de sensibilização, controlar vectores e animais reservatórios, e implementar práticas de manejo seguro para reduzir o risco de transmissão de zoonoses, criando uma rede de proteção integrada para a saúde pública."
+      "Laboratório de referência: Laboratório de Referência em Virologia do Instituto Nacional de Saúde (Marracuene). 9. Zoonoses com Potencial Epidémico As zoonoses com potencial epidémico representam um conjunto de doenças infecciosas originárias de animais que podem ser transmitidas aos seres humanos, oferecendo um risco elevado para a saúde pública devido ao seu potencial de causar surtos e epidemias. Estas doenças podem afectar diversos sistemas do corpo e espalhar-se rapidamente nas comunidades, especialmente em áreas de alta densidade populacional ou com condições sanitárias inadequadas. Em Moçambique, essas zoonoses representam uma preocupação significativa, pois o acesso a cuidados de saúde pode ser limitado em algumas regiões, e há uma convivência próxima entre humanos e animais em áreas rurais, o que aumenta o risco de transmissão. A identificação precoce, vigilância constante e uma resposta rápida são, portanto, fundamentais para controlar a propagação dessas zoonoses no país. Para os fins deste manual, são abordadas as seguintes zoonoses principais: o Carbúnculo provocado pelo Bacillus anthracis (Antraz), a Peste Bubónica e a doença causada pelo vírus Zika. stas zoonoses apresentam um potencial significativo de propagação internacional, especialmente em um mundo cada vez mais globalizado, com viagens internacionais e comércio de animais e produtos de origem animal. Esse movimento global pode facilitar a disseminação dessas doenças para além das fronteiras nacionais, representando uma ameaça à saúde pública global. Para lidar com essas zoonoses, a abordagem “One Health” é essencial, integrando saúde humana, animal e ambiental. Essa abordagem reconhece que a saúde das pessoas está directamente conectada à saúde dos animais e ao meio ambiente, especialmente em países como Moçambique, onde as interações com animais de criação e vida selvagem são comuns. Estratégias de prevenção e controlo devem, portanto, envolver não apenas o sector de saúde, mas também a agricultura, o meio ambiente e as comunidades locais. A colaboração com o sector de saúde animal é particularmente vital para fortalecer as acções de vigilância e resposta às zoonoses, já que este sector desempenha um papel central na monitoria e controlo de doenças nos animais, prevenindo que cheguem até as populações humanas. Em Moçambique, o sector de saúde animal contribui com a vigilância activa de doenças em animais domésticos e silvestres, a implementação de campanhas de vacinação e o controlo de doenças no gado. Este sector também participa na educação das comunidades sobre práticas de manejo seguro, biossegurança e na criação de animais de forma sustentável e saudável. Esse esforço conjunto permite identificar rapidamente possíveis ameaças zoonóticas, organizar campanhas de sensibilização, controlar vectores e animais reservatórios, e implementar práticas de manejo seguro para reduzir o risco de transmissão de zoonoses, criando uma rede de protecção integrada para a saúde pública."
      ]
     ]
    }
@@ -13790,7 +13790,7 @@ var DISEASES={
    ],
    [
     1,
-    "Realizar a colheita em ambiente bem ventilado, com uso de Equipamento de Proteção Individual (EPI) adequado, incluindo máscara N95, luvas e avental."
+    "Realizar a colheita em ambiente bem ventilado, com uso de Equipamento de Protecção Individual (EPI) adequado, incluindo máscara N95, luvas e avental."
    ],
    [
     1,
@@ -13806,7 +13806,7 @@ var DISEASES={
    ],
    [
     0,
-    "Laboratório de referência: Laboratório de Referência em Virologia do Instituto Nacional de Saúde (Marracuene). 9. Zoonoses com Potencial Epidémico As zoonoses com potencial epidémico representam um conjunto de doenças infecciosas originárias de animais que podem ser transmitidas aos seres humanos, oferecendo um risco elevado para a saúde pública devido ao seu potencial de causar surtos e epidemias. Estas doenças podem afectar diversos sistemas do corpo e espalhar-se rapidamente nas comunidades, especialmente em áreas de alta densidade populacional ou com condições sanitárias inadequadas. Em Moçambique, essas zoonoses representam uma preocupação significativa, pois o acesso a cuidados de saúde pode ser limitado em algumas regiões, e há uma convivência próxima entre humanos e animais em áreas rurais, o que aumenta o risco de transmissão. A identificação precoce, vigilância constante e uma resposta rápida são, portanto, fundamentais para controlar a propagação dessas zoonoses no país. Para os fins deste manual, são abordadas as seguintes zoonoses principais: o Carbúnculo provocado pelo Bacillus anthracis (Antraz), a Peste Bubónica e a doença causada pelo vírus Zika. stas zoonoses apresentam um potencial significativo de propagação internacional, especialmente em um mundo cada vez mais globalizado, com viagens internacionais e comércio de animais e produtos de origem animal. Esse movimento global pode facilitar a disseminação dessas doenças para além das fronteiras nacionais, representando uma ameaça à saúde pública global. Para lidar com essas zoonoses, a abordagem “One Health” é essencial, integrando saúde humana, animal e ambiental. Essa abordagem reconhece que a saúde das pessoas está directamente conectada à saúde dos animais e ao meio ambiente, especialmente em países como Moçambique, onde as interações com animais de criação e vida selvagem são comuns. Estratégias de prevenção e controlo devem, portanto, envolver não apenas o sector de saúde, mas também a agricultura, o meio ambiente e as comunidades locais. A colaboração com o sector de saúde animal é particularmente vital para fortalecer as acções de vigilância e resposta às zoonoses, já que este sector desempenha um papel central na monitoria e controlo de doenças nos animais, prevenindo que cheguem até as populações humanas. Em Moçambique, o sector de saúde animal contribui com a vigilância activa de doenças em animais domésticos e silvestres, a implementação de campanhas de vacinação e o controlo de doenças no gado. Este sector também participa na educação das comunidades sobre práticas de manejo seguro, biossegurança e na criação de animais de forma sustentável e saudável. Esse esforço conjunto permite identificar rapidamente possíveis ameaças zoonóticas, organizar campanhas de sensibilização, controlar vectores e animais reservatórios, e implementar práticas de manejo seguro para reduzir o risco de transmissão de zoonoses, criando uma rede de proteção integrada para a saúde pública."
+    "Laboratório de referência: Laboratório de Referência em Virologia do Instituto Nacional de Saúde (Marracuene). 9. Zoonoses com Potencial Epidémico As zoonoses com potencial epidémico representam um conjunto de doenças infecciosas originárias de animais que podem ser transmitidas aos seres humanos, oferecendo um risco elevado para a saúde pública devido ao seu potencial de causar surtos e epidemias. Estas doenças podem afectar diversos sistemas do corpo e espalhar-se rapidamente nas comunidades, especialmente em áreas de alta densidade populacional ou com condições sanitárias inadequadas. Em Moçambique, essas zoonoses representam uma preocupação significativa, pois o acesso a cuidados de saúde pode ser limitado em algumas regiões, e há uma convivência próxima entre humanos e animais em áreas rurais, o que aumenta o risco de transmissão. A identificação precoce, vigilância constante e uma resposta rápida são, portanto, fundamentais para controlar a propagação dessas zoonoses no país. Para os fins deste manual, são abordadas as seguintes zoonoses principais: o Carbúnculo provocado pelo Bacillus anthracis (Antraz), a Peste Bubónica e a doença causada pelo vírus Zika. stas zoonoses apresentam um potencial significativo de propagação internacional, especialmente em um mundo cada vez mais globalizado, com viagens internacionais e comércio de animais e produtos de origem animal. Esse movimento global pode facilitar a disseminação dessas doenças para além das fronteiras nacionais, representando uma ameaça à saúde pública global. Para lidar com essas zoonoses, a abordagem “One Health” é essencial, integrando saúde humana, animal e ambiental. Essa abordagem reconhece que a saúde das pessoas está directamente conectada à saúde dos animais e ao meio ambiente, especialmente em países como Moçambique, onde as interações com animais de criação e vida selvagem são comuns. Estratégias de prevenção e controlo devem, portanto, envolver não apenas o sector de saúde, mas também a agricultura, o meio ambiente e as comunidades locais. A colaboração com o sector de saúde animal é particularmente vital para fortalecer as acções de vigilância e resposta às zoonoses, já que este sector desempenha um papel central na monitoria e controlo de doenças nos animais, prevenindo que cheguem até as populações humanas. Em Moçambique, o sector de saúde animal contribui com a vigilância activa de doenças em animais domésticos e silvestres, a implementação de campanhas de vacinação e o controlo de doenças no gado. Este sector também participa na educação das comunidades sobre práticas de manejo seguro, biossegurança e na criação de animais de forma sustentável e saudável. Esse esforço conjunto permite identificar rapidamente possíveis ameaças zoonóticas, organizar campanhas de sensibilização, controlar vectores e animais reservatórios, e implementar práticas de manejo seguro para reduzir o risco de transmissão de zoonoses, criando uma rede de protecção integrada para a saúde pública."
    ]
   ],
   "risks": [
@@ -14800,7 +14800,7 @@ var DISEASES={
      ],
      [
       0,
-      "Comunidades em áreas onde o mosquito Aedes está presente e ativos na transmissão do Zika."
+      "Comunidades em áreas onde o mosquito Aedes está presente e activos na transmissão do Zika."
      ]
     ]
    },
@@ -15002,7 +15002,7 @@ var DISEASES={
    ],
    [
     0,
-    "Comunidades em áreas onde o mosquito Aedes está presente e ativos na transmissão do Zika."
+    "Comunidades em áreas onde o mosquito Aedes está presente e activos na transmissão do Zika."
    ],
    [
     "h",
@@ -15110,7 +15110,7 @@ var DISEASES={
    {
     "media": "<svg viewBox=\"0 0 96 84\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"48\" cy=\"46\" rx=\"9\" ry=\"20\" fill=\"#5a5148\"/><circle cx=\"48\" cy=\"24\" r=\"7\" fill=\"#5a5148\"/><path d=\"M48 30 L30 10 M48 34 L66 12\" stroke=\"#5a5148\" stroke-width=\"2\" stroke-linecap=\"round\"/><g stroke=\"#8a8078\" stroke-width=\"1.5\" fill=\"#cfcac2\" opacity=\"0.7\"><ellipse cx=\"30\" cy=\"46\" rx=\"16\" ry=\"7\" transform=\"rotate(-18 30 46)\"/><ellipse cx=\"66\" cy=\"46\" rx=\"16\" ry=\"7\" transform=\"rotate(18 66 46)\"/></g><path d=\"M40 60l-8 12M48 64l0 14M56 60l8 12\" stroke=\"#5a5148\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
     "title": "Exposição a vectores",
-    "text": "Comunidades em áreas onde o mosquito Aedes está presente e ativos na transmissão do Zika."
+    "text": "Comunidades em áreas onde o mosquito Aedes está presente e activos na transmissão do Zika."
    }
   ]
  },
@@ -15506,7 +15506,7 @@ var DISEASES={
      ],
      [
       0,
-      "Definição de surto: Um aumento no número de casos dentro de uma comunidade fechada ou grupo, indicando possível transmissão ativa."
+      "Definição de surto: Um aumento no número de casos dentro de uma comunidade fechada ou grupo, indicando possível transmissão activa."
      ]
     ]
    },
@@ -15630,7 +15630,7 @@ var DISEASES={
    ],
    [
     0,
-    "Definição de surto: Um aumento no número de casos dentro de uma comunidade fechada ou grupo, indicando possível transmissão ativa."
+    "Definição de surto: Um aumento no número de casos dentro de uma comunidade fechada ou grupo, indicando possível transmissão activa."
    ],
    [
     "h",
@@ -15782,7 +15782,7 @@ var DISEASES={
    "A filariose linfática é doença tropical negligenciada causada por nematoides parasitas, especialmente Wuchereria bancrofti, Brugia malayi e Brugia timori, transmitidos pela picada de mosquitos, como os gêneros Culex, Anopheles e Aedes.",
    "A doença é endêmica em regiões tropicais e subtropicais da África , incluindo Moçambique, Ásia, América Latina e Pacífico. Afecta milhões de pessoas, sendo uma das principais causas de incapacidades permanentes, como linfedema e elefantíase prejudicando a produtividade e o bem-estar das populações afectadas e impondo uma carga significativa aos sistemas de saúde pública.",
    "A filariose não é transmitida directamente entre pessoas.",
-   "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afetadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
+   "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afectadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
   ],
   "cases": [
    {
@@ -15822,7 +15822,7 @@ var DISEASES={
      ],
      [
       0,
-      "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afetadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
+      "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afectadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
      ]
     ]
    },
@@ -15881,7 +15881,7 @@ var DISEASES={
      ],
      [
       0,
-      "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afetadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
+      "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afectadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
      ]
     ]
    },
@@ -15936,7 +15936,7 @@ var DISEASES={
      ],
      [
       1,
-      "Busca activa de casos: Realizar busca ativa nas áreas afetadas para detecção de outros casos e possível fonte de infecção."
+      "Busca activa de casos: Realizar busca activa nas áreas afectadas para detecção de outros casos e possível fonte de infecção."
      ],
      [
       0,
@@ -16001,7 +16001,7 @@ var DISEASES={
    ],
    [
     0,
-    "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afetadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
+    "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afectadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
    ],
    [
     "h",
@@ -16057,7 +16057,7 @@ var DISEASES={
    ],
    [
     0,
-    "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afetadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
+    "A OMS lançou o Programa Global para Eliminação da Filariose Linfática, visando interromper a transmissão e aliviar o sofrimento das pessoas afectadas. São realizadas anualmente campanhas de tratamento em massa em áreas endêmicas, com medicamentos que reduzem a carga de microfilárias no sangue e previnem novas infecções. cas."
    ],
    [
     "h",
@@ -16109,7 +16109,7 @@ var DISEASES={
    ],
    [
     1,
-    "Busca activa de casos: Realizar busca ativa nas áreas afetadas para detecção de outros casos e possível fonte de infecção."
+    "Busca activa de casos: Realizar busca activa nas áreas afectadas para detecção de outros casos e possível fonte de infecção."
    ],
    [
     0,
@@ -16174,14 +16174,14 @@ var DISEASES={
    "A lepra é mais prevalente em áreas com condições de vida precárias e falta de acesso a cuidados de saúde. Factores como desnutrição, condições de higiene inadequadas e convivência prolongada com pessoas infectadas aumentam o risco de contrair a doença.",
    "Embora a lepra seja tratável com a poliquimioterapia (PQT) oferecida gratuitamente pela OMS, a doença continua sendo uma prioridade de saúde pública devido ao elevado estigma, discriminação e incapacidades físicas que ela pode causar. As deformidades resultantes, se não tratadas precocemente, levam a isolamento social e perda de produtividade.",
    "Não são comuns surtos de hanseníase devido à sua baixa taxa de transmissão, mas o controlo da hanseníase envolve diagnóstico e tratamento precoce para evitar complicações e prevenir a disseminação.",
-   "A vigilância ativa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente.",
+   "A vigilância activa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente.",
    "Definição de surto: Um aumento inesperado de casos dentro de uma comunidade, indicando possível transmissão activa."
   ],
   "cases": [
    {
     "k": "s",
     "label": "Suspeito",
-    "body": "Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afetada, além de espessamento de nervos periféricos.",
+    "body": "Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afectada, além de espessamento de nervos periféricos.",
     "media": "<svg viewBox=\"0 0 100 108\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"100\" height=\"108\" fill=\"#f7fbfa\"/><rect x=\"8\" y=\"8\" width=\"84\" height=\"92\" rx=\"12\" fill=\"#fff\" stroke=\"#ececec\"/><rect x=\"41\" y=\"33\" width=\"18\" height=\"22\" rx=\"2\" fill=\"#eef2f3\" stroke=\"#9fb0b4\"/><path d=\"M46 41h8M46 46h8\" stroke=\"#9fb0b4\" stroke-width=\"2\"/><text x=\"50\" y=\"78\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9\" font-weight=\"700\" fill=\"#333\">Sinais</text><text x=\"50\" y=\"90\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"9\" font-weight=\"700\" fill=\"#333\">clínicos</text></svg>"
    },
    {
@@ -16213,7 +16213,7 @@ var DISEASES={
      ],
      [
       0,
-      "A vigilância ativa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente."
+      "A vigilância activa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente."
      ],
      [
       0,
@@ -16226,7 +16226,7 @@ var DISEASES={
     "items": [
      [
       0,
-      "Caso suspeito: Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afetada, além de espessamento de nervos periféricos."
+      "Caso suspeito: Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afectada, além de espessamento de nervos periféricos."
      ],
      [
       0,
@@ -16364,7 +16364,7 @@ var DISEASES={
    ],
    [
     0,
-    "Caso suspeito: Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afetada, além de espessamento de nervos periféricos."
+    "Caso suspeito: Qualquer pessoa que apresente manchas esbranquiçadas, avermelhadas ou amarronzadas na pele, com perda de sensibilidade e ausência de pelos e suor na área afectada, além de espessamento de nervos periféricos."
    ],
    [
     0,
@@ -16400,7 +16400,7 @@ var DISEASES={
    ],
    [
     0,
-    "A vigilância ativa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente."
+    "A vigilância activa e a educação comunitária são fundamentais para reduzir o estigma e garantir que os casos sejam diagnosticados e tratados precocemente."
    ],
    [
     0,
@@ -16528,7 +16528,7 @@ var DISEASES={
    "A Tungíase, comumente conhecida como Matequenha em Moçambique é causada pela pulga Tunga penetrans, que é encontrada em áreas tropicais e subtropicais. A fêmea da pulga penetra na pele do hospedeiro para se alimentar e se desenvolver, provocando inflamação dor e prurido no local da infestação.",
    "A doença afecta pessoas de todas as idades, especialmente em áreas tropicais e subtropicais com baixa higiene e solos arenosos, como regiões de baixa renda na África, América do Sul e partes da Ásia.",
    "Se não tratada, pode evoluir para infecções bacterianas, como impetigo e celulite, e, em casos graves, até gangrena e perda de tecidos.",
-   "Embora não seja fatal, a tungíase é um problema significativo em áreas afetadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis.",
+   "Embora não seja fatal, a tungíase é um problema significativo em áreas afectadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis.",
    "Limiar: A tungíase geralmente não requer notificação, excepto em casos de surtos em ambientes colectivos ou comunitários.",
    "Definição de surto: Um aumento no número de casos em uma comunidade fechada ou grupo, indicando uma possível infestação activa."
   ],
@@ -16564,7 +16564,7 @@ var DISEASES={
      ],
      [
       0,
-      "Embora não seja fatal, a tungíase é um problema significativo em áreas afetadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis."
+      "Embora não seja fatal, a tungíase é um problema significativo em áreas afectadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis."
      ],
      [
       0,
@@ -16698,7 +16698,7 @@ var DISEASES={
      ],
      [
       0,
-      "Laboratório de Referência: Não aplicável SECÇÃO 5: Orientações para investigação de surtos Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objetivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo. Reconhece-se que nem todos os locais em Moçambique onde ocorrem surtos terão a infraestrutura para implementar cada passo como descrito, mas é importante esforçar-se para completar o maior número possível de etapas. As etapas são listadas em uma ordem geralmente cronológica; no entanto, diferentes situações podem exigir desvios desta sequência. Na prática, algumas etapas terão de ser realizadas simultaneamente, outras estarão em curso ao longo da investigação e algumas poderão não ser necessárias dependendo das circunstâncias. 1. Aspectos operacionais para o trabalho de campo 1.1. Definição da equipa de campo A equipa de campo numa investigação de surto é composta principalmente por epidemiologistas, definidos conforme as características do evento a ser investigado e o perfil dos profissionais disponíveis. Em situações de surtos e problemas de saúde pública, que são frequentemente complexos e desafiadores, é necessário envolver outros profissionais, instituições e serviços para apoiar a equipa de epidemiologistas de campo. Em certos casos, a presença de pesquisadores, técnicos de laboratório, infectologistas, entomologistas, antropólogos, estatísticos, especialistas em comunicação de risco, entre outros especialistas, pode ser essencial para contribuir com conhecimentos específicos e auxiliar na resolução do problema. Além disso, muitas investigações de campo exigem suporte laboratorial. Mesmo que laboratórios locais estejam disponíveis e aptos a processar e testar amostras, a equipa de campo deve contactar imediatamente os laboratórios de referência para partilhar detalhes do problema, discutir os tipos de amostras, métodos de colheita, processamento, e explorar possíveis questões de pesquisa que possam ser abordadas. A colaboração antecipada e o suporte laboratorial são cruciais para o sucesso da investigação, tanto a nível local quanto da equipa convidada. 1.2. Objectivos, funções e responsabilidades Dependendo da dimensão e complexidade do surto ou problema, bem como dos objectivos principais da investigação discutidos inicialmente, a comunicação entre a equipa convidada e os responsáveis pelo convite devem focar-se no esclarecimento dos objectivos, bem como nas funções e responsabilidades de cada membro da equipa. Algumas perguntas fundamentais relacionadas aos objectivos incluem:"
+      "Laboratório de Referência: Não aplicável SECÇÃO 5: Orientações para investigação de surtos Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objectivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo. Reconhece-se que nem todos os locais em Moçambique onde ocorrem surtos terão a infraestrutura para implementar cada passo como descrito, mas é importante esforçar-se para completar o maior número possível de etapas. As etapas são listadas em uma ordem geralmente cronológica; no entanto, diferentes situações podem exigir desvios desta sequência. Na prática, algumas etapas terão de ser realizadas simultaneamente, outras estarão em curso ao longo da investigação e algumas poderão não ser necessárias dependendo das circunstâncias. 1. Aspectos operacionais para o trabalho de campo 1.1. Definição da equipa de campo A equipa de campo numa investigação de surto é composta principalmente por epidemiologistas, definidos conforme as características do evento a ser investigado e o perfil dos profissionais disponíveis. Em situações de surtos e problemas de saúde pública, que são frequentemente complexos e desafiadores, é necessário envolver outros profissionais, instituições e serviços para apoiar a equipa de epidemiologistas de campo. Em certos casos, a presença de pesquisadores, técnicos de laboratório, infectologistas, entomologistas, antropólogos, estatísticos, especialistas em comunicação de risco, entre outros especialistas, pode ser essencial para contribuir com conhecimentos específicos e auxiliar na resolução do problema. Além disso, muitas investigações de campo exigem suporte laboratorial. Mesmo que laboratórios locais estejam disponíveis e aptos a processar e testar amostras, a equipa de campo deve contactar imediatamente os laboratórios de referência para partilhar detalhes do problema, discutir os tipos de amostras, métodos de colheita, processamento, e explorar possíveis questões de pesquisa que possam ser abordadas. A colaboração antecipada e o suporte laboratorial são cruciais para o sucesso da investigação, tanto a nível local quanto da equipa convidada. 1.2. Objectivos, funções e responsabilidades Dependendo da dimensão e complexidade do surto ou problema, bem como dos objectivos principais da investigação discutidos inicialmente, a comunicação entre a equipa convidada e os responsáveis pelo convite devem focar-se no esclarecimento dos objectivos, bem como nas funções e responsabilidades de cada membro da equipa. Algumas perguntas fundamentais relacionadas aos objectivos incluem:"
      ],
      [
       0,
@@ -16802,7 +16802,7 @@ var DISEASES={
    ],
    [
     0,
-    "Embora não seja fatal, a tungíase é um problema significativo em áreas afetadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis."
+    "Embora não seja fatal, a tungíase é um problema significativo em áreas afectadas, devido ao desconforto, à dor intensa e ao risco de complicações em populações vulneráveis."
    ],
    [
     0,
@@ -16918,7 +16918,7 @@ var DISEASES={
    ],
    [
     0,
-    "Laboratório de Referência: Não aplicável SECÇÃO 5: Orientações para investigação de surtos Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objetivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo. Reconhece-se que nem todos os locais em Moçambique onde ocorrem surtos terão a infraestrutura para implementar cada passo como descrito, mas é importante esforçar-se para completar o maior número possível de etapas. As etapas são listadas em uma ordem geralmente cronológica; no entanto, diferentes situações podem exigir desvios desta sequência. Na prática, algumas etapas terão de ser realizadas simultaneamente, outras estarão em curso ao longo da investigação e algumas poderão não ser necessárias dependendo das circunstâncias. 1. Aspectos operacionais para o trabalho de campo 1.1. Definição da equipa de campo A equipa de campo numa investigação de surto é composta principalmente por epidemiologistas, definidos conforme as características do evento a ser investigado e o perfil dos profissionais disponíveis. Em situações de surtos e problemas de saúde pública, que são frequentemente complexos e desafiadores, é necessário envolver outros profissionais, instituições e serviços para apoiar a equipa de epidemiologistas de campo. Em certos casos, a presença de pesquisadores, técnicos de laboratório, infectologistas, entomologistas, antropólogos, estatísticos, especialistas em comunicação de risco, entre outros especialistas, pode ser essencial para contribuir com conhecimentos específicos e auxiliar na resolução do problema. Além disso, muitas investigações de campo exigem suporte laboratorial. Mesmo que laboratórios locais estejam disponíveis e aptos a processar e testar amostras, a equipa de campo deve contactar imediatamente os laboratórios de referência para partilhar detalhes do problema, discutir os tipos de amostras, métodos de colheita, processamento, e explorar possíveis questões de pesquisa que possam ser abordadas. A colaboração antecipada e o suporte laboratorial são cruciais para o sucesso da investigação, tanto a nível local quanto da equipa convidada. 1.2. Objectivos, funções e responsabilidades Dependendo da dimensão e complexidade do surto ou problema, bem como dos objectivos principais da investigação discutidos inicialmente, a comunicação entre a equipa convidada e os responsáveis pelo convite devem focar-se no esclarecimento dos objectivos, bem como nas funções e responsabilidades de cada membro da equipa. Algumas perguntas fundamentais relacionadas aos objectivos incluem:"
+    "Laboratório de Referência: Não aplicável SECÇÃO 5: Orientações para investigação de surtos Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objectivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo. Reconhece-se que nem todos os locais em Moçambique onde ocorrem surtos terão a infraestrutura para implementar cada passo como descrito, mas é importante esforçar-se para completar o maior número possível de etapas. As etapas são listadas em uma ordem geralmente cronológica; no entanto, diferentes situações podem exigir desvios desta sequência. Na prática, algumas etapas terão de ser realizadas simultaneamente, outras estarão em curso ao longo da investigação e algumas poderão não ser necessárias dependendo das circunstâncias. 1. Aspectos operacionais para o trabalho de campo 1.1. Definição da equipa de campo A equipa de campo numa investigação de surto é composta principalmente por epidemiologistas, definidos conforme as características do evento a ser investigado e o perfil dos profissionais disponíveis. Em situações de surtos e problemas de saúde pública, que são frequentemente complexos e desafiadores, é necessário envolver outros profissionais, instituições e serviços para apoiar a equipa de epidemiologistas de campo. Em certos casos, a presença de pesquisadores, técnicos de laboratório, infectologistas, entomologistas, antropólogos, estatísticos, especialistas em comunicação de risco, entre outros especialistas, pode ser essencial para contribuir com conhecimentos específicos e auxiliar na resolução do problema. Além disso, muitas investigações de campo exigem suporte laboratorial. Mesmo que laboratórios locais estejam disponíveis e aptos a processar e testar amostras, a equipa de campo deve contactar imediatamente os laboratórios de referência para partilhar detalhes do problema, discutir os tipos de amostras, métodos de colheita, processamento, e explorar possíveis questões de pesquisa que possam ser abordadas. A colaboração antecipada e o suporte laboratorial são cruciais para o sucesso da investigação, tanto a nível local quanto da equipa convidada. 1.2. Objectivos, funções e responsabilidades Dependendo da dimensão e complexidade do surto ou problema, bem como dos objectivos principais da investigação discutidos inicialmente, a comunicação entre a equipa convidada e os responsáveis pelo convite devem focar-se no esclarecimento dos objectivos, bem como nas funções e responsabilidades de cada membro da equipa. Algumas perguntas fundamentais relacionadas aos objectivos incluem:"
    ],
    [
     0,
@@ -17097,7 +17097,7 @@ var DISEASES={
    ],
    [
     "p",
-    "A mobilização célere dos recursos humanos e materiais deve ser considerada uma prioridade. – Tomada de decisão baseada em evidências: Todos os protocolos e recomendações presentes neste manual fundamentam-se em evidências científicas sólidas e nas melhores práticas internacionais, garantindo uma abordagem de resposta informada e atualizada. – Monitoria contínua e avaliação:"
+    "A mobilização célere dos recursos humanos e materiais deve ser considerada uma prioridade. – Tomada de decisão baseada em evidências: Todos os protocolos e recomendações presentes neste manual fundamentam-se em evidências científicas sólidas e nas melhores práticas internacionais, garantindo uma abordagem de resposta informada e actualizada. – Monitoria contínua e avaliação:"
    ],
    [
     "p",
@@ -17141,7 +17141,7 @@ var DISEASES={
    ],
    [
     "p",
-    "O manual adere integralmente ao RSI 2005 da OMS, que fornece um quadro para as respostas de saúde pública à propagação internacional de doenças. Garante que as ações de Moçambique estão em linha com as normas globais de detecção, notificação e gestão de surtos. – Agenda Global de Segurança da Saúde (GHSA):"
+    "O manual adere integralmente ao RSI 2005 da OMS, que fornece um quadro para as respostas de saúde pública à propagação internacional de doenças. Garante que as acções de Moçambique estão em linha com as normas globais de detecção, notificação e gestão de surtos. – Agenda Global de Segurança da Saúde (GHSA):"
    ],
    [
     "p",
@@ -17173,7 +17173,7 @@ var DISEASES={
    ],
    [
     "p",
-    "O manual fornece orientações detalhadas para epidemiologistas responsáveis pela investigação de surtos – Equipas de Resposta a Emergências: O manual é uma ferramenta crítica para as equipas de resposta a emergências, permitindo-lhes ativar rapidamente centros de tratamento, organizar recursos e implementar medidas de controlo de infecção durante um surto. – Organizações Não Governamentais (ONGs) e Parceiros Internacionais:"
+    "O manual fornece orientações detalhadas para epidemiologistas responsáveis pela investigação de surtos – Equipas de Resposta a Emergências: O manual é uma ferramenta crítica para as equipas de resposta a emergências, permitindo-lhes activar rapidamente centros de tratamento, organizar recursos e implementar medidas de controlo de infecção durante um surto. – Organizações Não Governamentais (ONGs) e Parceiros Internacionais:"
    ],
    [
     "p",
@@ -17207,11 +17207,11 @@ var DISEASES={
    ],
    [
     "li",
-    "Panorama dos surtos: as doenças que mais afetam Moçambique e o papel do clima."
+    "Panorama dos surtos: as doenças que mais afectam Moçambique e o papel do clima."
    ],
    [
     "li",
-    "Objetivos: um guia padronizado para detetar, notificar e investigar surtos."
+    "Objectivos: um guia padronizado para detetar, notificar e investigar surtos."
    ],
    [
     "li",
@@ -17377,7 +17377,7 @@ var DISEASES={
    ],
    [
     "h",
-    "Importância da deteção atempada e investigação de"
+    "Importância da detecção atempada e investigação de"
    ],
    [
     "p",
@@ -17529,7 +17529,7 @@ var DISEASES={
    ],
    [
     "p",
-    "O número de casos pode aumentar e diminuir, dependendo do nível de exposição, mas, em geral, o surto persiste enquanto a fonte permanecer ativa. A curva de surtos reflete um número sustentado ou flutuante de casos ao longo do tempo (em formato de um “platô” e não um pico)."
+    "O número de casos pode aumentar e diminuir, dependendo do nível de exposição, mas, em geral, o surto persiste enquanto a fonte permanecer activa. A curva de surtos reflete um número sustentado ou flutuante de casos ao longo do tempo (em formato de um “platô” e não um pico)."
    ],
    [
     "p",
@@ -17567,11 +17567,11 @@ var DISEASES={
    ],
    [
     "li",
-    "Porquê e quando: fatores que os desencadeiam e sinais de início."
+    "Porquê e quando: factores que os desencadeiam e sinais de início."
    ],
    [
     "li",
-    "Deteção atempada: porque a rapidez reduz o impacto."
+    "Detecção atempada: porque a rapidez reduz o impacto."
    ],
    [
     "li",
@@ -17649,11 +17649,11 @@ var DISEASES={
    ],
    [
     "p",
-    "A imunidade colectiva é fundamental para reduzir a propagação dessas infeções, mas, em contextos de baixa imunidade, a vigilância reforçada é essencial para assegurar a detecção precoce e uma resposta rápida a potenciais surtos. Os sistemas de vigilância devem permanecer atentos, e os profissionais de saúde precisam notificar prontamente os casos de febre e erupção cutânea, principalmente em crianças e adolescentes menores de 15 anos."
+    "A imunidade colectiva é fundamental para reduzir a propagação dessas infecções, mas, em contextos de baixa imunidade, a vigilância reforçada é essencial para assegurar a detecção precoce e uma resposta rápida a potenciais surtos. Os sistemas de vigilância devem permanecer atentos, e os profissionais de saúde precisam notificar prontamente os casos de febre e erupção cutânea, principalmente em crianças e adolescentes menores de 15 anos."
    ],
    [
     "p",
-    "Os diferentes níveis de saúde pública devem estar preparados para implementar intervenções oportunas e apropriadas, conforme necessário, a fim de controlar a propagação dessas infeções. Nesta categoria, algumas doenças exigem uma diferenciação cuidadosa de outras causas de febre e erupção cutânea presentes na região, como dengue e vírus Zika, que podem apresentar características clínicas semelhantes, mas têm modos de transmissão diferentes."
+    "Os diferentes níveis de saúde pública devem estar preparados para implementar intervenções oportunas e apropriadas, conforme necessário, a fim de controlar a propagação dessas infecções. Nesta categoria, algumas doenças exigem uma diferenciação cuidadosa de outras causas de febre e erupção cutânea presentes na região, como dengue e vírus Zika, que podem apresentar características clínicas semelhantes, mas têm modos de transmissão diferentes."
    ],
    [
     "p",
@@ -17681,7 +17681,7 @@ var DISEASES={
   "blocks": [
    [
     "p",
-    "Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objetivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo."
+    "Este guia prático fornece um resumo das principais etapas necessárias durante uma investigação de surto, que são desenvolvidas nas secções seguintes do manual. O objectivo deste resumo é oferecer uma visão geral concisa das etapas da investigação, servindo como referência e lista de verificação para as equipas de campo."
    ],
    [
     "p",
@@ -17937,7 +17937,7 @@ var DISEASES={
    ],
    [
     "p",
-    "A análise permite compreender a extensão do surto, identificar padrões e inferir possíveis fontes de propagação. A descrição dos casos nesses termos oferece uma visão detalhada sobre a evolução do surto e os grupos mais afetados, fornecendo uma base sólida para direcionar ações de controlo e prevenção."
+    "A análise permite compreender a extensão do surto, identificar padrões e inferir possíveis fontes de propagação. A descrição dos casos nesses termos oferece uma visão detalhada sobre a evolução do surto e os grupos mais afectados, fornecendo uma base sólida para direcionar acções de controlo e prevenção."
    ],
    [
     "p",
@@ -18021,7 +18021,7 @@ var DISEASES={
    ],
    [
     "li",
-    "Intervenções direccionadas a proteção de pessoas suscpetíveis: Estas intervenções"
+    "Intervenções direccionadas a protecção de pessoas suscpetíveis: Estas intervenções"
    ],
    [
     "p",
@@ -18147,7 +18147,7 @@ var DISEASES={
    ],
    [
     "li",
-    "Aspetos operacionais: preparação, equipa e logística no terreno."
+    "Aspectos operacionais: preparação, equipa e logística no terreno."
    ],
    [
     "li",
@@ -18161,7 +18161,7 @@ var DISEASES={
   "blocks": [
    [
     "p",
-    "As considerações éticas durante as investigações de surtos são fundamentais para proteger os direitos das populações afetadas, assegurar a justiça e promover a confiança nas respostas de saúde pública, daí que em função da necessidade e nível de investigação poderá feito ou seguido um processo de aprovação ética para tal."
+    "As considerações éticas durante as investigações de surtos são fundamentais para proteger os direitos das populações afectadas, assegurar a justiça e promover a confiança nas respostas de saúde pública, daí que em função da necessidade e nível de investigação poderá feito ou seguido um processo de aprovação ética para tal."
    ],
    [
     "p",
@@ -18173,23 +18173,23 @@ var DISEASES={
    ],
    [
     "p",
-    "A captação e uso de imagens de locais ou de pessoas envolvidas (participantes) em uma determinada investigação de surtos, deve igualmente respeitar os princípios éticos recomendados. Em situações de emergência, onde o tempo é um fator crítico, o consentimento verbal pode ser uma alternativa válida, desde que devidamente documentado e alinhado com as normas éticas internacionais."
+    "A captação e uso de imagens de locais ou de pessoas envolvidas (participantes) em uma determinada investigação de surtos, deve igualmente respeitar os princípios éticos recomendados. Em situações de emergência, onde o tempo é um factor crítico, o consentimento verbal pode ser uma alternativa válida, desde que devidamente documentado e alinhado com as normas éticas internacionais."
    ],
    [
     "p",
-    "Além disso, a comunicação deve ser feita numa linguagem clara e acessível, respeitando os contextos culturais e linguísticos das comunidades envolvidas. A equidade é também um princípio essencial nas investigações de surtos, assegurando que todas as populações tenham acesso igualitário a cuidados e intervenções, independentemente de fatores como género, estatuto socioeconómico ou localização geográfica."
+    "Além disso, a comunicação deve ser feita numa linguagem clara e acessível, respeitando os contextos culturais e linguísticos das comunidades envolvidas. A equidade é também um princípio essencial nas investigações de surtos, assegurando que todas as populações tenham acesso igualitário a cuidados e intervenções, independentemente de factores como género, estatuto socioeconómico ou localização geográfica."
    ],
    [
     "p",
-    "É crucial evitar qualquer forma de discriminação ou estigmatização, especialmente para grupos que possam ser desproporcionalmente afetados pelo surto. Adicionalmente, os benefícios das investigações devem ser distribuídos de forma justa, garantindo que as comunidades participantes não sejam prejudicadas ou negligenciadas."
+    "É crucial evitar qualquer forma de discriminação ou estigmatização, especialmente para grupos que possam ser desproporcionalmente afectados pelo surto. Adicionalmente, os benefícios das investigações devem ser distribuídos de forma justa, garantindo que as comunidades participantes não sejam prejudicadas ou negligenciadas."
    ],
    [
     "p",
-    "Por fim, o envolvimento activo das comunidades na conceção e implementação das investigações é uma prática ética recomendada. Trabalhar em colaboração com líderes comunitários e representantes locais promove o respeito pelas necessidades e preocupações das populações afetadas."
+    "Por fim, o envolvimento activo das comunidades na conceção e implementação das investigações é uma prática ética recomendada. Trabalhar em colaboração com líderes comunitários e representantes locais promove o respeito pelas necessidades e preocupações das populações afectadas."
    ],
    [
     "p",
-    "Este envolvimento fortalece a legitimidade das ações e incentiva a adesão às medidas de controlo. Além disso, as investigações devem ser monitorizadas por comités de ética para garantir a conformidade com os padrões éticos, minimizando potenciais danos e maximizando os benefícios para a saúde pública."
+    "Este envolvimento fortalece a legitimidade das acções e incentiva a adesão às medidas de controlo. Além disso, as investigações devem ser monitorizadas por comités de ética para garantir a conformidade com os padrões éticos, minimizando potenciais danos e maximizando os benefícios para a saúde pública."
    ],
    [
     "p",
@@ -18239,7 +18239,7 @@ var DISEASES={
    ],
    [
     "li",
-    "Proteção de direitos: respeitar as populações afetadas."
+    "Protecção de direitos: respeitar as populações afectadas."
    ]
   ]
  },
@@ -18253,7 +18253,7 @@ var DISEASES={
    ],
    [
     "p",
-    "Coli) ELISA Ensaio de Imunoabsorção Enzimática (Enzyme-Linked Immunosorbent Assay) EPI Equipamento de Protecção Individual ESPII Emergência de Saúde Pública de Importância Internacional ETEC Escherichia coli Enterotxigénicas ( Enterrotoxigenic Escherichia coli) FAO Organização das Nações Unidas para a Alimentação e Agricultura FETP Programa de Formação em Epidemiologia de Campo FHCC Febre Hemorrágica da Crimeia-Congo FHSR Febre Hemorrágica com Síndrome Renal GHSA Agenda Global de Segurança Sanitária (Global Health Security Agenda) GPEI Iniciativa Global para a Erradicação da Pólio (Global Polio Eradication Initiative) GPS Sistema de Posicionamento Global (Global Positioning System) HAV Vírus da Hepatite A (Hepatitis A Virus) HEV Vírus da Hepatite E (Hepatitis E Virus) HIV Vírus da Imunodeficiência Humana (Human Immunodeficiency Virus) HPS Síndrome Pulmonar por Hantavírus (Hantavirus Pulmonary Syndrome) HSV Herpes Simplex Virus ICT Teste de Imunocromatografia (Immunochromatographic Test) IFD Imunofluorescência directa INS Instituto Nacional de Saúde IRA Infecção Respiratória Aguda JEE Avaliação Externa Conjunta (Joint External Evaluation) LCR Líquido Cefalorraquidiano MAT Teste de Aglutinação Microscópica (Microscopic Agglutination Test) MDR Multidroga resistente (Multidrug-Resistant) MERS Síndrome Respiratória do Médio Oriente (Middle East Respiratory Syndrome) MISAU Ministério da Saúde de Moçambique OMSA Organização Mundial da Saúde Animal OH JAP Plano de acção conjunto OneHealth (One Health Joint Action Plan) OMS Organização Mundial da Saúde PCR Reação em Cadeia da Polimerase (Polymerase Chain Reaction) PEP Profilaxia Pós-Exposição PESS Plano Estratégico do Sector de Saúde PFA Paralisia Flácida Aguda PASS Plano de Acção para Segurança Sanitária RSI Regulamento Sanitário Internacional RSV Vírus Sincicial Respiratório RT Transcrição Reversa (Reverse Transcription) SARS Síndrome Respiratória Aguda Grave SARS-CoV-2 Vírus da Síndrome Respiratória Aguda Grave - Coronavírus 2 SFH Síndrome Febril Hemorrágica SIDA Síndrome da Imunodeficiência Adquirida SHU síndrome hemolítica urémica SRC Síndrome da Rubéola Congénita SRO Solução de Reidratação Oral TB Tuberculose TDR Teste de Diagnóstico Rápido UEM Universidade Eduardo Mondlane UN Programa Ambiental das Nações Unidas VIDR Vigilância Integrada de Doença e Resposta VTM Meio de Transporte Viral (Viral Transport Medium) VVZ Vírus Varicela-Zoster (Varicella Zoster Virus) WASH Água, Saneamento e Higiene (Water, Sanitation, and Hygiene) WPV Poliovírus selvagem (Wild poliovírus) XDR Extensivamente Resistente a Medicamentos (Extensively Drug-Resistant) Lista de tabelas Tabela 1."
+    "Coli) ELISA Ensaio de Imunoabsorção Enzimática (Enzyme-Linked Immunosorbent Assay) EPI Equipamento de Protecção Individual ESPII Emergência de Saúde Pública de Importância Internacional ETEC Escherichia coli Enterotxigénicas ( Enterrotoxigenic Escherichia coli) FAO Organização das Nações Unidas para a Alimentação e Agricultura FETP Programa de Formação em Epidemiologia de Campo FHCC Febre Hemorrágica da Crimeia-Congo FHSR Febre Hemorrágica com Síndrome Renal GHSA Agenda Global de Segurança Sanitária (Global Health Security Agenda) GPEI Iniciativa Global para a Erradicação da Pólio (Global Polio Eradication Initiative) GPS Sistema de Posicionamento Global (Global Positioning System) HAV Vírus da Hepatite A (Hepatitis A Virus) HEV Vírus da Hepatite E (Hepatitis E Virus) HIV Vírus da Imunodeficiência Humana (Human Immunodeficiency Virus) HPS Síndrome Pulmonar por Hantavírus (Hantavirus Pulmonary Syndrome) HSV Herpes Simplex Virus ICT Teste de Imunocromatografia (Immunochromatographic Test) IFD Imunofluorescência directa INS Instituto Nacional de Saúde IRA Infecção Respiratória Aguda JEE Avaliação Externa Conjunta (Joint External Evaluation) LCR Líquido Cefalorraquidiano MAT Teste de Aglutinação Microscópica (Microscopic Agglutination Test) MDR Multidroga resistente (Multidrug-Resistant) MERS Síndrome Respiratória do Médio Oriente (Middle East Respiratory Syndrome) MISAU Ministério da Saúde de Moçambique OMSA Organização Mundial da Saúde Animal OH JAP Plano de acção conjunto OneHealth (One Health Joint Action Plan) OMS Organização Mundial da Saúde PCR Reacção em Cadeia da Polimerase (Polymerase Chain Reaction) PEP Profilaxia Pós-Exposição PESS Plano Estratégico do Sector de Saúde PFA Paralisia Flácida Aguda PASS Plano de Acção para Segurança Sanitária RSI Regulamento Sanitário Internacional RSV Vírus Sincicial Respiratório RT Transcrição Reversa (Reverse Transcription) SARS Síndrome Respiratória Aguda Grave SARS-CoV-2 Vírus da Síndrome Respiratória Aguda Grave - Coronavírus 2 SFH Síndrome Febril Hemorrágica SIDA Síndrome da Imunodeficiência Adquirida SHU síndrome hemolítica urémica SRC Síndrome da Rubéola Congénita SRO Solução de Reidratação Oral TB Tuberculose TDR Teste de Diagnóstico Rápido UEM Universidade Eduardo Mondlane UN Programa Ambiental das Nações Unidas VIDR Vigilância Integrada de Doença e Resposta VTM Meio de Transporte Viral (Viral Transport Medium) VVZ Vírus Varicela-Zoster (Varicella Zoster Virus) WASH Água, Saneamento e Higiene (Water, Sanitation, and Hygiene) WPV Poliovírus selvagem (Wild poliovírus) XDR Extensivamente Resistente a Medicamentos (Extensively Drug-Resistant) Lista de tabelas Tabela 1."
    ],
    [
     "p",
@@ -18273,7 +18273,7 @@ var DISEASES={
    ],
    [
     "p",
-    "Casos de malária notificados semanalmente em comparação com a média histórica específica da US, Província de Sofala, 15 de Julho - 1 de Setembro 2019 (Fonte Boletim Mensal no20, Resposta ao Ciclone Idai, 2019)..............................................................................................................................168 Manual para DETECÇÃO E INVESTIGAÇÃO DE SURTOS EM MOÇAMBIQUE MAIO DE 2026 Principais conceitos epidemiológicos e Glossário No contexto da saúde pública, da deteção de doenças e da investigação de surtos, a compreensão clara dos conceitos e termos epidemiológicos é essencial para uma resposta eficaz e medidas de controlo adequadas."
+    "Casos de malária notificados semanalmente em comparação com a média histórica específica da US, Província de Sofala, 15 de Julho - 1 de Setembro 2019 (Fonte Boletim Mensal no20, Resposta ao Ciclone Idai, 2019)..............................................................................................................................168 Manual para DETECÇÃO E INVESTIGAÇÃO DE SURTOS EM MOÇAMBIQUE MAIO DE 2026 Principais conceitos epidemiológicos e Glossário No contexto da saúde pública, da detecção de doenças e da investigação de surtos, a compreensão clara dos conceitos e termos epidemiológicos é essencial para uma resposta eficaz e medidas de controlo adequadas."
    ],
    [
     "p",
@@ -18301,7 +18301,7 @@ var DISEASES={
    ],
    [
     "p",
-    "As pandemias caracterizamse pela sua ampla dispersão geográfica e pelo impacto significativo na saúde global. Período de incubação: É o intervalo de tempo entre a exposição a um agente infecioso e o aparecimento dos primeiros sintomas da doença."
+    "As pandemias caracterizamse pela sua ampla dispersão geográfica e pelo impacto significativo na saúde global. Período de incubação: É o intervalo de tempo entre a exposição a um agente infeccioso e o aparecimento dos primeiros sintomas da doença."
    ],
    [
     "p",
@@ -18321,15 +18321,15 @@ var DISEASES={
    ],
    [
     "p",
-    "proporção por 1.000 ou 100.000 habitantes. Reservatório: O habitat natural de um agente infecioso, onde ele normalmente vive, cresce e se multiplica. Pode incluir seres humanos, animais ou o ambiente. Exemplo: morcegos como reservatório natural do vírus Marburg."
+    "proporção por 1.000 ou 100.000 habitantes. Reservatório: O habitat natural de um agente infeccioso, onde ele normalmente vive, cresce e se multiplica. Pode incluir seres humanos, animais ou o ambiente. Exemplo: morcegos como reservatório natural do vírus Marburg."
    ],
    [
     "p",
-    "Taxa de ataque: É uma medida epidemiológica que descreve a proporção de pessoas que adoecem após serem expostas a um agente infecioso. É geralmente expressa em percentagem e é útil para avaliar a gravidade de um surto. Taxa de letalidade: Proporção de indivíduos diagnosticados com uma determinada doença que morrem dessa doença durante um período de tempo especificado."
+    "Taxa de ataque: É uma medida epidemiológica que descreve a proporção de pessoas que adoecem após serem expostas a um agente infeccioso. É geralmente expressa em percentagem e é útil para avaliar a gravidade de um surto. Taxa de letalidade: Proporção de indivíduos diagnosticados com uma determinada doença que morrem dessa doença durante um período de tempo especificado."
    ],
    [
     "p",
-    "É frequentemente utilizado para avaliar a gravidade de um surto. Vector: Organismo que transmite um agente infecioso de um hospedeiro para outro. Exemplo: o mosquito Anopheles como vector do parasita que causa malária. Zoonose: Zoonose refere-se a doenças que são transmissíveis naturalmente de animais para seres humanos e vice-versa."
+    "É frequentemente utilizado para avaliar a gravidade de um surto. Vector: Organismo que transmite um agente infeccioso de um hospedeiro para outro. Exemplo: o mosquito Anopheles como vector do parasita que causa malária. Zoonose: Zoonose refere-se a doenças que são transmissíveis naturalmente de animais para seres humanos e vice-versa."
    ],
    [
     "p",

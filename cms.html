@@ -61,10 +61,20 @@ a{color:var(--azul)}
     <div class="field"><label>Palavra-passe</label><input id="pass" type="password"></div>
     <div class="row">
       <button class="btn-p" onclick="doLogin()">Entrar</button>
-      <button class="btn-o" onclick="doSignup()">Criar conta</button>
       <button class="btn-o" onclick="resetCfg()" style="margin-left:auto">Trocar de projecto</button>
     </div>
-    <p class="mut" style="margin-top:12px">A primeira conta criada deve ser promovida a <b>admin</b> na tabela <b>perfis</b>.</p>
+    <p class="mut" style="margin-top:12px">As contas são criadas pelo <b>Administrador</b> do INS. Se não consegue entrar, contacte o Administrador.</p>
+  </div>
+</div>
+
+<div id="trocar" class="wrap hide">
+  <div class="card">
+    <h1>Definir nova palavra-passe</h1>
+    <p class="mut">É a sua primeira entrada. Por segurança, defina uma palavra-passe pessoal antes de continuar.</p>
+    <div id="trocarErr" class="hint hide"></div>
+    <div class="field"><label>Nova palavra-passe</label><input id="np1" type="password" placeholder="mínimo 8 caracteres"></div>
+    <div class="field"><label>Confirmar palavra-passe</label><input id="np2" type="password"></div>
+    <button class="btn-p" style="width:100%" onclick="trocarSenha()">Guardar e entrar</button>
   </div>
 </div>
 
@@ -99,7 +109,7 @@ var FIELDS=[
 ];
 
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2800);}
-function show(id){['cfg','login','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
+function show(id){['cfg','login','trocar','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function badge(e){var m={publicado:'pub',revisao:'rev',rascunho:'rasc',aprovado:'aprov'};return '<span class="badge '+(m[e]||'rasc')+'">'+e+'</span>';}
 
@@ -125,21 +135,31 @@ function doLogin(){
     afterLogin(r.data.user);
   });
 }
-function doSignup(){
-  var email=document.getElementById('email').value.trim(), pass=document.getElementById('pass').value;
-  if(!email||!pass){toast('Preencha email e palavra-passe');return;}
-  sb.auth.signUp({email:email,password:pass}).then(function(r){
-    if(r.error){toast(r.error.message);return;}
-    toast('Conta criada. Peça ao Admin para lhe dar um papel.');
+function doLogout(){ sb.auth.signOut().then(function(){ location.reload(); }); }
+
+/* 1.ª entrada: se a conta estiver marcada com senha temporaria, obriga a definir uma nova */
+function precisaTrocar(){ return !!(USER && USER.user_metadata && USER.user_metadata.senha_temporaria===true); }
+function trocarSenha(){
+  var p1=document.getElementById('np1').value, p2=document.getElementById('np2').value;
+  var e=document.getElementById('trocarErr'); e.classList.add('hide');
+  if((p1||'').length<8){ e.textContent='A palavra-passe deve ter pelo menos 8 caracteres.'; e.classList.remove('hide'); return; }
+  if(p1!==p2){ e.textContent='As palavras-passe não coincidem.'; e.classList.remove('hide'); return; }
+  sb.auth.updateUser({password:p1, data:{senha_temporaria:false}}).then(function(r){
+    if(r.error){ e.textContent=r.error.message; e.classList.remove('hide'); return; }
+    if(r.data && r.data.user) USER=r.data.user;
+    toast('Palavra-passe actualizada.'); carregarPerfil();
   });
 }
-function doLogout(){ sb.auth.signOut().then(function(){ location.reload(); }); }
 
 function afterLogin(user){
   USER=user;
-  sb.from('perfis').select('*').eq('id',user.id).single().then(function(r){
-    PERFIL=r.data||{nome:user.email,papel:'visitante'};
-    document.getElementById('whoName').textContent=PERFIL.nome||user.email;
+  if(precisaTrocar()){ show('trocar'); return; }
+  carregarPerfil();
+}
+function carregarPerfil(){
+  sb.from('perfis').select('*').eq('id',USER.id).single().then(function(r){
+    PERFIL=r.data||{nome:USER.email,papel:'visitante'};
+    document.getElementById('whoName').textContent=PERFIL.nome||USER.email;
     document.getElementById('whoRole').textContent=PERFIL.papel;
     show('app'); render();
   });

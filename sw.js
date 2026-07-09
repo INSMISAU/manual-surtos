@@ -1,7 +1,7 @@
 /* Service Worker — Manual de Surtos INS
    Mostra SEMPRE a versao mais recente com internet (acaba com os "varios refreshes")
-   e funciona offline. Sobe CACHE_VERSION quando publicares (v4 -> v5). */
-const CACHE_VERSION = "surtos-v4";
+   e funciona offline. Sobe CACHE_VERSION quando publicares (v5 -> v6). */
+const CACHE_VERSION = "surtos-v5";
 
 const CORE = [
   "./","./index.html","./doenca.html","./seccao.html","./sindrome.html",
@@ -11,7 +11,7 @@ const CORE = [
   "./assets/js/content.js","./assets/js/app.js","./assets/css/style.css"
 ];
 const STATIC_RX = /\.(css|png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|otf|pdf)$/i;
-const DATA_RX = /(content|ddata|cms_data|fiche-assets)\.js$/i;
+const DATA_RX = /(content|ddata|cms_data|fiche-assets|app)\.js$/i;
 
 self.addEventListener("install", (e) => {
   e.waitUntil(

@@ -54,17 +54,21 @@ function renderBody(blocks,figs){
   figs=figs||[]; const used=new Set();
   let html='',inList=false;
   const closeList=()=>{ if(inList){html+='</ul>';inList=false;} };
+  const figByNum=n=>{ for(let k=0;k<figs.length;k++){ if(String(figs[k].num)===String(n)) return figs[k]; } return null; };
   const arr=blocks||[];
   for(let i=0;i<arr.length;i++){
     const b=arr[i];
     if(isTableRow(b)){ const t=[]; while(i<arr.length&&isTableRow(arr[i])){ t.push(arr[i].text); i++; } i--; closeList(); html+=tableHtml(t); continue; }
+    /* Linha que É a legenda de uma figura ("Figura N. …"): mostra a figura uma só vez
+       (com a sua própria legenda) e não repete o texto por cima. */
+    const cap = (b && typeof b.text==='string') ? b.text.match(/^\s*Figura\s+(\d+)\s*[.\:]/i) : null;
+    if(cap){ const f=figByNum(cap[1]); if(f && !used.has(f.num)){ closeList(); html+=figHtml(f); used.add(f.num); continue; } }
     if(b.type==='li'){ if(!inList){html+='<ul>';inList=true;} html+='<li>'+boldLabel(b.text)+'</li>'; }
     else { closeList();
       if(b.type==='h3') html+='<h3>'+esc(b.text)+'</h3>';
       else if(b.type==='h4') html+='<h4>'+esc(b.text)+'</h4>';
       else html+='<p>'+boldLabel(b.text)+'</p>';
     }
-    for(let k=0;k<figs.length;k++){ const f=figs[k]; if(!used.has(f.num)&&b.text&&b.text.indexOf('Figura '+f.num)>=0){ closeList(); html+=figHtml(f); used.add(f.num);} }
   }
   closeList();
   const rest=figs.filter(f=>!used.has(f.num));

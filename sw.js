@@ -1,44 +1,17 @@
 /* Service Worker — Manual de Surtos INS
-   Torna o manual utilizavel SEM internet, mostrando SEMPRE a versao mais
-   recente quando ha internet (corrige o problema dos "varios refreshes").
-
-   Estrategia:
-   - Paginas (HTML) e dados (content.js, ddata.js, cms_data.js): NETWORK-FIRST.
-     Com internet, vai buscar a versao fresca ao servidor e actualiza a cache;
-     sem internet, usa a ultima versao guardada. Assim, o que for publicado
-     aparece de imediato, sem obrigar o utilizador a varios refreshes.
-   - Recursos estaticos (css, imagens, fontes, icones): CACHE-FIRST, por rapidez.
-   Sobe o numero em CACHE_VERSION sempre que publicares (v3 -> v4).
-*/
-const CACHE_VERSION = "surtos-v3";
+   Mostra SEMPRE a versao mais recente com internet (acaba com os "varios refreshes")
+   e funciona offline. Sobe CACHE_VERSION quando publicares (v4 -> v5). */
+const CACHE_VERSION = "surtos-v4";
 
 const CORE = [
-  "./",
-  "./index.html",
-  "./doenca.html",
-  "./seccao.html",
-  "./sindrome.html",
-  "./explorar-seccao.html",
-  "./explorar-sindrome.html",
-  "./explorar-abecedario.html",
-  "./emendas.html",
-  "./glossario.html",
-  "./perfil.html",
-  "./pesquisa.html",
-  // dados (podem estar na raiz ou em assets/js — allSettled ignora os que faltarem)
-  "./content.js",
-  "./ddata.js",
-  "./cms_data.js",
-  "./app.js",
-  "./assets/js/content.js",
-  "./assets/js/app.js",
-  "./assets/css/style.css"
+  "./","./index.html","./doenca.html","./seccao.html","./sindrome.html",
+  "./explorar-seccao.html","./explorar-sindrome.html","./explorar-abecedario.html",
+  "./emendas.html","./glossario.html","./perfil.html","./pesquisa.html",
+  "./content.js","./ddata.js","./cms_data.js","./fiche-assets.js","./app.js",
+  "./assets/js/content.js","./assets/js/app.js","./assets/css/style.css"
 ];
-
-// Extensoes tratadas como "estaticas" (cache-first).
 const STATIC_RX = /\.(css|png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|otf|pdf)$/i;
-// Ficheiros de dados que devem ser sempre frescos (network-first).
-const DATA_RX = /(content|ddata|cms_data)\.js$/i;
+const DATA_RX = /(content|ddata|cms_data|fiche-assets)\.js$/i;
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
@@ -48,4 +21,38 @@ self.addEventListener("install", (e) => {
   );
 });
 
-self.addEventListener
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", (e) => {
+  const req = e.request;
+  if (req.method !== "GET") return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+  const isPage = req.mode === "navigate" || url.pathname.endsWith(".html") || url.pathname.endsWith("/");
+  const isData = DATA_RX.test(url.pathname);
+  const isStatic = STATIC_RX.test(url.pathname);
+  if (isPage || (isData && !isStatic)) {
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res && res.status === 200) { const copy = res.clone(); caches.open(CACHE_VERSION).then((c) => c.put(req, copy)); }
+        return res;
+      }).catch(() => caches.match(req).then((cached) => cached || caches.match("./index.html")))
+    );
+    return;
+  }
+  e.respondWith(
+    caches.match(req).then((cached) => {
+      const network = fetch(req).then((res) => {
+        if (res && res.status === 200) { const copy = res.clone(); caches.open(CACHE_VERSION).then((c) => c.put(req, copy)); }
+        return res;
+      }).catch(() => null);
+      return cached || network.then((res) => res || caches.match("./index.html"));
+    })
+  );
+});

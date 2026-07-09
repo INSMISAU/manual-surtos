@@ -158,9 +158,9 @@ function render(){
     return;
   }
   c.innerHTML='<div class="card"><div class="ok-banner">O manual público fica <b>estático e seguro</b>: ao "Publicar para o site", este gestor gera o ficheiro do manual a partir do que está <b>publicado</b>. O leitor nunca depende da base de dados.</div>'+
-    '<div class="row" style="margin-bottom:10px"><b style="flex:1">Doenças</b>'+
+    '<div class="'+(emTeste()?'ok-banner':'hint')+'" style="margin-bottom:10px">Publicacao actual &rarr; <b>'+(emTeste()?'CoPIA DE TESTE':'MANUAL REAL (lancamento)')+'</b> &middot; '+ghRepo()+'</div>'+'<div class="row" style="margin-bottom:10px"><b style="flex:1">Doenças</b>'+
     '<button class="btn-o" onclick="loadEmendas()">Ver emendas</button>'+
-    (can('publish')?'<button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button>':'')+'</div>'+
+    (can('publish')?'<button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button><button class="btn-o" onclick="configGitHub()" style="margin-left:6px">⚙ Ligação de publicação</button><button class="btn-o" onclick="alternarTeste()" style="margin-left:6px">🧪 Modo de teste</button>':'')+'</div>'+
     '<div id="lista">A carregar…</div></div>';
   sb.from('doencas').select('id,nome,slug,estado,versao,sindrome_id').order('nome').then(function(r){
     if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
@@ -270,14 +270,17 @@ function txtToBlocks(t){
   return out;
 }
 function publicarSite(){
+  if(!emTeste()){ if(!confirm('ATENCAO: vais publicar no MANUAL REAL do lancamento ('+ghRepo()+').\n\nTens a certeza? (Para testar, liga primeiro o Modo de teste.)')) return; }
   toast('A gerar o manual a partir da base de dados...');
   Promise.all([
     sb.from('sindromes').select('*').order('ordem'),
     sb.from('doencas').select('*').eq('estado','publicado').order('nome'),
     sb.from('seccoes').select('*').eq('estado','publicado').order('ordem'),
-    sb.from('glossario_abreviaturas').select('*').order('sigla')
+    sb.from('glossario_abreviaturas').select('*').order('sigla'),
+    fetch('https://raw.githubusercontent.com/'+ghRepo()+'/'+GH_BRANCH+'/ddata.js?_='+Date.now()).then(function(r){return r.ok?r.text():null;}).catch(function(){return null;}),
+    fetch('https://raw.githubusercontent.com/'+ghRepo()+'/'+GH_BRANCH+'/assets/js/content.js?_='+Date.now()).then(function(r){return r.ok?r.text():null;}).catch(function(){return null;})
   ]).then(function(res){
-    var sind=res[0].data||[], doe=res[1].data||[], sec=res[2].data||[], ab=res[3].data||[];
+    var sind=res[0].data||[], doe=res[1].data||[], sec=res[2].data||[], ab=res[3].data||[], ddataTxt=res[4], contentTxt=res[5];
     var sinIndex={}; var groups=sind.map(function(s,i){ sinIndex[s.id]=i+1; return {id:i+1,name:s.nome,icon:'sindrome',diseases:[]}; });
     var LBL=[['pontos_chave','Pontos-chave'],['definicao_caso','Definicao de caso'],['limiares_notificacao','Limiar de notificacao e surto'],['agente_infeccioso','Agente infeccioso'],['fonte_periodo_infeccao','Fonte e periodo de infeccao'],['grupos_risco','Grupos de risco'],['protocolo_investigacao','Protocolo de investigacao'],['colheita_manuseio_amostras','Laboratorio e amostras']];
     var diseases=doe.map(function(d){
@@ -289,11 +292,113 @@ function publicarSite(){
     var sections=sec.map(function(s){return {id:s.ordem,title:s.titulo,label:'SECCAO '+s.ordem,blocks:txtToBlocks(s.conteudo),figures:[]};});
     var MAN={meta:{title:'Manual Nacional para Deteccao e Investigacao de Surtos',subtitle:'Instituto Nacional de Saude',version:'V1.0'},
       sections:sections,groups:groups,diseases:diseases,glossary:{abbreviations:ab.map(function(a){return {abbr:a.sigla,meaning:a.significado};})}};
-    var js='window.MANUAL='+JSON.stringify(MAN)+';\n';
-    var b=new Blob([js],{type:'application/javascript'}); var u=URL.createObjectURL(b);
-    var a=document.createElement('a'); a.href=u; a.download='content.js'; a.click(); URL.revokeObjectURL(u);
-    toast('content.js gerado ('+diseases.length+' doencas). Suba-o a assets/js/ no GitHub.');
+    var contentJs;
+    var baseMAN=parseManual(contentTxt);
+    if(baseMAN && baseMAN.diseases && baseMAN.diseases.length){
+      var doeBy={}; doe.forEach(function(d){ doeBy[d.slug]=d; });
+      baseMAN.diseases.forEach(function(dis){ var d=doeBy[dis.slug]; if(!d) return; dis.fields=LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};}); });
+      contentJs='window.MANUAL='+JSON.stringify(baseMAN)+';\n';
+    } else { contentJs='window.MANUAL='+JSON.stringify(MAN)+';\n'; }
+    var files=[{path:'content.js',content:contentJs},{path:'assets/js/content.js',content:contentJs}];
+
+    /* Gerar tambem ddata.js (o ficheiro que a FICHA le): fundir o texto do CMS na
+       estrutura actual, mantendo intactos casos, grupos de risco e texto integral */
+    var geradoDdata=false;
+    if(ddataTxt){
+      try{
+        var _all=parseDdataAll(ddataTxt); var base=_all.DISEASES; if(!base) throw new Error('ddata ilegivel');
+        var MAP={ 'Pontos-chave':'pontos_chave','Definicao de caso':'definicao_caso','Definição de caso':'definicao_caso','Limiar de notificação e surto':'limiares_notificacao','Limiar de notificacao e surto':'limiares_notificacao',
+          'Agente infeccioso':'agente_infeccioso','Fonte e periodo de infeccao':'fonte_periodo_infeccao','Fonte e período de infecção':'fonte_periodo_infeccao',
+          'Grupos de risco':'grupos_risco','Protocolo de investigacao':'protocolo_investigacao','Protocolo de investigação':'protocolo_investigacao',
+          'Laboratorio e amostras':'colheita_manuseio_amostras','Laboratório e amostras':'colheita_manuseio_amostras' };
+        var cms={}; doe.forEach(function(d){ cms[d.slug]=d; });
+        Object.keys(base).forEach(function(slug){
+          var d=cms[slug]; if(!d) return;
+          if(d.pontos_chave){ base[slug].keys=(''+d.pontos_chave).split('\n').map(function(s){return s.trim();}).filter(Boolean); }
+          (base[slug].secfull||[]).forEach(function(secf){
+            var key=MAP[secf.t];
+            if(key && d[key]!=null && (''+d[key]).trim()){
+              secf.items=(''+d[key]).split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){return [0,s];});
+            }
+          });
+        });
+        var ddOut='var DISEASES='+JSON.stringify(base)+';\n';
+        if(_all.ICONS!=null) ddOut+='var ICONS='+JSON.stringify(_all.ICONS)+';\n';
+        if(_all.COVER!=null) ddOut+='var COVER='+JSON.stringify(_all.COVER)+';\n';
+        files.push({path:'ddata.js',content:ddOut});
+        geradoDdata=true;
+      }catch(e){ /* nao bloqueia */ }
+    }
+    publicarFicheiros(files, diseases.length, geradoDdata);
   }).catch(function(e){ toast('Erro: '+e.message); });
+}
+
+/* descarrega um ficheiro gerado */
+function baixar(nome, conteudo){
+  var b=new Blob([conteudo],{type:'application/javascript'}); var u=URL.createObjectURL(b);
+  var a=document.createElement('a'); a.href=u; a.download=nome; a.click(); URL.revokeObjectURL(u);
+}
+/* le o ddata.js actual (var DISEASES={...};) e devolve o objecto */
+function parseManual(txt){ try{ return new Function('window', txt+'; return window.MANUAL;')({}); }catch(e){ return null; } }
+function parseDdataAll(txt){
+  try{ return new Function('return (function(){'+txt+'; return {DISEASES:typeof DISEASES!=="undefined"?DISEASES:null, ICONS:typeof ICONS!=="undefined"?ICONS:null, COVER:typeof COVER!=="undefined"?COVER:null};})()')(); }
+  catch(e){ return {DISEASES:null,ICONS:null,COVER:null}; }
+}
+function parseDdata(txt){
+  try{ return JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}')+1)); }
+  catch(e){ var f=new Function(txt+'; return typeof DISEASES!=="undefined"?DISEASES:null;'); return f(); }
+}
+
+
+/* ---- PUBLICACAO: automatica (GitHub) se houver chave, senao descarrega ---- */
+var GH_LIVE='INSMISAU/manual-surtos', GH_TEST='INSMISAU/manual-surtos-teste', GH_BRANCH='main';
+function ghRepo(){ try{return localStorage.getItem('ins_gh_repo')||GH_LIVE;}catch(e){return GH_LIVE;} }
+function emTeste(){ return ghRepo()===GH_TEST; }
+function alternarTeste(){ try{ if(emTeste()){ localStorage.removeItem('ins_gh_repo'); toast('MODO REAL: as publicacoes vao para o manual do lancamento.'); } else { localStorage.setItem('ins_gh_repo', GH_TEST); toast('MODO DE TESTE: as publicacoes vao para a copia de teste ('+GH_TEST+'). O manual real fica intacto.'); } if(typeof render==='function') render(); }catch(e){} }
+function ghToken(){ try{return localStorage.getItem('ins_gh_token')||'';}catch(e){return '';} }
+function configGitHub(){
+  var t=prompt('Chave de publicacao do GitHub (token fine-grained, permissao Contents: write no repositorio '+ghRepo()+'). Fica guardada APENAS neste navegador, nunca no codigo. Deixe vazio para remover.', ghToken());
+  if(t===null) return;
+  try{ if(t.trim()){ localStorage.setItem('ins_gh_token', t.trim()); toast('Publicacao automatica configurada neste navegador.'); } else { localStorage.removeItem('ins_gh_token'); toast('Chave removida.'); } }catch(e){ toast('Nao foi possivel guardar.'); }
+}
+function publicarFicheiros(files, nDoencas, comDdata){
+  if(ghToken()){
+    toast('A publicar no site (GitHub)...');
+    commitToGitHub(files, 'Publicar manual via CMS ('+nDoencas+' doencas)').then(function(){
+      toast('Publicado! O site actualiza em 1-2 min. ('+nDoencas+' doencas'+(comDdata?' + fichas':'')+')');
+    }).catch(function(e){
+      alert('FALHA AO PUBLICAR NO GITHUB:\n\n'+e.message+'\n\n(Como alternativa, vou descarregar os ficheiros. Nada foi publicado.)');
+      files.forEach(function(f){ baixar(f.path.split('/').pop(), f.content); });
+    });
+  } else {
+    files.forEach(function(f){ baixar(f.path.split('/').pop(), f.content); });
+    toast('Ficheiros gerados ('+nDoencas+' doencas). Para publicar sem descarregar, use "Ligacao de publicacao" (configurar a chave uma vez).');
+  }
+}
+function ghApi(path, method, body){
+  return fetch('https://api.github.com/repos/'+ghRepo()+path, {
+    method: method||'GET',
+    headers: { 'Authorization':'Bearer '+ghToken(), 'Accept':'application/vnd.github+json', 'Content-Type':'application/json' },
+    body: body?JSON.stringify(body):undefined
+  }).then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error((j&&j.message)||('HTTP '+r.status)); return j; }); });
+}
+function b64utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function commitToGitHub(files, message){
+  var refSha, baseTreeSha;
+  return ghApi('/git/ref/heads/'+GH_BRANCH).then(function(ref){
+    refSha=ref.object.sha; return ghApi('/git/commits/'+refSha);
+  }).then(function(commit){
+    baseTreeSha=commit.tree.sha;
+    return Promise.all(files.map(function(f){
+      return ghApi('/git/blobs','POST',{content:b64utf8(f.content), encoding:'base64'}).then(function(b){ return {path:f.path, mode:'100644', type:'blob', sha:b.sha}; });
+    }));
+  }).then(function(tree){
+    return ghApi('/git/trees','POST',{base_tree:baseTreeSha, tree:tree});
+  }).then(function(newTree){
+    return ghApi('/git/commits','POST',{message:message, tree:newTree.sha, parents:[refSha]});
+  }).then(function(newCommit){
+    return ghApi('/git/refs/heads/'+GH_BRANCH,'PATCH',{sha:newCommit.sha});
+  });
 }
 
 /* ---- ARRANQUE ---- */

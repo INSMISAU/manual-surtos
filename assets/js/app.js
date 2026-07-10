@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     ['emendas.html','↻','Emendas / Versoes',''],
     ['glossario.html','◈','Glossario',''],
     ['perfil.html','☺','Perfil',''],
-    ['gestor-conteudos.html','⚙','Administracao (CMS)','adm']
+    ['cms.html','⚙','Administracao (CMS)','adm']
   ];
   function buildMenu(){
     if(document.getElementById('mnav'))return;

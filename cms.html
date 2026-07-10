@@ -171,17 +171,32 @@ function can(a){ if(!PERFIL)return false; var p=PERFIL.papel;
   if(a==='publish')return ['publicador','admin'].indexOf(p)>=0;
   return false; }
 
+var VIEW='doencas';
+function irPara(v){ VIEW=v; render(); }
+function slugify(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
 function render(){
   var c=document.getElementById('content');
   if(!isStaff()){
     c.innerHTML='<div class="card"><div class="hint">A sua conta ainda não tem permissões. O Administrador deve definir o seu papel (editor/revisor/publicador) na tabela <b>perfis</b>.</div></div>';
     return;
   }
+  var tabs=[['doencas','Doenças'],['sindromes','Síndromes'],['seccoes','Secções']];
+  var nav='<div class="row" style="gap:6px;margin-bottom:12px">'+tabs.map(function(t){return '<button class="'+(VIEW===t[0]?'btn-p':'btn-o')+'" onclick="irPara(\''+t[0]+'\')">'+t[1]+'</button>';}).join('')+'</div>';
+  var actions='<div class="row" style="margin-bottom:10px"><span style="flex:1"></span><button class="btn-o" onclick="loadEmendas()">Ver emendas</button>'+
+    (can('publish')?'<button class="btn-g" onclick="publicarSite()" style="margin-left:6px">↥ Publicar para o site</button><button class="btn-o" onclick="configGitHub()" style="margin-left:6px">⚙ Ligação</button><button class="btn-o" onclick="alternarTeste()" style="margin-left:6px">🧪 Modo de teste</button>':'')+'</div>';
   c.innerHTML='<div class="card"><div class="ok-banner">O manual público fica <b>estático e seguro</b>: ao "Publicar para o site", este gestor gera o ficheiro do manual a partir do que está <b>publicado</b>. O leitor nunca depende da base de dados.</div>'+
-    '<div class="'+(emTeste()?'ok-banner':'hint')+'" style="margin-bottom:10px">Publicacao actual &rarr; <b>'+(emTeste()?'CoPIA DE TESTE':'MANUAL REAL (lancamento)')+'</b> &middot; '+ghRepo()+'</div>'+'<div class="row" style="margin-bottom:10px"><b style="flex:1">Doenças</b>'+
-    '<button class="btn-o" onclick="loadEmendas()">Ver emendas</button>'+
-    (can('publish')?'<button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button><button class="btn-o" onclick="configGitHub()" style="margin-left:6px">⚙ Ligação de publicação</button><button class="btn-o" onclick="alternarTeste()" style="margin-left:6px">🧪 Modo de teste</button>':'')+'</div>'+
-    '<div id="lista">A carregar…</div></div>';
+    '<div class="'+(emTeste()?'ok-banner':'hint')+'" style="margin-bottom:10px">Publicacao actual &rarr; <b>'+(emTeste()?'CoPIA DE TESTE':'MANUAL REAL (lancamento)')+'</b> &middot; '+ghRepo()+'</div>'+
+    nav+actions+'<div id="viewbox">A carregar…</div></div>';
+  if(VIEW==='sindromes') viewSindromes();
+  else if(VIEW==='seccoes') viewSeccoes();
+  else viewDoencas();
+}
+
+/* ---------- DOENÇAS ---------- */
+function viewDoencas(){
+  var vb=document.getElementById('viewbox');
+  vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Doenças</b>'+(can('edit')?'<button class="btn-p" onclick="novaDoenca()">+ Nova doença</button>':'')+'</div><div id="novaBox"></div><div id="lista">A carregar…</div>';
   sb.from('doencas').select('id,nome,slug,estado,versao,sindrome_id').order('nome').then(function(r){
     if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
     var rows=r.data.map(function(d){
@@ -189,6 +204,108 @@ function render(){
         '<td style="text-align:right"><button class="btn-o" onclick="editDoe(\''+d.id+'\')">Abrir</button></td></tr>';
     }).join('');
     document.getElementById('lista').innerHTML='<table><thead><tr><th>Doença</th><th>Estado</th><th>Versão</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+  });
+}
+function novaDoenca(){
+  var box=document.getElementById('novaBox'); if(!box)return;
+  sb.from('sindromes').select('id,nome').order('nome').then(function(r){
+    var opts=(r.data||[]).map(function(s){return '<option value="'+s.id+'">'+esc(s.nome)+'</option>';}).join('');
+    box.innerHTML='<div class="card" style="background:#f7fbfc;margin-bottom:10px"><div class="field"><label>Nome da nova doença</label><input id="ndNome" placeholder="ex.: Sarampo"></div>'+
+      '<div class="field"><label>Síndrome</label><select id="ndSin">'+opts+'</select></div>'+
+      '<div class="row"><button class="btn-g" onclick="criarDoenca()">Criar e abrir</button><button class="btn-o" onclick="document.getElementById(\'novaBox\').innerHTML=\'\'">Cancelar</button></div></div>';
+  });
+}
+function criarDoenca(){
+  var nome=(document.getElementById('ndNome').value||'').trim();
+  var sin=document.getElementById('ndSin').value;
+  if(!nome){toast('Escreva o nome da doença');return;}
+  var rec={nome:nome, slug:slugify(nome), sindrome_id:sin||null, letra:nome.charAt(0).toUpperCase(), estado:'rascunho', versao:'1.0'};
+  sb.from('doencas').insert(rec).select('id').single().then(function(r){
+    if(r.error){toast('Erro: '+r.error.message);return;}
+    toast('Doença criada — preencha os campos'); editDoe(r.data.id);
+  });
+}
+
+/* ---------- SÍNDROMES ---------- */
+function viewSindromes(){
+  var vb=document.getElementById('viewbox');
+  vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Síndromes</b>'+(can('edit')?'<button class="btn-p" onclick="novaSindrome()">+ Nova síndrome</button>':'')+'</div><div id="lista">A carregar…</div>';
+  sb.from('sindromes').select('*').order('ordem').then(function(r){
+    if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
+    var rows=(r.data||[]).map(function(s){
+      return '<tr><td class="mut">'+(s.ordem!=null?s.ordem:'')+'</td><td><b>'+esc(s.nome)+'</b></td>'+
+        '<td style="text-align:right">'+(can('edit')?'<button class="btn-o" onclick="renomearSindrome(\''+s.id+'\')">Renomear</button>':'')+'</td></tr>';
+    }).join('');
+    document.getElementById('lista').innerHTML='<table><thead><tr><th>Ordem</th><th>Síndrome</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+  });
+}
+function novaSindrome(){
+  var nome=prompt('Nome da nova síndrome:'); if(!nome||!nome.trim())return;
+  sb.from('sindromes').select('ordem').order('ordem',{ascending:false}).limit(1).then(function(r){
+    var ord=((r.data&&r.data[0]&&r.data[0].ordem)||0)+1;
+    sb.from('sindromes').insert({nome:nome.trim(),ordem:ord}).then(function(res){
+      if(res.error){toast('Erro: '+res.error.message);return;} toast('Síndrome criada'); render();
+    });
+  });
+}
+function renomearSindrome(id){
+  sb.from('sindromes').select('nome').eq('id',id).single().then(function(r){
+    var nome=prompt('Novo nome da síndrome:', r.data?r.data.nome:''); if(!nome||!nome.trim())return;
+    sb.from('sindromes').update({nome:nome.trim()}).eq('id',id).then(function(res){
+      if(res.error){toast('Erro: '+res.error.message);return;} toast('Actualizado'); render();
+    });
+  });
+}
+
+/* ---------- SECÇÕES ---------- */
+function viewSeccoes(){
+  var vb=document.getElementById('viewbox');
+  vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Secções</b>'+(can('edit')?'<button class="btn-p" onclick="novaSeccao()">+ Nova secção</button>':'')+'</div><div id="lista">A carregar…</div>';
+  sb.from('seccoes').select('*').order('ordem').then(function(r){
+    if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
+    var rows=(r.data||[]).map(function(s){
+      return '<tr><td class="mut">'+(s.ordem!=null?s.ordem:'')+'</td><td><b>'+esc(s.titulo)+'</b></td><td>'+badge(s.estado||'rascunho')+'</td>'+
+        '<td style="text-align:right"><button class="btn-o" onclick="editSeccao(\''+s.id+'\')">Abrir</button></td></tr>';
+    }).join('');
+    document.getElementById('lista').innerHTML='<table><thead><tr><th>Ordem</th><th>Secção</th><th>Estado</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+  });
+}
+function novaSeccao(){
+  var t=prompt('Título da nova secção:'); if(!t||!t.trim())return;
+  sb.from('seccoes').select('ordem').order('ordem',{ascending:false}).limit(1).then(function(r){
+    var ord=((r.data&&r.data[0]&&r.data[0].ordem)||0)+1;
+    sb.from('seccoes').insert({titulo:t.trim(),ordem:ord,estado:'rascunho',conteudo:''}).select('id').single().then(function(res){
+      if(res.error){toast('Erro: '+res.error.message);return;} toast('Secção criada'); editSeccao(res.data.id);
+    });
+  });
+}
+function editSeccao(id){
+  sb.from('seccoes').select('*').eq('id',id).single().then(function(r){
+    if(r.error){toast('Erro a carregar');return;}
+    var s=r.data;
+    document.getElementById('content').innerHTML=
+      '<div class="card"><div class="row"><button class="btn-o" onclick="irPara(\'seccoes\')">← Voltar</button><h1 style="flex:1;margin:0;font-size:18px">'+esc(s.titulo)+'</h1>'+badge(s.estado||'rascunho')+'</div></div>'+
+      '<div class="card">'+
+      '<div class="field"><label>Título</label><input id="scTitulo" value="'+esc(s.titulo)+'" '+(can('edit')?'':'readonly')+'></div>'+
+      '<div class="field"><label>Ordem</label><input id="scOrdem" type="number" value="'+(s.ordem!=null?s.ordem:'')+'" '+(can('edit')?'':'readonly')+'></div>'+
+      '<div class="field"><label>Conteúdo</label><textarea id="scConteudo" rows="12" '+(can('edit')?'':'readonly')+'>'+esc(s.conteudo||'')+'</textarea></div>'+
+      '<div class="row" style="border-top:1px solid var(--linha);padding-top:12px">'+
+      (can('edit')?'<button class="btn-o" onclick="saveSeccao(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveSeccao(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
+      (can('review')?'<button class="btn-g" onclick="setEstadoSeccao(\''+id+'\',\'aprovado\')">✔ Aprovar</button>':'')+
+      (can('publish')?'<button class="btn-p" onclick="setEstadoSeccao(\''+id+'\',\'publicado\')">↥ Publicar</button>':'')+
+      '</div></div>';
+  });
+}
+function saveSeccao(id,submit){
+  var patch={titulo:document.getElementById('scTitulo').value.trim(), ordem:parseInt(document.getElementById('scOrdem').value)||null, conteudo:document.getElementById('scConteudo').value};
+  if(submit) patch.estado='revisao';
+  sb.from('seccoes').update(patch).eq('id',id).then(function(res){
+    if(res.error){toast('Erro: '+res.error.message);return;} toast('Guardado'+(submit?' e submetido':'')); editSeccao(id);
+  });
+}
+function setEstadoSeccao(id,estado){
+  sb.from('seccoes').update({estado:estado}).eq('id',id).then(function(res){
+    if(res.error){toast('Erro: '+res.error.message);return;} toast('Estado: '+estado); editSeccao(id);
   });
 }
 
@@ -306,7 +423,7 @@ function publicarSite(){
     var diseases=doe.map(function(d){
       var gid=sinIndex[d.sindrome_id]; if(gid) groups[gid-1].diseases.push(d.slug);
       return {slug:d.slug,name:d.nome,letter:d.letra||(d.nome||'?').charAt(0),group:gid||0,
-        images:(Array.isArray(d.imagens)?d.imagens:[]),
+             images:(Array.isArray(d.imagens)?d.imagens:[]),
         fields:LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};})};
     });
     var sections=sec.map(function(s){return {id:s.ordem,title:s.titulo,label:'SECCAO '+s.ordem,blocks:txtToBlocks(s.conteudo),figures:[]};});
@@ -321,8 +438,6 @@ function publicarSite(){
     } else { contentJs='window.MANUAL='+JSON.stringify(MAN)+';\n'; }
     var files=[{path:'content.js',content:contentJs},{path:'assets/js/content.js',content:contentJs}];
 
-    /* Gerar tambem ddata.js (o ficheiro que a FICHA le): fundir o texto do CMS na
-       estrutura actual, mantendo intactos casos, grupos de risco e texto integral */
     var geradoDdata=false;
     if(ddataTxt){
       try{
@@ -347,30 +462,22 @@ function publicarSite(){
         if(_all.COVER!=null) ddOut+='var COVER='+JSON.stringify(_all.COVER)+';\n';
         files.push({path:'ddata.js',content:ddOut});
         geradoDdata=true;
-      }catch(e){ /* nao bloqueia */ }
+      }catch(e){ }
     }
     publicarFicheiros(files, diseases.length, geradoDdata);
   }).catch(function(e){ toast('Erro: '+e.message); });
 }
 
-/* descarrega um ficheiro gerado */
 function baixar(nome, conteudo){
   var b=new Blob([conteudo],{type:'application/javascript'}); var u=URL.createObjectURL(b);
   var a=document.createElement('a'); a.href=u; a.download=nome; a.click(); URL.revokeObjectURL(u);
 }
-/* le o ddata.js actual (var DISEASES={...};) e devolve o objecto */
 function parseManual(txt){ try{ return new Function('window', txt+'; return window.MANUAL;')({}); }catch(e){ return null; } }
 function parseDdataAll(txt){
   try{ return new Function('return (function(){'+txt+'; return {DISEASES:typeof DISEASES!=="undefined"?DISEASES:null, ICONS:typeof ICONS!=="undefined"?ICONS:null, COVER:typeof COVER!=="undefined"?COVER:null};})()')(); }
   catch(e){ return {DISEASES:null,ICONS:null,COVER:null}; }
 }
-function parseDdata(txt){
-  try{ return JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}')+1)); }
-  catch(e){ var f=new Function(txt+'; return typeof DISEASES!=="undefined"?DISEASES:null;'); return f(); }
-}
 
-
-/* ---- PUBLICACAO: automatica (GitHub) se houver chave, senao descarrega ---- */
 var GH_LIVE='INSMISAU/manual-surtos', GH_TEST='INSMISAU/manual-surtos-teste', GH_BRANCH='main';
 function ghRepo(){ try{return localStorage.getItem('ins_gh_repo')||GH_LIVE;}catch(e){return GH_LIVE;} }
 function emTeste(){ return ghRepo()===GH_TEST; }
@@ -410,6 +517,21 @@ function commitToGitHub(files, message){
   }).then(function(commit){
     baseTreeSha=commit.tree.sha;
     return Promise.all(files.map(function(f){
+      return ghApi('/git/blobs','POST',{content:b64utf8(f.content), encoding:'base64'}).then(function(b){ return {path:f.path, mode:'100644', type:'blob', sha:b.sha}; });
+    }));
+  }).then(function(tree){
+    return ghApi('/git/trees','POST',{base_tree:baseTreeSha, tree:tree});
+  }).then(function(newTree){
+    return ghApi('/git/commits','POST',{message:message, tree:newTree.sha, parents:[refSha]});
+  }).then(function(newCommit){
+    return ghApi('/git/refs/heads/'+GH_BRANCH,'PATCH',{sha:newCommit.sha});
+  });
+}
+
+window.addEventListener('load', initSb);
+</script>
+</body>
+</html>
       return ghApi('/git/blobs','POST',{content:b64utf8(f.content), encoding:'base64'}).then(function(b){ return {path:f.path, mode:'100644', type:'blob', sha:b.sha}; });
     }));
   }).then(function(tree){

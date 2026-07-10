@@ -334,11 +334,11 @@ function publicarSite(){
         var cms={}; doe.forEach(function(d){ cms[d.slug]=d; });
         Object.keys(base).forEach(function(slug){
           var d=cms[slug]; if(!d) return;
-          if(d.pontos_chave){ base[slug].keys=(''+d.pontos_chave).split('\n').map(function(s){return s.trim();}).filter(Boolean); }
+          if(d.pontos_chave){ base[slug].keys=(''+d.pontos_chave).split('\n').map(function(s){return s.trim().replace(/^[•\-]\s+/,'');}).filter(Boolean); }
           (base[slug].secfull||[]).forEach(function(secf){
             var key=MAP[secf.t];
             if(key && d[key]!=null && (''+d[key]).trim()){
-              secf.items=(''+d[key]).split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){return [0,s];});
+              secf.items=(''+d[key]).split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){return /^[•\-]\s+/.test(s)?[1,s.replace(/^[•\-]\s+/,'')]:[0,s];});
             }
           });
         });

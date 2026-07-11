@@ -217,6 +217,7 @@ function pageEmendas(){
     '<h2 class="sec-h">Emendas e Atualizações</h2>'+
     '<a class="hero" href="doenca.html?slug=colera" style="min-height:150px"><img src="assets/img/hero-colera.jpg" alt="">'+
     '<div class="scrim"></div><div class="ct"><h3 style="font-size:20px">Atualização do<br>Protocolo de Cólera</h3><span class="tag">Emenda</span></div></a>'+
+    '<p class="hero-meta" style="margin:6px 2px 12px;font-size:12.5px;color:var(--muted)">Data: 20 de Maio de 2026 · Secção 4</p>'+
     '<h2 class="sec-h">Versões anteriores</h2>'+
     '<div class="ver-item"><div class="vn">V1.0</div><div class="vd">20 Maio 2026</div>'+
     '<div class="chg"><b>Adicionado:</b> Digitalização integral do Manual Nacional (6 secções, 37 fichas de doença).</div>'+
@@ -226,26 +227,41 @@ function pageEmendas(){
 }
 function pageSearch(){
   const q=(param('q')||'').trim();
-  const nq=deaccent(q);
+  const STOP=['de','do','da','dos','das','e','a','o','as','os','em','no','na','para','com','ou'];
+  /* pesquisa flexível: divide em palavras, ignora acentos e artigos, e casa por qualquer ordem */
+  const tokens=deaccent(q).split(/\s+/).map(t=>t.replace(/[^a-z0-9]/g,'')).filter(t=>t.length>=2 && STOP.indexOf(t)<0);
+  function matches(text){ const dt=deaccent(text); return tokens.length>0 && tokens.every(t=>dt.indexOf(t)>=0); }
+  function hl(text){ /* destaca as palavras pesquisadas (ignorando acentos) */
+    return String(text).split(/(\s+)/).map(function(w){
+      var dw=deaccent(w.replace(/[.,;:()"']/g,''));
+      return (dw && tokens.some(function(t){return dw.indexOf(t)>=0;})) ? '<mark>'+esc(w)+'</mark>' : esc(w);
+    }).join('');
+  }
+  function snippet(text){ const dt=deaccent(text); let pos=-1;
+    tokens.forEach(function(t){ var p=dt.indexOf(t); if(p>=0 && (pos<0||p<pos)) pos=p; });
+    if(pos<0) return '';
+    var start=Math.max(0,pos-45); var s=String(text).slice(start,start+150).trim();
+    return (start>0?'… ':'')+hl(s)+' …';
+  }
   let results=[];
-  if(nq.length>=2){
+  if(tokens.length){
     (M.diseases||[]).forEach(d=>{
-      const hay=deaccent(d.name+' '+(d.fields||[]).map(f=>f.label+' '+f.blocks.map(b=>b.text).join(' ')).join(' '));
-      if(hay.indexOf(nq)>=0) results.push({t:d.name,s:'Ficha de doença',href:'doenca.html?slug='+d.slug});
+      const full=d.name+' '+(d.fields||[]).map(f=>f.label+' '+f.blocks.map(b=>b.text).join(' ')).join(' ');
+      if(matches(full)) results.push({t:d.name,s:'Ficha de doença',href:'doenca.html?slug='+d.slug,snip:snippet(full)});
     });
     (M.sections||[]).forEach(s=>{
-      const hay=deaccent('seccao '+s.id+' '+s.title+' '+s.blocks.map(b=>b.text).join(' '));
-      if(hay.indexOf(nq)>=0) results.push({t:'SECÇÃO '+s.id+': '+s.title,s:'Secção',href:'seccao.html?id='+s.id});
+      const full='Secção '+s.id+' '+s.title+' '+s.blocks.map(b=>b.text).join(' ');
+      if(matches(full)) results.push({t:'SECÇÃO '+s.id+': '+s.title,s:'Secção',href:'seccao.html?id='+s.id,snip:snippet(full)});
     });
     ((M.glossary&&M.glossary.abbreviations)||[]).forEach(a=>{
-      if(deaccent(a.abbr+' '+a.meaning).indexOf(nq)>=0) results.push({t:a.abbr+' — '+a.meaning,s:'Abreviatura',href:'glossario.html'});
+      if(matches(a.abbr+' '+a.meaning)) results.push({t:a.abbr+' — '+a.meaning,s:'Abreviatura',href:'glossario.html',snip:''});
     });
   }
   let body;
   if(!q) body='<div class="lead">Escreva um termo e prima Enter para pesquisar no manual.</div>';
   else if(!results.length) body='<div class="card">Sem resultados para <b>'+esc(q)+'</b>.</div>';
   else body='<div class="lead">'+results.length+' resultado(s) para "'+esc(q)+'"</div><div class="abc-list">'+
-    results.map(r=>'<a class="abc-row" href="'+r.href+'">'+esc(r.t)+'<div style="font-size:11px;color:var(--muted)">'+esc(r.s)+'</div></a>').join('')+'</div>';
+    results.map(r=>'<a class="abc-row" href="'+r.href+'"><div>'+hl(r.t)+'</div>'+(r.snip?'<div style="font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45">'+r.snip+'</div>':'')+'<div style="font-size:11px;color:var(--petrol);margin-top:2px">'+esc(r.s)+'</div></a>').join('')+'</div>';
   mount({back:true,crumb:'Pesquisa',title:'Pesquisa',q:q},body,'map');
 }
 function pagePerfil(){
@@ -258,7 +274,7 @@ function pagePerfil(){
     '<div class="card content"><h4 style="margin-top:2px">Sobre</h4>'+
     '<p>Digitalização do Manual Nacional para Detecção e Investigação de Surtos, do Instituto Nacional de Saúde (INS) / Ministério da Saúde (MISAU).</p>'+
     '<p>Protótipo para validação de design e estrutura. Conteúdo clínico pendente de validação do INS.</p></div>'+
-    '<div class="note">Os dados de utilizador, registo e certificação serão definidos pelo INS na fase de formação.</div>';
+    '<div class="note">Este é o e-book (manual digital), destinado à consulta. O registo de utilizadores e a certificação aplicam-se à componente formativa, não ao e-book.</div>';
   mount({crumb:'Perfil',title:'Perfil',search:false},body,'user');
 }
 const PAGES={home:pageHome,'explorar-seccao':pageExplorarSeccao,seccao:pageSeccao,
@@ -318,7 +334,10 @@ document.addEventListener('DOMContentLoaded',()=>{
      'background:linear-gradient(rgba(242,248,250,0),#f2f8fa);pointer-events:none}',
    '.rm-btn{width:100%;border:1px solid #007088;background:#eef7f8;color:#005c70;font:inherit;',
      'font-size:13.5px;font-weight:700;padding:11px;border-radius:11px;cursor:pointer;display:flex;',
-     'align-items:center;justify-content:center;gap:8px;margin:0 0 14px;font-family:"Raleway",sans-serif}'
+     'align-items:center;justify-content:center;gap:8px;margin:0 0 14px;font-family:"Raleway",sans-serif}',
+   // destaque da pesquisa + Voltar padronizado (só o de baixo)
+   'mark{background:#fff3bf;color:inherit;padding:0 2px;border-radius:3px}',
+   '.hdr .backlink{display:none!important}'
   ].join('');
   document.head.appendChild(st);
 
@@ -369,7 +388,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       f.appendChild(back); f.appendChild(up); f.appendChild(dn); f.appendChild(men);
       document.body.appendChild(f);
     }
-    // Esconder o botao 'Baixar PDF' (nao ha PDF ainda) e o texto de leituras recentes
     var btns=document.querySelectorAll('button');
     for(var j=0;j<btns.length;j++){ if(/Baixar PDF/i.test(btns[j].textContent||'')) btns[j].style.display='none'; }
     var rec=document.querySelector('.recent'); if(rec) rec.style.display='none';
@@ -381,7 +399,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(box.scrollHeight <= 560) return;
     box.dataset.rm='1';
     box.classList.add('rm-clip');
-    // botao no TOPO, igual ao das fichas
     var btn=document.createElement('button'); btn.className='rm-btn';
     btn.innerHTML='&#128196; Ver texto integral do manual';
     btn.addEventListener('click',function(){

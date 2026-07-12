@@ -237,9 +237,10 @@ function pageSindrome(){
     ? '<details class="acc" open><summary><span class="dot"></span>Introdução<span class="chev">'+I.chev+'</span></summary>'+
       '<div class="inner content">'+g.intro.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></details>'
     : '';
+  const hero=g.img?('<figure class="synhero"><img src="'+g.img+'" alt="'+esc(g.imgAlt||g.name)+'" loading="lazy">'+(g.imgAlt?'<figcaption>'+esc(g.imgAlt)+'</figcaption>':'')+'</figure>'):'';
   const obs=g.obs?('<details class="acc"><summary><span class="dot"></span>Observações do manual<span class="chev">'+I.chev+'</span></summary>'+
     '<div class="inner content"><p>'+esc(g.obs)+'</p></div></details>'):'';
-  const body=intro+obs+'<div class="lead">'+ds.length+' condição(ões) nesta síndrome</div><div class="abc-list">'+rows+'</div>'+sindromePager(id);
+  const body=hero+intro+obs+'<div class="lead">'+ds.length+' condição(ões) nesta síndrome</div><div class="abc-list">'+rows+'</div>'+sindromePager(id);
   mount({back:true,crumb:'Síndrome',title:esc(g.name),search:false},body,'map');
 }
 function pageAbecedario(){

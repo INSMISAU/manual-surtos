@@ -5,6 +5,8 @@
 (function(){
 const M = window.MANUAL || {};
 const I = {
+  chevL:'<svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>',
+  chevR:'<svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>',
   burger:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
   search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>',
   bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
@@ -101,11 +103,35 @@ function tabbar(active){
 }
 function mount(headerOpts, bodyHtml, activeTab){
   document.body.innerHTML='<div class="app">'+header(headerOpts)+'<main class="body">'+bodyHtml+'</main></div>'+tabbar(activeTab);
+  addClosers();
+}
+/* Comprimir sem voltar ao topo: botao "Fechar" no fim de cada bloco aberto. */
+function addClosers(root){
+  var box=(root||document);
+  var alvos=[].slice.call(box.querySelectorAll('details.acc > .inner'));
+  alvos.forEach(function(inn){
+    if(inn.querySelector('.closer')) return;
+    var b=document.createElement('button');
+    b.type='button'; b.className='closer';
+    b.innerHTML='<svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><path d="M18 15l-6-6-6 6"/></svg> Fechar';
+    b.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      var d=inn.parentNode; d.open=false;
+      var y=d.getBoundingClientRect().top+window.pageYOffset-70;
+      window.scrollTo({top:y<0?0:y,behavior:'smooth'});
+    });
+    inn.appendChild(b);
+  });
 }
 function pageHome(){
   const card=(href,t,extra)=>'<a class="nav-card" href="'+href+'"><span class="t">'+t+'</span>'+(extra||'')+'</a>';
+  const pf=(M.meta&&M.meta.prefacio)||null;
+  const prefacio=pf?('<details class="acc" style="margin:0 0 12px"><summary><span class="dot"></span>'+esc(pf.titulo)+'<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content">'+pf.paragrafos.map(p=>'<p>'+esc(p)+'</p>').join('')+
+    '<p style="font-size:12.5px;color:var(--muted);margin-top:10px">'+esc(pf.assinatura)+'</p></div></details>'):'';
   const body=
     coverBlock()+
+    prefacio+
     card('explorar-seccao.html','Explorar por Secção')+
     card('explorar-sindrome.html','Explorar por Síndrome','<span class="ico"><img class="dico" src="assets/icons/sindromes.png" alt=""></span>')+
     card('explorar-abecedario.html','Explorar por Abecedário','<span class="az">A-Z</span>')+
@@ -146,18 +172,53 @@ function coverBlock(){
     '<div class="cv-title"><b>Manual para Detecção e Investigação de Surtos em Moçambique</b>'+
     '<span>Instituto Nacional de Saúde · Ministério da Saúde</span></div></div>';
 }
+/* Navegacao continua (Anterior / Seguinte) — segue a ordem do manual. */
+function pager(prev,next){
+  const lnk=(o,dir)=>'<a class="pg '+dir+'" href="'+o.href+'">'+
+     (dir==='pv'?'<span class="ar">'+I.chevL+'</span>':'')+
+     '<span class="tx"><span class="lb">'+(dir==='pv'?'Anterior':'Seguinte')+'</span><span class="tt">'+esc(o.title)+'</span></span>'+
+     (dir==='nx'?'<span class="ar">'+I.chevR+'</span>':'')+'</a>';
+  const fim=t=>'<span class="pg end">'+t+'</span>';
+  return '<div class="pager">'+(prev?lnk(prev,'pv'):fim('Início do manual'))+(next?lnk(next,'nx'):fim('Fim do manual'))+'</div>';
+}
+function seccaoPager(id){
+  const ordem=[1,2,3,4,5,6];
+  const href=i=>i===4?'explorar-sindrome.html':('seccao.html?id='+i);
+  const nome=i=>i===4?'Vigilância Sindrómica':SECT_TITLE(i);
+  const i=ordem.indexOf(id);
+  const pv=i>0?{href:href(ordem[i-1]),title:'Secção '+ordem[i-1]+' · '+nome(ordem[i-1])}:null;
+  const nx=i<ordem.length-1?{href:href(ordem[i+1]),title:'Secção '+ordem[i+1]+' · '+nome(ordem[i+1])}:null;
+  return pager(pv,nx);
+}
+function sindromePager(id){
+  const gs=(M.groups||[]);
+  const i=gs.findIndex(g=>g.id===id);
+  const pv=i>0?{href:'sindrome.html?id='+gs[i-1].id,title:gs[i-1].name}:null;
+  const nx=(i>=0&&i<gs.length-1)?{href:'sindrome.html?id='+gs[i+1].id,title:gs[i+1].name}:null;
+  return pager(pv,nx);
+}
 function pageSeccao(){
   const id=+param('id');
   const s=(M.sections||[]).find(s=>s.id===id);
   if(!s){mount({back:true,title:'Secção'},'<div class="card">Secção não encontrada.</div>','map');return;}
   const body='<div class="note">Texto reproduzido <b>integralmente</b> do Manual Nacional (pendente de validação do INS).</div>'+
-    '<div class="content card">'+renderSectionContent(s)+'</div>';
+    '<details class="acc" open><summary><span class="dot"></span>'+esc(s.title)+'<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content">'+renderSectionContent(s)+'</div></details>'+seccaoPager(id);
   mount({back:true,crumb:'Secção '+id,title:'SECÇÃO '+id+'<br><span class="thin">'+esc(s.title)+'</span>',search:false},body,'map');
 }
 function pageExplorarSindrome(){
   const cards=(M.groups||[]).map(g=>
     '<div class="syn" onclick="location.href=\'sindrome.html?id='+g.id+'\'"><div class="ico">'+groupIcon(g.icon)+'</div><div class="nm">'+esc(g.name)+'</div></div>').join('');
-  const body='<div class="grid">'+cards+'</div>'+
+  const si=(M.meta&&M.meta.sindromesIntro)||[];
+  const intro=si.length?('<details class="acc" open style="margin-bottom:14px"><summary><span class="dot"></span>Porquê agrupar por síndrome<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content">'+si.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></details>'):'';
+  const t1=(M.meta&&M.meta.tabela1)||null;
+  const tabela=t1?('<details class="acc" style="margin:14px 0 0"><summary><span class="dot"></span>'+esc(t1.titulo)+'<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content"><div style="overflow-x:auto"><table class="t1"><thead><tr>'+
+    t1.cabecalho.map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+
+    (M.groups||[]).map(g=>'<tr><td><a href="sindrome.html?id='+g.id+'"><b>'+esc(g.name)+'</b></a></td><td>'+esc(g.agentes||'')+'</td><td>'+esc(g.obs||'')+'</td></tr>').join('')+
+    '</tbody></table></div></div></details>'):'';
+  const body=intro+'<div class="grid">'+cards+'</div>'+tabela+
     '<div class="card" style="margin-top:16px;display:flex;gap:14px;align-items:center">'+
     '<img src="assets/img/foto1.jpg" style="width:84px;height:84px;object-fit:cover;border-radius:12px" alt="">'+
     '<div><div style="font-family:Poppins;font-weight:700;color:var(--petrol);font-size:14px">Manual para Detecção e Investigação de Surtos em Moçambique</div>'+
@@ -172,7 +233,13 @@ function pageSindrome(){
   const ds=(M.diseases||[]).filter(d=>g.diseases.includes(d.slug));
   const rows=ds.map(d=>'<a class="abc-row" href="doenca.html?slug='+d.slug+'"><span class="ltr">'+esc(d.letter)+'</span>'+esc(d.name)+'<span style="float:right;color:var(--petrol)">'+I.arrow+'</span></a>').join('')
     || '<div class="abc-row dim">Sem fichas nesta categoria.</div>';
-  const body='<div class="lead">'+ds.length+' condição(ões) nesta síndrome</div><div class="abc-list">'+rows+'</div>';
+  const intro=(g.intro&&g.intro.length)
+    ? '<details class="acc" open><summary><span class="dot"></span>Introdução<span class="chev">'+I.chev+'</span></summary>'+
+      '<div class="inner content">'+g.intro.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></details>'
+    : '';
+  const obs=g.obs?('<details class="acc"><summary><span class="dot"></span>Observações do manual<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content"><p>'+esc(g.obs)+'</p></div></details>'):'';
+  const body=intro+obs+'<div class="lead">'+ds.length+' condição(ões) nesta síndrome</div><div class="abc-list">'+rows+'</div>'+sindromePager(id);
   mount({back:true,crumb:'Síndrome',title:esc(g.name),search:false},body,'map');
 }
 function pageAbecedario(){
@@ -196,16 +263,13 @@ function pageDoenca(){
 }
 function pageGlossario(){
   const ab=(M.glossary&&M.glossary.abbreviations)||[];
-  const concepts=[
-    ['Surto','A ocorrência de um número de casos de uma doença superior ao esperado em determinado local e período.'],
-    ['Endemia','Doença que está constantemente presente numa área geográfica ou população específica, geralmente a um nível basal previsível.'],
-    ['Epidemia','Aumento, frequentemente súbito, do número de casos de uma doença acima do que é normalmente esperado numa população.'],
-    ['Caso suspeito','Pessoa que apresenta sinais e sintomas compatíveis com a definição clínica de uma doença sob vigilância.'],
-    ['Definição de caso','Conjunto de critérios padronizados utilizados para classificar se uma pessoa apresenta uma determinada doença ou condição de saúde.'],
-  ];
+  const concepts=((M.glossary&&M.glossary.concepts)||[]).map(c=>[c.term,c.def]);
   const cBody=concepts.map(c=>'<h4>'+esc(c[0])+':</h4><p>'+esc(c[1])+'</p>').join('');
   const abBody=ab.map(a=>'<div class="abbr"><span class="k">'+esc(a.abbr)+'</span><span class="v">'+esc(a.meaning)+'</span></div>').join('');
-  const body='<div class="card content"><h3 style="margin-top:4px">Principais conceitos epidemiológicos</h3>'+cBody+'</div>'+
+  const gi=(M.glossary&&M.glossary.intro)?'<p style="margin:0 0 12px">'+esc(M.glossary.intro)+'</p>':'';
+  const body=(gi?'<div class="note">'+esc(M.glossary.intro)+'</div>':'')+
+    '<details class="acc" open><summary><span class="dot"></span>Principais conceitos epidemiológicos<span class="chev">'+I.chev+'</span></summary>'+
+    '<div class="inner content">'+cBody+'</div></details>'+
     '<h2 class="sec-h">Abreviaturas ('+ab.length+')</h2><div class="card" style="padding:6px 16px">'+abBody+'</div>';
   mount({crumb:'Glossário',title:'Glossário',search:false},body,'book');
 }
@@ -322,12 +386,17 @@ document.addEventListener('DOMContentLoaded',()=>{
    '.mnav a.adm{margin-top:6px;border-top:1px solid #e4e9ed;padding-top:14px;color:#b02040}',
    '.mnav a.adm .mi{background:#f7e6ea;color:#b02040}',
    // ---- Botoes flutuantes (cores do manual) ----
-   '.fab-nav{position:fixed;bottom:92px;right:calc(50% - 234px);z-index:45;display:flex;flex-direction:column;gap:10px}',
-   '@media(max-width:520px){.fab-nav{right:14px}}',
-   '.fab-nav button{width:48px;height:48px;border-radius:50%;border:none;background:#007088;color:#fff;',
-     'box-shadow:0 5px 14px rgba(0,0,0,.28);cursor:pointer;display:grid;place-items:center;font-size:22px;line-height:1}',
-   '.fab-nav button.menu{background:#b02040;font-size:20px}',
-   '.fab-nav button.up{background:#0b465d;font-size:20px;width:44px;height:44px}',
+   // fora da coluna de texto sempre que haja espaco; encostados a margem em ecras estreitos
+   '.fab-nav{position:fixed;bottom:92px;right:max(6px, calc(50% - 285px));z-index:45;display:flex;flex-direction:column;gap:7px;opacity:.93}',
+   '.fab-nav:hover{opacity:1}',
+   '.fab-nav button{width:38px;height:38px;border-radius:50%;border:none;background:#007088;color:#fff;',
+     'box-shadow:0 3px 10px rgba(0,0,0,.22);cursor:pointer;display:grid;place-items:center;font-size:17px;line-height:1}',
+   '.fab-nav button.menu{background:#b02040;font-size:16px}',
+   '.fab-nav button.up{background:#0b465d;font-size:16px;width:36px;height:36px}',
+   // telemovel: esconder as setas de rolar (o dedo ja rola); ficam so o menu e o voltar
+   '@media(max-width:560px){.fab-nav{right:6px;bottom:84px;gap:6px}',
+     '.fab-nav button{width:36px;height:36px;font-size:16px}',
+     '.fab-nav button.up{display:none}}',
    // ---- Ver texto integral (igual ao das fichas: topo, largo, contorno petroleo) ----
    '.rm-clip{max-height:460px;overflow:hidden;position:relative}',
    '.rm-clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80px;',

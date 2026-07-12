@@ -230,3 +230,8 @@ table.t1 a{color:var(--petrol);text-decoration:none}
 .pager .lb{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .pager .tt{font-size:13.5px;font-weight:700;color:var(--petrol);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pager .ar{flex:none;color:var(--petrol);display:flex}
+
+/* Imagem de entrada da sindrome */
+.synhero{margin:0 0 14px}
+.synhero img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow-s)}
+.synhero figcaption{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}

@@ -204,3 +204,29 @@ body{font-family:"Raleway","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-
 .tbl th,.tbl td{border:1px solid #dce7ea;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.35}
 .tbl thead th{background:#e6f2f4;color:#0a4a5a;font-weight:700}
 .tbl tbody tr:nth-child(even){background:#f6fafb}
+
+/* Tabela 1 — agrupamento por vigilância sindrómica */
+table.t1{width:100%;border-collapse:collapse;font-size:12.5px}
+table.t1 th{background:var(--petrol);color:#fff;text-align:left;padding:7px 9px;font-size:12px}
+table.t1 td{padding:7px 9px;border-bottom:1px solid #e2e8ec;vertical-align:top}
+table.t1 tr:nth-child(even) td{background:#fafcfd}
+table.t1 a{color:var(--petrol);text-decoration:none}
+
+/* Comprimir conteudo: cabecalho fixo enquanto aberto + botao Fechar no fim */
+.closer{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:12px;padding:10px 0;
+ border:0;border-top:1px solid var(--line);background:none;cursor:pointer;
+ color:var(--petrol);font-family:inherit;font-size:12.5px;font-weight:700}
+.closer:hover{background:#f2f7f9}
+.closer svg{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Navegacao continua: Anterior / Seguinte */
+.pager{display:flex;gap:10px;margin:18px 0 4px}
+.pager .pg{flex:1 1 0;min-width:0;overflow:hidden;display:flex;align-items:center;gap:9px;padding:12px 13px;background:#fff;
+ border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-s);text-decoration:none;color:inherit}
+.pager .pg.nx{justify-content:flex-end;text-align:right}
+.pager .pg.end{justify-content:center;border-style:dashed;box-shadow:none;background:none;color:var(--muted);font-size:12.5px}
+.pager .pg:active{background:#f2f7f9}
+.pager .tx{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.pager .lb{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.pager .tt{font-size:13.5px;font-weight:700;color:var(--petrol);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pager .ar{flex:none;color:var(--petrol);display:flex}

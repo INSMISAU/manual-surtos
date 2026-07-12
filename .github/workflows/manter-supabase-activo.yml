@@ -1,0 +1,51 @@
+# Mantem o projecto Supabase activo.
+#
+# PORQUE EXISTE: no plano gratuito, o Supabase suspende o projecto ao fim de
+# ~1 semana sem consultas a base de dados. Se isso acontecer, o Gestor de
+# Conteudos deixa de abrir (o manual publicado continua a funcionar, incluindo
+# offline -- so a edicao/publicacao fica bloqueada).
+#
+# O QUE FAZ: uma vez por dia faz uma leitura minima a base de dados. Isso conta
+# como actividade e impede a suspensao. Nao escreve nada, nao altera nada.
+#
+# CHAVE: a chave usada e a "publishable" -- e publica por desenho (ja esta no
+# cms.html deste repositorio) e esta protegida por RLS. Nao da acesso a dados.
+#
+# ATENCAO: o GitHub desactiva tarefas agendadas em repositorios sem qualquer
+# actividade durante 60 dias, e avisa por email. Se isso acontecer, basta abrir
+# o separador "Actions" e carregar em "Enable workflow".
+
+name: Manter Supabase activo
+
+on:
+  schedule:
+    - cron: "17 6 * * *"     # todos os dias as 06:17 UTC (08:17 em Maputo)
+  workflow_dispatch:          # permite correr a mao a partir do separador Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar a base de dados
+        env:
+          SB_URL: https://watlfdjcgfxmzymztmvc.supabase.co
+          SB_KEY: sb_publishable_ZxGOBZcm1IGp36e7Qh2nyg_S8Tb56B4
+        run: |
+          set -e
+          falhas=0
+          for tabela in doencas seccoes sindromes; do
+            codigo=$(curl -s -o /tmp/resposta.json -w "%{http_code}" \
+              -H "apikey: $SB_KEY" \
+              -H "Authorization: Bearer $SB_KEY" \
+              "$SB_URL/rest/v1/$tabela?select=id&limit=1")
+            echo "  $tabela -> HTTP $codigo"
+            if [ "$codigo" != "200" ] && [ "$codigo" != "206" ] && [ "$codigo" != "401" ] && [ "$codigo" != "403" ]; then
+              echo "     resposta: $(cat /tmp/resposta.json)"
+              falhas=$((falhas+1))
+            fi
+          done
+          if [ "$falhas" -gt 0 ]; then
+            echo "::error::A base de dados nao respondeu. O projecto pode estar suspenso -- ver https://supabase.com/dashboard"
+            exit 1
+          fi
+          echo "Base de dados activa."

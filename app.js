@@ -46,7 +46,15 @@ function tableHtml(texts){
   const rows=texts.map(parseRow);
   let sep=-1; for(let i=0;i<rows.length;i++){ if(isSep(rows[i])){ sep=i; break; } }
   const maxc=Math.max.apply(null,rows.map(r=>r.length));
-  const cells=(r,tag)=>{ let h=''; for(let i=0;i<maxc;i++){ h+='<'+tag+'>'+esc(r[i]!=null?r[i]:'')+'</'+tag+'>'; } return h; };
+  /* S56-5: a 1a coluna e o rotulo da linha -> negrito.
+     S56-13: linhas cujas restantes celulas estao vazias sao cabecalhos de grupo
+     (ex.: "Sexo", "Idade (anos)", "Residencia") -> negrito. E os "Totais" tambem. */
+  const soRotulo=r=>{ for(let i=1;i<r.length;i++){ if(String(r[i]||'').trim()) return false; } return String(r[0]||'').trim()!==''; };
+  const cells=(r,tag)=>{ let h=''; const grupo=soRotulo(r)||/^totais?$/i.test(String(r[0]||'').trim());
+    for(let i=0;i<maxc;i++){ const v=esc(r[i]!=null?r[i]:'');
+      const neg = tag==='td' && v && (i===0 || grupo);
+      h+='<'+tag+(grupo?' class="grp"':'')+'>'+(neg?'<b>'+v+'</b>':v)+'</'+tag+'>'; }
+    return h; };
   let html='<div class="tbl-wrap"><table class="tbl">';
   if(sep>=0){
     html+='<thead>'; for(let i=0;i<sep;i++) html+='<tr>'+cells(rows[i],'th')+'</tr>'; html+='</thead><tbody>';
@@ -57,6 +65,10 @@ function tableHtml(texts){
 function renderBody(blocks,figs){
   figs=figs||[]; const used=new Set();
   let html='',listTag=null;
+  /* S56-2: nas REFERENCIAS nao ha rotulos -- o negrito automatico so acerta
+     nas que tem dois-pontos no titulo (ex.: "Conjunctivitis: A Systematic Review"),
+     o que cria desalinhamento. A partir do cabecalho REFERENCIAS, texto simples. */
+  let emRefs=false;
   const closeList=()=>{ if(listTag){html+='</'+listTag+'>';listTag=null;} };
   const figByNum=n=>{ for(let k=0;k<figs.length;k++){ if(String(figs[k].num)===String(n)) return figs[k]; } return null; };
   const arr=blocks||[];
@@ -67,11 +79,17 @@ function renderBody(blocks,figs){
        (com a sua própria legenda) e não repete o texto por cima. */
     const cap = (b && typeof b.text==='string') ? b.text.match(/^\s*Figura\s+(\d+)\s*[.\:]/i) : null;
     if(cap){ const f=figByNum(cap[1]); if(f && !used.has(f.num)){ closeList(); html+=figHtml(f); used.add(f.num); continue; } }
-    if(b.type==='li'||b.type==='oli'){ const want=b.type==='oli'?'ol':'ul'; if(listTag!==want){closeList();html+='<'+want+'>';listTag=want;} html+='<li>'+boldLabel(b.text)+'</li>'; }
+    if(/^\s*REFER[ÊE]NCIAS?\b/i.test(String(b.text||''))) emRefs=true;
+    /* S56-6/7: nas REFERENCIAS e nos campos do formulario (Anexo 3) o manual
+       nao poe negrito -- so nos cabecalhos. Os campos vem marcados com b.plain. */
+    const bl = (emRefs||b.plain) ? (x=>esc(String(x))) : boldLabel;
+    /* S56-12: itens subordinados (o manual usa a. b. c. indentados) levam classe "sub" */
+    if(b.type==='li'||b.type==='oli'){ const want=b.type==='oli'?'ol':'ul'; if(listTag!==want){closeList();html+='<'+want+'>';listTag=want;}
+      html+='<li'+(b.level?' class="sub'+(b.level>1?'2':'')+'"':'')+'>'+bl(b.text)+'</li>'; }
     else { closeList();
       if(b.type==='h3') html+='<h3>'+esc(b.text)+'</h3>';
       else if(b.type==='h4') html+='<h4>'+esc(b.text)+'</h4>';
-      else html+='<p>'+boldLabel(b.text)+'</p>';
+      else html+='<p>'+bl(b.text)+'</p>';
     }
   }
   closeList();
@@ -320,6 +338,15 @@ function pageSearch(){
     });
     ((M.glossary&&M.glossary.abbreviations)||[]).forEach(a=>{
       if(matches(a.abbr+' '+a.meaning)) results.push({t:a.abbr+' — '+a.meaning,s:'Abreviatura',href:'glossario.html',snip:''});
+    });
+    /* C-4: as sindromes tambem tem de ser encontradas (nome, introducao e observacoes do manual) */
+    (M.groups||[]).forEach(g=>{
+      const full=g.name+' '+((g.intro||[]).join(' '))+' '+(g.obs||'')+' '+(g.agentes||'');
+      if(matches(full)) results.push({t:g.name,s:'Síndrome',href:'sindrome.html?id='+g.id,snip:snippet(full)});
+    });
+    /* e os conceitos do glossario */
+    ((M.glossary&&M.glossary.concepts)||[]).forEach(c=>{
+      if(matches(c.term+' '+c.def)) results.push({t:c.term,s:'Conceito · Glossário',href:'glossario.html',snip:snippet(c.term+': '+c.def)});
     });
   }
   let body;

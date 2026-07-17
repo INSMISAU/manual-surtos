@@ -80,9 +80,9 @@ var HARD_KEY='sb_publishable_ZxGOBZcm1IGp36e7Qh2nyg_S8Tb56B4';
 var sb=null, USER=null, PERFIL=null;
 var FIELDS=[
 ['pontos_chave','Pontos-chave'],['definicao_caso','Definição de caso'],
-['limiares_notificacao','Limiar de notificação e surto'],['agente_infeccioso','Agente infeccioso'],
+['limiares_notificacao','Número de casos necessários para desencadear a notificação e a investigação'],['agente_infeccioso','Agente infeccioso'],
 ['fonte_periodo_infeccao','Fonte e período de infecção'],['grupos_risco','Grupos de risco'],
-['protocolo_investigacao','Protocolo de investigação'],['colheita_manuseio_amostras','Laboratório e amostras']
+['protocolo_investigacao','Protocolo de investigação'],['colheita_manuseio_amostras','Colheita e manuseio de amostras para o diagnóstico laboratorial']
 ];
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2800);}
 function show(id){['cfg','login','trocar','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
@@ -364,6 +364,36 @@ else out.push({type:'p',text:ln});
 });
 return out;
 }
+/* ── Sincronizar os blocos visuais com o texto da base de dados ─────────────
+   A ficha da doenca NAO le secfull para "Definicao de caso" nem "Grupos de
+   risco": le cases[] (separadores) e risks[] (blocos com icone). Sem isto,
+   editar esses dois campos no CMS nao muda nada na ficha, e nao da erro.
+   Regra confirmada nas 39 fichas: item de nivel 0 = um bloco; os de nivel 1
+   entram no bloco de cima. O icone, a imagem e o rotulo sao preservados.    */
+function _nrm(s){ return String(s==null?"":s).replace(/\s+/g," ").trim(); }
+function _secPor(o,re){ var a=(o&&o.secfull)||[]; for(var i=0;i<a.length;i++){ if(re.test(a[i].t||"")) return a[i]; } return null; }
+function _agrupar(sec){ var g=[]; ((sec&&sec.items)||[]).forEach(function(it){ if(!_nrm(it[1])) return; if(it[0]===0) g.push([String(it[1])]); else if(g.length) g[g.length-1].push(String(it[1])); }); return g.map(function(x){ return x.join(" "); }); }
+function sincRiscos(o){
+  var sec=_secPor(o,/grupos de risco/i); if(!sec||!o.risks||!o.risks.length) return;
+  var velhos=o.risks, porTexto={}; velhos.forEach(function(r){ if(r.text) porTexto[_nrm(r.text)]=r; });
+  var novos=_agrupar(sec); if(!novos.length) return;
+  o.risks=novos.map(function(t,i){
+    var ant=porTexto[_nrm(t)]||velhos[i]||{};   /* mesmo texto -> mesmo icone, mesmo que mude de ordem */
+    var b={}; for(var p in ant){ if(p!=="text") b[p]=ant[p]; }   /* preserva tudo o que nao seja o texto */
+    b.media=ant.media||""; b.text=t; return b;
+  });
+}
+function sincCasos(o){
+  var sec=_secPor(o,/defini[cç][aã]o de caso/i); if(!sec||!o.cases||!o.cases.length) return;
+  var velhos=o.cases, novos=_agrupar(sec); if(!novos.length) return;
+  o.cases=novos.map(function(t,i){
+    var ant=velhos[i]||{}; var rot=(t.match(/^([^:]{2,70}):/)||[,""])[1];
+    var b={}; for(var p in ant){ if(p!=="body") b[p]=ant[p]; }   /* preserva tudo o que nao seja o corpo */
+    b.label=ant.label||_nrm(rot.replace(/^Caso\s+/i,""))||("Caso "+(i+1));
+    b.body=t.replace(/^[^:]{2,70}:\s*/,""); b.media=ant.media||"";
+    return b;
+  });
+}
 function publicarSite(){
 if(!emTeste()){ if(!confirm('ATENCAO: vais publicar no MANUAL REAL do lancamento ('+ghRepo()+').\n\nTens a certeza? (Para testar, liga primeiro o Modo de teste.)')) return; }
 toast('A gerar o manual a partir da base de dados...');
@@ -376,8 +406,17 @@ fetch('https://raw.githubusercontent.com/'+ghRepo()+'/'+GH_BRANCH+'/ddata.js?_='
 fetch('https://raw.githubusercontent.com/'+ghRepo()+'/'+GH_BRANCH+'/assets/js/content.js?_='+Date.now()).then(function(r){return r.ok?r.text():null;}).catch(function(){return null;})
 ]).then(function(res){
 var sind=res[0].data||[], doe=res[1].data||[], sec=res[2].data||[], ab=res[3].data||[], ddataTxt=res[4], contentTxt=res[5];
+/* Sem estes dois ficheiros do GitHub nao ha manual completo: o content.js traz o
+   prefacio, as figuras e o glossario; o ddata.js traz os icones das fichas.
+   Se falharem, PARAR. Antes gerava-se um manual mutilado sem avisar ninguem. */
+if(!contentTxt || !ddataTxt){
+var _f=[]; if(!contentTxt) _f.push('assets/js/content.js'); if(!ddataTxt) _f.push('ddata.js');
+alert('NADA FOI PUBLICADO.\n\nNao foi possivel descarregar do GitHub:\n   '+_f.join('\n   ')+'\n\nRepositorio: '+ghRepo()+' (ramo '+GH_BRANCH+')\n\nCausa mais provavel: o GitHub limita pedidos seguidos. Espere um minuto e tente outra vez.\n\nO manual NAO foi alterado.');
+toast('Publicacao cancelada: o GitHub nao respondeu.');
+return;
+}
 var sinIndex={}; var groups=sind.map(function(s,i){ sinIndex[s.id]=i+1; return {id:i+1,name:s.nome,icon:'sindrome',diseases:[]}; });
-var LBL=[['pontos_chave','Pontos-chave'],['definicao_caso','Definicao de caso'],['limiares_notificacao','Limiar de notificacao e surto'],['agente_infeccioso','Agente infeccioso'],['fonte_periodo_infeccao','Fonte e periodo de infeccao'],['grupos_risco','Grupos de risco'],['protocolo_investigacao','Protocolo de investigacao'],['colheita_manuseio_amostras','Laboratorio e amostras']];
+var LBL=[['pontos_chave','Pontos-chave'],['definicao_caso','Definicao de caso'],['limiares_notificacao','Número de casos necessários para desencadear a notificação e a investigação'],['agente_infeccioso','Agente infeccioso'],['fonte_periodo_infeccao','Fonte e periodo de infeccao'],['grupos_risco','Grupos de risco'],['protocolo_investigacao','Protocolo de investigacao'],['colheita_manuseio_amostras','Colheita e manuseio de amostras para o diagnóstico laboratorial']];
 var diseases=doe.map(function(d){
 var gid=sinIndex[d.sindrome_id]; if(gid) groups[gid-1].diseases.push(d.slug);
 return {slug:d.slug,name:d.nome,letter:d.letra||(d.nome||'?').charAt(0),group:gid||0,
@@ -393,16 +432,22 @@ if(baseMAN && baseMAN.diseases && baseMAN.diseases.length){
 var doeBy={}; doe.forEach(function(d){ doeBy[d.slug]=d; });
 baseMAN.diseases.forEach(function(dis){ var d=doeBy[dis.slug]; if(!d) return; dis.fields=LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};}); });
 contentJs='window.MANUAL='+JSON.stringify(baseMAN)+';\n';
-} else { contentJs='window.MANUAL='+JSON.stringify(MAN)+';\n'; }
+} else {
+/* O content.js veio mas nao se conseguiu ler. Antes publicava-se um manual minimo
+   (so o texto da base de dados), perdendo prefacio, figuras, glossario e tabelas. */
+alert('NADA FOI PUBLICADO.\n\nO content.js foi descarregado do GitHub mas nao foi possivel interpreta-lo.\n\nPublicar assim faria o manual perder o prefacio, as figuras, os conceitos do glossario e as tabelas.\n\nO manual NAO foi alterado. Avise a equipa tecnica.');
+toast('Publicacao cancelada: content.js ilegivel.');
+return;
+}
 var files=[{path:'content.js',content:contentJs},{path:'assets/js/content.js',content:contentJs}];
 var geradoDdata=false;
 if(ddataTxt){
 try{
 var _all=parseDdataAll(ddataTxt); var base=_all.DISEASES; if(!base) throw new Error('ddata ilegivel');
-var MAP={ 'Pontos-chave':'pontos_chave','Definicao de caso':'definicao_caso','Definição de caso':'definicao_caso','Limiar de notificação e surto':'limiares_notificacao','Limiar de notificacao e surto':'limiares_notificacao',
+var MAP={ 'Pontos-chave':'pontos_chave','Definicao de caso':'definicao_caso','Definição de caso':'definicao_caso','Número de casos necessários para desencadear a notificação e a investigação':'limiares_notificacao','Número de casos necessários para desencadear a notificação e a investigação':'limiares_notificacao',
 'Agente infeccioso':'agente_infeccioso','Fonte e periodo de infeccao':'fonte_periodo_infeccao','Fonte e período de infecção':'fonte_periodo_infeccao',
 'Grupos de risco':'grupos_risco','Protocolo de investigacao':'protocolo_investigacao','Protocolo de investigação':'protocolo_investigacao',
-'Laboratorio e amostras':'colheita_manuseio_amostras','Laboratório e amostras':'colheita_manuseio_amostras' };
+'Colheita e manuseio de amostras para o diagnóstico laboratorial':'colheita_manuseio_amostras','Colheita e manuseio de amostras para o diagnóstico laboratorial':'colheita_manuseio_amostras' };
 var cms={}; doe.forEach(function(d){ cms[d.slug]=d; });
 Object.keys(base).forEach(function(slug){
 var d=cms[slug]; if(!d) return;
@@ -410,16 +455,29 @@ if(d.pontos_chave){ base[slug].keys=(''+d.pontos_chave).split('\n').map(function
 (base[slug].secfull||[]).forEach(function(secf){
 var key=MAP[secf.t];
 if(key && d[key]!=null && (''+d[key]).trim()){
-secf.items=(''+d[key]).split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){return /^[•\-]\s+/.test(s)?[1,s.replace(/^[•\-]\s+/,'')]:[0,s];});
+secf.items=(''+d[key]).split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(s){
+/* Niveis do manual: sem marca = topo (•) | "• " = sub (o) | "•• " = sub-sub (§).
+   Compativel com o texto antigo: "• " continua a valer sub-item. */
+if(/^(••|--)\s+/.test(s)) return [2, s.replace(/^(••|--)\s+/,'')];
+if(/^[•\-]\s+/.test(s)) return [1, s.replace(/^[•\-]\s+/,'')];
+return [0,s];});
 }
 });
+sincRiscos(base[slug]);
+sincCasos(base[slug]);
 });
 var ddOut='var DISEASES='+JSON.stringify(base)+';\n';
 if(_all.ICONS!=null) ddOut+='var ICONS='+JSON.stringify(_all.ICONS)+';\n';
 if(_all.COVER!=null) ddOut+='var COVER='+JSON.stringify(_all.COVER)+';\n';
 files.push({path:'ddata.js',content:ddOut});
 geradoDdata=true;
-}catch(e){ }
+}catch(e){
+/* Antes: catch vazio. O ddata.js nao era gerado e ninguem sabia -- so vinham 2
+   ficheiros em vez de 3, e as fichas das doencas ficavam por actualizar. */
+alert('NADA FOI PUBLICADO.\n\nErro ao gerar as fichas das doencas (ddata.js):\n'+e.message+'\n\nO manual NAO foi alterado. Tente outra vez; se persistir, avise a equipa tecnica.');
+toast('Publicacao cancelada: falha ao gerar o ddata.js.');
+return;
+}
 }
 publicarFicheiros(files, diseases.length, geradoDdata);
 }).catch(function(e){ toast('Erro: '+e.message); });

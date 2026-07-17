@@ -235,3 +235,37 @@ table.t1 a{color:var(--petrol);text-decoration:none}
 .synhero{margin:0 0 14px}
 .synhero img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow-s)}
 .synhero figcaption{font-size:11.5px;color:var(--muted);margin-top:6px;text-align:center}
+
+/* Itens de lista subordinados nas seccoes (o manual usa a. b. c. indentados) */
+.content li.sub{list-style:circle;margin-left:20px;color:#4a5a62}
+.content li.sub2{list-style:square;margin-left:38px;color:#5a6a72;font-size:.95em}
+/* Linhas de cabecalho de grupo dentro das tabelas (S56-13) */
+.tbl td.grp{background:#f2f7f9}
+
+/* ── Texto nunca transborda a caixa ──────────────────────────────
+   O manual tem URLs muito longos (ate 133 caracteres, sem espacos) e
+   linhas de preenchimento "______" nos formularios. Sem isto, saem
+   pela margem direita e ficam cortados. */
+.content, .content p, .content li, .content h3, .content h4,
+.card, .lead, .abc-row, .note, .pager .tt, .tbl td, .tbl th,
+.synhero figcaption, .secimg figcaption{
+  overflow-wrap:break-word;
+  word-break:break-word;
+}
+/* URLs e caminhos: partir em qualquer ponto se nao houver alternativa */
+.content a, .content code{word-break:break-all}
+/* Tabelas: nunca empurrar a pagina para o lado */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{min-width:100%}
+/* Cabecalhos dos blocos: os titulos do manual chegam aos 75 caracteres */
+.acc>summary{overflow-wrap:break-word;min-width:0}
+.acc>summary .dot{flex:none}
+
+/* ── Tabelas largas: cada coluna com largura minima ──────────────
+   O manual imprime a "Lista de Casos" com 11 colunas tao estreitas
+   que as palavras partem letra a letra ("Des fec ho"). No ecra nao
+   temos essa limitacao: damos espaco a cada coluna e a tabela rola
+   na horizontal, ficando legivel. */
+.tbl th, .tbl td{min-width:88px}
+.tbl th:first-child, .tbl td:first-child{min-width:40px}
+.tbl-wrap{position:relative}

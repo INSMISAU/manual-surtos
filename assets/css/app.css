@@ -1,0 +1,7 @@
+
+/* Tabela 1 — agrupamento sindrómico */
+table.t1{width:100%;border-collapse:collapse;font-size:12.5px}
+table.t1 th{background:var(--petrol);color:#fff;text-align:left;padding:7px 9px;font-size:12px}
+table.t1 td{padding:7px 9px;border-bottom:1px solid #e2e8ec;vertical-align:top}
+table.t1 tr:nth-child(even) td{background:#fafcfd}
+table.t1 a{color:var(--petrol);text-decoration:none}

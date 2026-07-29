@@ -152,19 +152,18 @@ c.innerHTML='<div class="card"><div class="hint">A sua conta ainda não tem perm
 return;
 }
 var tabs=[['doencas','Doenças'],['sindromes','Síndromes'],['seccoes','Secções']];
-var nav='<div class="row" style="gap:6px;margin-bottom:12px">'+tabs.map(function(t){return '<button class="'+(VIEW===t[0]?'btn-p':'btn-o')+'" onclick="irPara(\''+t[0]+'\')">'+t[1]+'</button>';}).join('')+'</div>';
-var actions='<div class="row" style="margin-bottom:10px"><span style="flex:1"></span><button class="btn-o" onclick="loadEmendas()">Ver emendas</button>'+
-(can('publish')?'<button class="btn-g" onclick="publicarSite()" style="margin-left:6px">↥ Publicar para o site</button><button class="btn-o" onclick="configGitHub()" style="margin-left:6px">⚙ Ligação</button><button class="btn-o" onclick="alternarTeste()" style="margin-left:6px">🧪 Modo de teste</button>':'')+'</div>';
-c.innerHTML='<div class="card"><div class="ok-banner">O manual público fica <b>estático e seguro</b>: ao "Publicar para o site", este gestor gera o ficheiro do manual a partir do que está <b>publicado</b>. O leitor nunca depende da base de dados.</div>'+
-'<div class="'+(emTeste()?'ok-banner':'hint')+'" style="margin-bottom:10px">Publicacao actual &rarr; <b>'+(emTeste()?'CoPIA DE TESTE':'MANUAL REAL (lancamento)')+'</b> &middot; '+ghRepo()+'</div>'+
+var nav='<div class="row" style="gap:6px;margin-bottom:12px;align-items:center">'+tabs.map(function(t){return '<button class="'+(VIEW===t[0]?'btn-p':'btn-o')+'" onclick="irPara(\''+t[0]+'\')">'+t[1]+'</button>';}).join('')+'<span style="flex:1"></span><button class="btn-o" onclick="loadEmendas()">Ver emendas</button></div>';
+var actions=(can('publish')?'<div class="row" style="margin-bottom:10px;align-items:center"><button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button><span style="flex:1"></span><button class="btn-o" onclick="toggleDef()" title="Definições de publicação" style="opacity:.45;font-size:16px;padding:4px 9px">⚙</button></div><div id="defBox" style="display:none;margin-bottom:10px;border:1px solid var(--linha);border-radius:8px;padding:10px;background:#fafafa"><div class="mut" style="font-size:12px;margin-bottom:6px">Definições (só publicadores). O destino (teste/real) é automático conforme o endereço deste gestor. A mesma chave serve os dois repositórios.</div><button class="btn-o" onclick="configGitHub()">⚙ Ligação de publicação</button></div>':'');
+c.innerHTML='<div class="card"><h1 style="margin:0 0 14px;font-size:19px;color:var(--azul2);text-align:center">Administração — Gestor de Conteúdos</h1>'+
 nav+actions+'<div id="viewbox">A carregar…</div></div>';
 if(VIEW==='sindromes') viewSindromes();
 else if(VIEW==='seccoes') viewSeccoes();
 else viewDoencas();
 }
+function toggleDef(){ var d=document.getElementById('defBox'); if(d) d.style.display=(d.style.display==='none'||!d.style.display)?'block':'none'; }
 function viewDoencas(){
 var vb=document.getElementById('viewbox');
-vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Doenças</b>'+(can('edit')?'<button class="btn-p" onclick="novaDoenca()">+ Nova doença</button>':'')+'</div><div id="novaBox"></div><div id="lista">A carregar…</div>';
+vb.innerHTML='<div style="text-align:center;font-weight:700;font-size:16px;margin:0 0 8px">Doenças</div>'+(can('edit')?'<div style="text-align:center;margin:0 0 12px"><button class="btn-p" onclick="novaDoenca()">+ Nova doença</button></div>':'')+'<div id="novaBox"></div><div id="lista">A carregar…</div>';
 sb.from('doencas').select('id,nome,slug,estado,versao,sindrome_id').order('nome').then(function(r){
 if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
 var rows=r.data.map(function(d){
@@ -195,7 +194,7 @@ toast('Doença criada — preencha os campos'); editDoe(r.data.id);
 }
 function viewSindromes(){
 var vb=document.getElementById('viewbox');
-vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Síndromes</b>'+(can('edit')?'<button class="btn-p" onclick="novaSindrome()">+ Nova síndrome</button>':'')+'</div><div id="lista">A carregar…</div>';
+vb.innerHTML='<div style="text-align:center;font-weight:700;font-size:16px;margin:0 0 8px">Síndromes</div>'+(can('edit')?'<div style="text-align:center;margin:0 0 12px"><button class="btn-p" onclick="novaSindrome()">+ Nova síndrome</button></div>':'')+'<div id="lista">A carregar…</div>';
 sb.from('sindromes').select('*').order('ordem').then(function(r){
 if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
 var rows=(r.data||[]).map(function(s){
@@ -224,7 +223,7 @@ if(res.error){toast('Erro: '+res.error.message);return;} toast('Actualizado'); r
 }
 function viewSeccoes(){
 var vb=document.getElementById('viewbox');
-vb.innerHTML='<div class="row" style="margin-bottom:8px"><b style="flex:1">Secções</b>'+(can('edit')?'<button class="btn-p" onclick="novaSeccao()">+ Nova secção</button>':'')+'</div><div id="lista">A carregar…</div>';
+vb.innerHTML='<div style="text-align:center;font-weight:700;font-size:16px;margin:0 0 8px">Secções</div>'+(can('edit')?'<div style="text-align:center;margin:0 0 12px"><button class="btn-p" onclick="novaSeccao()">+ Nova secção</button></div>':'')+'<div id="lista">A carregar…</div>';
 sb.from('seccoes').select('*').order('ordem').then(function(r){
 if(r.error){document.getElementById('lista').innerHTML='<div class="hint">Erro: '+esc(r.error.message)+'</div>';return;}
 var rows=(r.data||[]).map(function(s){
@@ -253,23 +252,28 @@ document.getElementById('content').innerHTML=
 '<div class="field"><label>Título</label><input id="scTitulo" value="'+esc(s.titulo)+'" '+(can('edit')?'':'readonly')+'></div>'+
 '<div class="field"><label>Ordem</label><input id="scOrdem" type="number" value="'+(s.ordem!=null?s.ordem:'')+'" '+(can('edit')?'':'readonly')+'></div>'+
 '<div class="field"><label>Conteúdo</label><textarea id="scConteudo" rows="12" '+(can('edit')?'':'readonly')+'>'+esc(s.conteudo||'')+'</textarea></div>'+
-'<div class="row" style="border-top:1px solid var(--linha);padding-top:12px">'+
+'<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;flex-wrap:wrap;gap:6px;align-items:center">'+
 (can('edit')?'<button class="btn-o" onclick="saveSeccao(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveSeccao(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
-(can('review')?'<button class="btn-g" onclick="setEstadoSeccao(\''+id+'\',\'aprovado\')">✔ Aprovar</button>':'')+
-(can('publish')?'<button class="btn-p" onclick="setEstadoSeccao(\''+id+'\',\'publicado\')">↥ Publicar</button>':'')+
+(can('review')?((s.estado||'rascunho')==='revisao'?'<button class="btn-g" onclick="setEstadoSeccao(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstadoSeccao(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'<span class="mut" style="font-size:12px;margin-left:8px">Revisão: aguarda submissão</span>'):'')+
+(can('publish')?((s.estado||'rascunho')==='aprovado'?'<button class="btn-p" onclick="setEstadoSeccao(\''+id+'\',\'publicado\')">↥ Publicar</button>':'<span class="mut" style="font-size:12px;margin-left:8px">Publicação: aguarda aprovação</span>'):'')+
 '</div></div>';
 });
 }
 function saveSeccao(id,submit){
 var patch={titulo:document.getElementById('scTitulo').value.trim(), ordem:parseInt(document.getElementById('scOrdem').value)||null, conteudo:document.getElementById('scConteudo').value};
-if(submit) patch.estado='revisao';
+sb.from('seccoes').select('estado').eq('id',id).single().then(function(r){
+if(submit) patch.estado='revisao'; else if(r.data.estado==='publicado'||r.data.estado==='aprovado') patch.estado='rascunho';
 sb.from('seccoes').update(patch).eq('id',id).then(function(res){
 if(res.error){toast('Erro: '+res.error.message);return;} toast('Guardado'+(submit?' e submetido':'')); editSeccao(id);
 });
+});
 }
 function setEstadoSeccao(id,estado){
+sb.from('seccoes').select('estado').eq('id',id).single().then(function(r){
+if(!_podeIr(r.data.estado,estado)){ toast('Sequência obrigatória: rascunho → revisão → aprovado → publicado. Não pode saltar de "'+r.data.estado+'" para "'+estado+'".'); return; }
 sb.from('seccoes').update({estado:estado}).eq('id',id).then(function(res){
 if(res.error){toast('Erro: '+res.error.message);return;} toast('Estado: '+estado); editSeccao(id);
+});
 });
 }
 var CURRENT_IMGS=[];
@@ -318,10 +322,10 @@ document.getElementById('content').innerHTML=
 '<h1 style="flex:1;margin:0;font-size:18px">'+esc(d.nome)+'</h1>'+badge(d.estado)+' <span class="mut">v'+d.versao+'</span></div></div>'+
 '<div class="card">'+
 '<div class="field"><label>Nome</label><input id="f_nome" value="'+esc(d.nome)+'" '+(can('edit')?'':'readonly')+'></div>'+f+imgHTML()+
-'<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;margin-top:6px">'+
+'<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;margin-top:6px;flex-wrap:wrap;gap:6px;align-items:center">'+
 (can('edit')?'<button class="btn-o" onclick="saveDoe(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveDoe(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
-(can('review')?'<button class="btn-g" onclick="setEstado(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstado(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'')+
-(can('publish')?'<button class="btn-p" onclick="setEstado(\''+id+'\',\'publicado\')">↥ Publicar</button>':'')+
+(can('review')?(d.estado==='revisao'?'<button class="btn-g" onclick="setEstado(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstado(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'<span class="mut" style="font-size:12px;margin-left:8px">Revisão: aguarda submissão</span>'):'')+
+(can('publish')?(d.estado==='aprovado'?'<button class="btn-p" onclick="setEstado(\''+id+'\',\'publicado\')">↥ Publicar</button>':'<span class="mut" style="font-size:12px;margin-left:8px">Publicação: aguarda aprovação</span>'):'')+
 '</div></div>';
 });
 }
@@ -333,7 +337,7 @@ patch.imagens=CURRENT_IMGS;
 sb.from('doencas').select('versao,estado').eq('id',id).single().then(function(r){
 patch.versao=bump(r.data.versao);
 if(submit) patch.estado='revisao';
-else if(r.data.estado==='publicado') patch.estado='rascunho';
+else if(r.data.estado==='publicado'||r.data.estado==='aprovado') patch.estado='rascunho';
 sb.from('doencas').update(patch).eq('id',id).then(function(res){
 if(res.error){toast('Erro: '+res.error.message);return;}
 toast('Guardado — v'+patch.versao+(submit?' e submetido':''));
@@ -341,10 +345,14 @@ editDoe(id);
 });
 });
 }
+function _podeIr(de,para){ if(para==='rascunho')return true; if(para==='revisao')return de==='rascunho'; if(para==='aprovado')return de==='revisao'; if(para==='publicado')return de==='aprovado'; return false; }
 function setEstado(id,estado){
+sb.from('doencas').select('estado').eq('id',id).single().then(function(r){
+if(!_podeIr(r.data.estado,estado)){ toast('Sequência obrigatória: rascunho → revisão → aprovado → publicado. Não pode saltar de "'+r.data.estado+'" para "'+estado+'".'); return; }
 sb.from('doencas').update({estado:estado,atualizado_por:USER.id}).eq('id',id).then(function(res){
 if(res.error){toast('Erro: '+res.error.message);return;}
 toast('Estado: '+estado); editDoe(id);
+});
 });
 }
 function loadEmendas(){
@@ -353,7 +361,7 @@ var rows=(r.data||[]).map(function(e){
 return '<tr><td class="mut">'+(e.data||'').slice(0,10)+'</td><td><b>'+esc(e.alvo_nome||'')+'</b></td><td>v'+(e.versao||'')+'</td><td class="mut">'+esc(e.autor||'')+'</td><td class="mut">'+esc(e.descricao||'')+'</td></tr>';
 }).join('');
 document.getElementById('content').innerHTML='<div class="card"><div class="row"><button class="btn-o" onclick="render()">← Voltar</button><b style="flex:1">Emendas / Versões</b></div>'+
-(rows?'<table><thead><tr><th>Data</th><th>Conteúdo</th><th>Versão</th><th>Autor</th><th>Descrição</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="mut" style="padding:14px">Sem emendas ainda.</div>')+'</div>';
+(rows?'<div style="overflow-x:auto"><table><thead><tr><th>Data</th><th>Conteúdo</th><th>Versão</th><th>Autor</th><th>Descrição</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="mut" style="padding:14px">Sem emendas ainda.</div>')+'</div>';
 });
 }
 function txtToBlocks(t){
@@ -395,7 +403,7 @@ function sincCasos(o){
   });
 }
 function publicarSite(){
-if(!emTeste()){ if(!confirm('ATENCAO: vais publicar no MANUAL REAL do lancamento ('+ghRepo()+').\n\nTens a certeza? (Para testar, liga primeiro o Modo de teste.)')) return; }
+if(!emTeste()){ if(!confirm('ATENCAO: vais publicar no MANUAL REAL, visivel ao publico ('+ghRepo()+').\n\nSo as fichas APROVADAS e depois PUBLICADAS serao geradas. Confirmas?')) return; }
 toast('A gerar o manual a partir da base de dados...');
 Promise.all([
 sb.from('sindromes').select('*').order('ordem'),
@@ -492,7 +500,7 @@ try{ return new Function('return (function(){'+txt+'; return {DISEASES:typeof DI
 catch(e){ return {DISEASES:null,ICONS:null,COVER:null}; }
 }
 var GH_LIVE='INSMISAU/manual-surtos', GH_TEST='INSMISAU/manual-surtos-teste', GH_BRANCH='main';
-function ghRepo(){ try{return localStorage.getItem('ins_gh_repo')||GH_LIVE;}catch(e){return GH_LIVE;} }
+function ghRepo(){ try{ var p=(location.pathname||'').toLowerCase(); if(p.indexOf('/manual-surtos-teste')>=0) return GH_TEST; if(p.indexOf('/manual-surtos')>=0) return GH_LIVE; }catch(e){} return GH_TEST; }
 function emTeste(){ return ghRepo()===GH_TEST; }
 function alternarTeste(){ try{ if(emTeste()){ localStorage.removeItem('ins_gh_repo'); toast('MODO REAL: as publicacoes vao para o manual do lancamento.'); } else { localStorage.setItem('ins_gh_repo', GH_TEST); toast('MODO DE TESTE: as publicacoes vao para a copia de teste ('+GH_TEST+'). O manual real fica intacto.'); } if(typeof render==='function') render(); }catch(e){} }
 function ghToken(){ try{return localStorage.getItem('ins_gh_token')||'';}catch(e){return '';} }

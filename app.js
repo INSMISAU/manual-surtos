@@ -34,7 +34,7 @@ function deaccent(s){return (s||'').toLowerCase()
 function boldLabel(t){
   let html;
   const m=t.match(/^([^:]{2,80}):\s+(.+)$/);
-  if(m) html='<b>'+esc(m[1])+':</b> '+esc(m[2]);
+  if(m) html='<b>'+esc(m[1])+'</b><br>'+esc(m[2]);
   else html=esc(t);
   return html.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>'); /* negrito inline **...** */
 }
@@ -115,7 +115,7 @@ function header(o){
 }
 function tabbar(active){
   const tabs=[['index.html','home','Início'],['explorar-seccao.html','map','Explorar'],
-    ['emendas.html','doc','Emendas'],['glossario.html','book','Glossário'],['perfil.html','user','Perfil']];
+    ['glossario.html','book','Glossário'],['perfil.html','user','Perfil']];
   return '<nav class="tabbar">'+tabs.map(t=>
     '<a class="tab '+(active===t[1]?'active':'')+'" href="'+t[0]+'">'+I[t[1]]+'<span>'+t[2]+'</span></a>').join('')+'</nav>';
 }
@@ -158,7 +158,8 @@ function pageHome(){
       '<div class="scrim"></div><div class="ct"><h3>Atualização<br>do Protocolo<br>de Cólera</h3><span class="tag">Emenda</span></div></a>'+
     '<p class="hero-meta">Veja as últimas V1.0 — Atualização do Protocolo de Cólera<br>Publicado em: 20/05/2026 · Secção 4</p>'+
     '<button class="pill carmine" onclick="location.href=\'doenca.html?slug=colera\'">'+I.download+' Baixar PDF</button>'+
-    '<div class="recent">Os seus registos de leitura recente aparecerão aqui</div>';
+    '<div class="recent">Os seus registos de leitura recente aparecerão aqui</div>'+
+    '<p class="disclaimer" style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px">Este manual digital não substitui o manual oficial do INS · MISAU.</p>';
   mount({crumb:'Estrutura de Exploração do Manual',title:'Estrutura de<br><span class="thin">Exploração do Manual</span>',search:true},body,'home');
 }
 function SECT_TITLE(id){
@@ -176,13 +177,13 @@ function pageExplorarSeccao(){
     6:'Considerações éticas na investigação de surtos.'};
   const body=[1,2,3,4,5,6].map(id=>{
     const href=id===4?'explorar-sindrome.html':('seccao.html?id='+id);
-    return '<div class="sec-card"><h3>SECÇÃO '+id+': '+esc(SECT_TITLE(id))+'</h3>'+
+    return '<div class="sec-card"><h3>SECÇÃO '+id+' — '+esc(SECT_TITLE(id))+'</h3>'+
       '<p>'+esc(secInfo[id])+'</p>'+
       '<button class="pill" onclick="location.href=\''+href+'\'">Saiba Mais '+I.arrow+'</button></div>';
   }).join('');
   mount({crumb:'Explorar',title:'Explorar<br><span class="thin">por Secção</span>'},body,'map');
 }
-function figHtml(f){return '<figure class="fig"><img src="'+f.file+'" alt="'+esc(f.caption)+'" loading="lazy">'+
+function figHtml(f){return '<figure class="fig"><img src="'+f.file+'" alt="" loading="lazy">'+
   '<figcaption><b>Figura '+f.num+'.</b> '+esc(f.caption.replace(/^Figura\s+\d+\.\s*/,''))+'</figcaption></figure>';}
 function renderSectionContent(sec){ return renderBody((sec.blocks||[]),(sec.figures||[])); }
 function coverBlock(){
@@ -219,17 +220,14 @@ function pageSeccao(){
   const id=+param('id');
   const s=(M.sections||[]).find(s=>s.id===id);
   if(!s){mount({back:true,title:'Secção'},'<div class="card">Secção não encontrada.</div>','map');return;}
-  const body='<div class="note">Texto reproduzido <b>integralmente</b> do Manual Nacional (pendente de validação do INS).</div>'+
-    '<details class="acc" open><summary><span class="dot"></span>'+esc(s.title)+'<span class="chev">'+I.chev+'</span></summary>'+
-    '<div class="inner content">'+renderSectionContent(s)+'</div></details>'+seccaoPager(id);
+  const body='<div class="content">'+renderSectionContent(s)+'</div>'+seccaoPager(id);
   mount({back:true,crumb:'Secção '+id,title:'SECÇÃO '+id+'<br><span class="thin">'+esc(s.title)+'</span>',search:false},body,'map');
 }
 function pageExplorarSindrome(){
   const cards=(M.groups||[]).map(g=>
     '<div class="syn" onclick="location.href=\'sindrome.html?id='+g.id+'\'"><div class="ico">'+groupIcon(g.icon)+'</div><div class="nm">'+esc(g.name)+'</div></div>').join('');
   const si=(M.meta&&M.meta.sindromesIntro)||[];
-  const intro=si.length?('<details class="acc" open style="margin-bottom:14px"><summary><span class="dot"></span>Porquê agrupar por síndrome<span class="chev">'+I.chev+'</span></summary>'+
-    '<div class="inner content">'+si.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></details>'):'';
+  const intro='';
   const t1=(M.meta&&M.meta.tabela1)||null;
   const tabela=t1?('<details class="acc" style="margin:14px 0 0"><summary><span class="dot"></span>'+esc(t1.titulo)+'<span class="chev">'+I.chev+'</span></summary>'+
     '<div class="inner content"><div style="overflow-x:auto"><table class="t1"><thead><tr>'+
@@ -252,12 +250,10 @@ function pageSindrome(){
   const rows=ds.map(d=>'<a class="abc-row" href="doenca.html?slug='+d.slug+'"><span class="ltr">'+esc(d.letter)+'</span>'+esc(d.name)+'<span style="float:right;color:var(--petrol)">'+I.arrow+'</span></a>').join('')
     || '<div class="abc-row dim">Sem fichas nesta categoria.</div>';
   const intro=(g.intro&&g.intro.length)
-    ? '<details class="acc" open><summary><span class="dot"></span>Introdução<span class="chev">'+I.chev+'</span></summary>'+
-      '<div class="inner content">'+g.intro.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></details>'
+    ? '<div class="content">'+g.intro.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div>'
     : '';
   const hero=g.img?('<figure class="synhero"><img src="'+g.img+'" alt="'+esc(g.imgAlt||g.name)+'" loading="lazy">'+(g.imgAlt?'<figcaption>'+esc(g.imgAlt)+'</figcaption>':'')+'</figure>'):'';
-  const obs=g.obs?('<details class="acc"><summary><span class="dot"></span>Observações do manual<span class="chev">'+I.chev+'</span></summary>'+
-    '<div class="inner content"><p>'+esc(g.obs)+'</p></div></details>'):'';
+  const obs='';
   const body=hero+intro+obs+'<div class="lead">'+ds.length+' condição(ões) nesta síndrome</div><div class="abc-list">'+rows+'</div>'+sindromePager(id);
   mount({back:true,crumb:'Síndrome',title:esc(g.name),search:false},body,'map');
 }
@@ -277,7 +273,7 @@ function pageDoenca(){
   const accs=(d.fields||[]).map((f,i)=>'<details class="acc" '+(i===0?'open':'')+'>'+
     '<summary><span class="dot"></span>'+esc(f.label)+'<span class="chev">'+I.chev+'</span></summary>'+
     '<div class="inner content">'+renderBlocks(f.blocks)+'</div></details>').join('');
-  const body='<div class="note">Ficha reproduzida <b>integralmente</b> do Manual Nacional (pendente de validação do INS).</div>'+accs;
+  const body=accs;
   mount({back:true,crumb:'Síndrome · '+d.letter,title:esc(d.name),search:false},body,'map');
 }
 function pageGlossario(){
@@ -286,7 +282,7 @@ function pageGlossario(){
   const cBody=concepts.map(c=>'<h4>'+esc(c[0])+':</h4><p>'+esc(c[1])+'</p>').join('');
   const abBody=ab.map(a=>'<div class="abbr"><span class="k">'+esc(a.abbr)+'</span><span class="v">'+esc(a.meaning)+'</span></div>').join('');
   const gi=(M.glossary&&M.glossary.intro)?'<p style="margin:0 0 12px">'+esc(M.glossary.intro)+'</p>':'';
-  const body=(gi?'<div class="note">'+esc(M.glossary.intro)+'</div>':'')+
+  const body=(gi?'<p style="font-size:13px;color:#5a6b73;margin:6px 0 12px">'+esc(M.glossary.intro)+'</p>':'')+
     '<details class="acc" open><summary><span class="dot"></span>Principais conceitos epidemiológicos<span class="chev">'+I.chev+'</span></summary>'+
     '<div class="inner content">'+cBody+'</div></details>'+
     '<h2 class="sec-h">Abreviaturas ('+ab.length+')</h2><div class="card" style="padding:6px 16px">'+abBody+'</div>';
@@ -305,7 +301,7 @@ function pageEmendas(){
     '<div class="ver-item"><div class="vn">V1.0</div><div class="vd">20 Maio 2026</div>'+
     '<div class="chg"><b>Adicionado:</b> Digitalização integral do Manual Nacional (6 secções, 37 fichas de doença).</div>'+
     '<div class="chg"><b>Pendente:</b> Validação clínica e do design pelo INS.</div></div>'+
-    '<div class="note">As emendas e o histórico de versões serão geridos pelo INS após a publicação oficial.</div>';
+    '';
   mount({crumb:'Emendas',title:'Histórico<br><span class="thin">de Versões</span>',search:false},body,'doc');
 }
 function pageSearch(){
@@ -334,7 +330,7 @@ function pageSearch(){
     });
     (M.sections||[]).forEach(s=>{
       const full='Secção '+s.id+' '+s.title+' '+s.blocks.map(b=>b.text).join(' ');
-      if(matches(full)) results.push({t:'SECÇÃO '+s.id+': '+s.title,s:'Secção',href:'seccao.html?id='+s.id,snip:snippet(full)});
+      if(matches(full)) results.push({t:'SECÇÃO '+s.id+' — '+s.title,s:'Secção',href:'seccao.html?id='+s.id,snip:snippet(full)});
     });
     ((M.glossary&&M.glossary.abbreviations)||[]).forEach(a=>{
       if(matches(a.abbr+' '+a.meaning)) results.push({t:a.abbr+' — '+a.meaning,s:'Abreviatura',href:'glossario.html',snip:''});
@@ -366,7 +362,7 @@ function pagePerfil(){
     '<div class="card content"><h4 style="margin-top:2px">Sobre</h4>'+
     '<p>Digitalização do Manual Nacional para Detecção e Investigação de Surtos, do Instituto Nacional de Saúde (INS) / Ministério da Saúde (MISAU).</p>'+
     '<p>Protótipo para validação de design e estrutura. Conteúdo clínico pendente de validação do INS.</p></div>'+
-    '<div class="note">Este é o e-book (manual digital), destinado à consulta. O registo de utilizadores e a certificação aplicam-se à componente formativa, não ao e-book.</div>';
+    '';
   mount({crumb:'Perfil',title:'Perfil',search:false},body,'user');
 }
 const PAGES={home:pageHome,'explorar-seccao':pageExplorarSeccao,seccao:pageSeccao,

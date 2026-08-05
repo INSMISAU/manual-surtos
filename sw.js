@@ -1,7 +1,7 @@
 /* Service Worker — Manual de Surtos INS
    Mostra SEMPRE a versao mais recente com internet (acaba com os "varios refreshes")
    e funciona offline. Sobe CACHE_VERSION quando publicares (v5 -> v6). */
-const CACHE_VERSION = "surtos-v55";
+const CACHE_VERSION = "surtos-v57";
 
 const CORE = [
   "./","./index.html","./doenca.html","./seccao.html","./sindrome.html",
@@ -10,7 +10,7 @@ const CORE = [
   "./content.js","./ddata.js","./cms_data.js","./fiche-assets.js","./app.js",
   "./assets/js/content.js","./assets/js/app.js","./assets/css/style.css",
   "./assets/ilustracoes/conjuntivite-caso.jpg",
-  "./assets/icones/agregado-familiar.svg","./assets/icones/gravidez.svg","./assets/icones/populacoes.svg","./assets/icones/profissionais-saude.svg","./assets/icones/roedores.svg","./assets/ilustracoes/crimeia-congo-caso.jpg","./assets/ilustracoes/mpox-caso.jpg","./assets/ilustracoes/mpox-laboratorio.jpg","./assets/ilustracoes/parotidite-laboratorio.jpg","./assets/ilustracoes/peste-caso.jpg","./assets/ilustracoes/rubeola-transmissao.jpg","./assets/ilustracoes/sarampo-laboratorio.jpg","./assets/ilustracoes/sarampo-transmissao.jpg","./assets/ilustracoes/sindrome-respiratorias.jpg","./assets/ilustracoes/varicela-laboratorio.jpg"
+  "./assets/icones/agregado-familiar.svg","./assets/icones/gravidez.svg","./assets/icones/populacoes.svg","./assets/icones/profissionais-saude.svg","./assets/icones/roedores.svg","./assets/ilustracoes/crimeia-congo-caso.jpg","./assets/ilustracoes/mpox-caso.jpg","./assets/ilustracoes/mpox-laboratorio.jpg","./assets/ilustracoes/parotidite-laboratorio.jpg","./assets/ilustracoes/peste-caso.jpg","./assets/ilustracoes/rubeola-transmissao.jpg","./assets/ilustracoes/sarampo-laboratorio.jpg","./assets/ilustracoes/sarampo-transmissao.jpg","./assets/ilustracoes/sindrome-respiratorias.jpg","./assets/ilustracoes/varicela-laboratorio.jpg","./assets/ilustracoes/rubeola-caso.jpg","./assets/ilustracoes/vsr-caso.jpg","./assets/ilustracoes/sarampo-caso.jpg","./assets/ilustracoes/varicela-caso.jpg","./assets/ilustracoes/parotidite-caso.jpg","./assets/ilustracoes/mers-ilustracao.jpg","./assets/ilustracoes/zika-vetor.jpg","./assets/ilustracoes/poliomielite-caso.jpg","./assets/ilustracoes/colera-contexto.jpg","./assets/ilustracoes/leptospirose-vetor.jpg","./assets/ilustracoes/dermatite-serpiginosa-caso.jpg"
 ];
 const STATIC_RX = /\.(css|png|jpg|jpeg|gif|svg|webp|ico|woff2?|ttf|otf|pdf)$/i;
 const DATA_RX = /(content|ddata|cms_data|fiche-assets|app)\.js$/i;

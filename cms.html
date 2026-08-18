@@ -128,12 +128,17 @@ USER=user;
 if(precisaTrocar()){ show('trocar'); return; }
 carregarPerfil();
 }
+var SYS=null; /* definicoes de publicacao (token/repo/branch), lidas do Supabase */
 function carregarPerfil(){
 sb.from('perfis').select('*').eq('id',USER.id).single().then(function(r){
 PERFIL=r.data||{nome:USER.email,papel:'visitante'};
 document.getElementById('whoName').textContent=PERFIL.nome||USER.email;
 document.getElementById('whoRole').textContent=PERFIL.papel;
-show('app'); render();
+/* A': buscar o token/repo/branch da tabela system_settings. So publicador/admin
+   conseguem ler (RLS). O token e usado para publicar mas NUNCA e mostrado. */
+if(['publicador','admin'].indexOf(PERFIL.papel)>=0){
+sb.from('system_settings').select('github_token,github_repo,github_test_repo,github_branch').eq('id',1).single().then(function(s){ SYS=(s&&s.data)||null; show('app'); render(); });
+} else { show('app'); render(); }
 });
 }
 function isStaff(){ return PERFIL && ['editor','revisor','publicador','admin'].indexOf(PERFIL.papel)>=0; }
@@ -153,7 +158,9 @@ return;
 }
 var tabs=[['doencas','Doenças'],['sindromes','Síndromes'],['seccoes','Secções']];
 var nav='<div class="row" style="gap:6px;margin-bottom:12px;align-items:center">'+tabs.map(function(t){return '<button class="'+(VIEW===t[0]?'btn-p':'btn-o')+'" onclick="irPara(\''+t[0]+'\')">'+t[1]+'</button>';}).join('')+'<span style="flex:1"></span><button class="btn-o" onclick="loadEmendas()">Ver emendas</button></div>';
-var actions=(can('publish')?'<div class="row" style="margin-bottom:10px;align-items:center"><button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button><span style="flex:1"></span><button class="btn-o" onclick="toggleDef()" title="Definições de publicação" style="opacity:.45;font-size:16px;padding:4px 9px">⚙</button></div><div id="defBox" style="display:none;margin-bottom:10px;border:1px solid var(--linha);border-radius:8px;padding:10px;background:#fafafa"><div class="mut" style="font-size:12px;margin-bottom:6px">Definições (só publicadores). O destino (teste/real) é automático conforme o endereço deste gestor. A mesma chave serve os dois repositórios.</div><button class="btn-o" onclick="configGitHub()">⚙ Ligação de publicação</button></div>':'');
+/* Publicacao (solucao A'): o token vem de system_settings (Supabase, via RLS) e o
+   commit e feito directamente. O utilizador autorizado so ve "Publicar". */
+var actions=(can('publish')?'<div class="row" style="margin-bottom:10px;align-items:center"><button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button></div>':'');
 c.innerHTML='<div class="card"><h1 style="margin:0 0 14px;font-size:19px;color:var(--azul2);text-align:center">Administração — Gestor de Conteúdos</h1>'+
 nav+actions+'<div id="viewbox">A carregar…</div></div>';
 if(VIEW==='sindromes') viewSindromes();
@@ -438,7 +445,26 @@ var contentJs;
 var baseMAN=parseManual(contentTxt);
 if(baseMAN && baseMAN.diseases && baseMAN.diseases.length){
 var doeBy={}; doe.forEach(function(d){ doeBy[d.slug]=d; });
-baseMAN.diseases.forEach(function(dis){ var d=doeBy[dis.slug]; if(!d) return; dis.fields=LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};}); });
+/* REGRA UNICA: tudo o que e editavel no CMS reflecte-se no manual; o que nao e
+   editavel (prefacio, figuras do manual, glossario, texto integral) fica do base. */
+/* Doencas: nome, letra, imagens e campos de conteudo. */
+baseMAN.diseases.forEach(function(dis){ var d=doeBy[dis.slug]; if(!d) return; if(d.nome) dis.name=d.nome; if(d.letra) dis.letter=d.letra; if(Array.isArray(d.imagens)) dis.images=d.imagens; dis.fields=LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};}); });
+/* Seccoes: titulo, conteudo e ORDEM da BD (figuras do base preservadas). */
+var secByOrd={}; sec.forEach(function(s){ secByOrd[s.ordem]=s; });
+(baseMAN.sections||[]).forEach(function(sc){ var s=secByOrd[sc.id]; if(!s) return; if(s.titulo) sc.title=s.titulo; if(s.conteudo && (''+s.conteudo).trim()) sc.blocks=txtToBlocks(s.conteudo); });
+if(baseMAN.sections){ baseMAN.sections.sort(function(a,b){ var oa=secByOrd[a.id]?secByOrd[a.id].ordem:a.id, ob=secByOrd[b.id]?secByOrd[b.id].ordem:b.id; return (oa||0)-(ob||0); }); }
+/* Sindromes/estrutura: nome, ORDEM e PERTENCA das doencas a partir da BD.
+   Conteudo rico de cada doenca preservado do base (so se reordena/renomeia). */
+if(sind && sind.length){
+var slugsBase={}; (baseMAN.diseases||[]).forEach(function(dis){ slugsBase[dis.slug]=true; });
+var iconByName={}; (baseMAN.groups||[]).forEach(function(g){ iconByName[g.name]=g.icon; });
+baseMAN.groups=sind.slice().sort(function(a,b){return (a.ordem||0)-(b.ordem||0);}).map(function(s,i){
+var membros=doe.filter(function(d){return d.sindrome_id===s.id && slugsBase[d.slug];}).map(function(d){return d.slug;});
+return { id:i+1, name:s.nome, icon:iconByName[s.nome]||'sindrome', diseases:membros };
+});
+var gidBySlug={}; baseMAN.groups.forEach(function(g){ g.diseases.forEach(function(sl){ gidBySlug[sl]=g.id; }); });
+(baseMAN.diseases||[]).forEach(function(dis){ if(gidBySlug[dis.slug]) dis.group=gidBySlug[dis.slug]; });
+}
 contentJs='window.MANUAL='+JSON.stringify(baseMAN)+';\n';
 } else {
 /* O content.js veio mas nao se conseguiu ler. Antes publicava-se um manual minimo
@@ -457,8 +483,11 @@ var MAP={ 'Pontos-chave':'pontos_chave','Definicao de caso':'definicao_caso','De
 'Grupos de risco':'grupos_risco','Protocolo de investigacao':'protocolo_investigacao','Protocolo de investigação':'protocolo_investigacao',
 'Colheita e manuseio de amostras para o diagnóstico laboratorial':'colheita_manuseio_amostras','Colheita e manuseio de amostras para o diagnóstico laboratorial':'colheita_manuseio_amostras' };
 var cms={}; doe.forEach(function(d){ cms[d.slug]=d; });
+var _sinName={}; sind.forEach(function(s){ _sinName[s.id]=s.nome; });
 Object.keys(base).forEach(function(slug){
 var d=cms[slug]; if(!d) return;
+if(d.nome) base[slug].name=d.nome; if(d.letra) base[slug].letter=d.letra;
+if(d.sindrome_id && _sinName[d.sindrome_id]) base[slug].grp=_sinName[d.sindrome_id];
 if(d.pontos_chave){ base[slug].keys=(''+d.pontos_chave).split('\n').map(function(s){return s.trim().replace(/^[•\-]\s+/,'');}).filter(Boolean); }
 (base[slug].secfull||[]).forEach(function(secf){
 var key=MAP[secf.t];
@@ -490,38 +519,29 @@ return;
 publicarFicheiros(files, diseases.length, geradoDdata);
 }).catch(function(e){ toast('Erro: '+e.message); });
 }
-function baixar(nome, conteudo){
-var b=new Blob([conteudo],{type:'application/javascript'}); var u=URL.createObjectURL(b);
-var a=document.createElement('a'); a.href=u; a.download=nome; a.click(); URL.revokeObjectURL(u);
-}
 function parseManual(txt){ try{ return new Function('window', txt+'; return window.MANUAL;')({}); }catch(e){ return null; } }
 function parseDdataAll(txt){
 try{ return new Function('return (function(){'+txt+'; return {DISEASES:typeof DISEASES!=="undefined"?DISEASES:null, ICONS:typeof ICONS!=="undefined"?ICONS:null, COVER:typeof COVER!=="undefined"?COVER:null};})()')(); }
 catch(e){ return {DISEASES:null,ICONS:null,COVER:null}; }
 }
 var GH_LIVE='INSMISAU/manual-surtos', GH_TEST='INSMISAU/manual-surtos-teste', GH_BRANCH='main';
-function ghRepo(){ try{ var p=(location.pathname||'').toLowerCase(); if(p.indexOf('/manual-surtos-teste')>=0) return GH_TEST; if(p.indexOf('/manual-surtos')>=0) return GH_LIVE; }catch(e){} return GH_TEST; }
+function ghRepo(){ var live=(SYS&&SYS.github_repo)||GH_LIVE, test=(SYS&&SYS.github_test_repo)||GH_TEST; try{ var p=(location.pathname||'').toLowerCase(); if(p.indexOf('/manual-surtos-teste')>=0) return test; if(p.indexOf('/manual-surtos')>=0) return live; }catch(e){} return test; }
 function emTeste(){ return ghRepo()===GH_TEST; }
-function alternarTeste(){ try{ if(emTeste()){ localStorage.removeItem('ins_gh_repo'); toast('MODO REAL: as publicacoes vao para o manual do lancamento.'); } else { localStorage.setItem('ins_gh_repo', GH_TEST); toast('MODO DE TESTE: as publicacoes vao para a copia de teste ('+GH_TEST+'). O manual real fica intacto.'); } if(typeof render==='function') render(); }catch(e){} }
-function ghToken(){ try{return localStorage.getItem('ins_gh_token')||'';}catch(e){return '';} }
-function configGitHub(){
-var t=prompt('Chave de publicacao do GitHub (token fine-grained, permissao Contents: write no repositorio '+ghRepo()+'). Fica guardada APENAS neste navegador, nunca no codigo. Deixe vazio para remover.', ghToken());
-if(t===null) return;
-try{ if(t.trim()){ localStorage.setItem('ins_gh_token', t.trim()); toast('Publicacao automatica configurada neste navegador.'); } else { localStorage.removeItem('ins_gh_token'); toast('Chave removida.'); } }catch(e){ toast('Nao foi possivel guardar.'); }
-}
+/* A': o token vem do Supabase (system_settings, via RLS). Nunca no localStorage, nunca mostrado. */
+function ghToken(){ return (SYS&&SYS.github_token)||''; }
 function publicarFicheiros(files, nDoencas, comDdata){
-if(ghToken()){
-toast('A publicar no site (GitHub)...');
+if(!ghToken()){ toast('Publicação indisponível — contacte o Administrador.'); return; }
+toast('A publicar…');
 commitToGitHub(files, 'Publicar manual via CMS ('+nDoencas+' doencas)').then(function(){
-toast('Publicado! O site actualiza em 1-2 min. ('+nDoencas+' doencas'+(comDdata?' + fichas':'')+')');
+publicadoOk(nDoencas, comDdata);
 }).catch(function(e){
-alert('FALHA AO PUBLICAR NO GITHUB:\n\n'+e.message+'\n\n(Como alternativa, vou descarregar os ficheiros. Nada foi publicado.)');
-files.forEach(function(f){ baixar(f.path.split('/').pop(), f.content); });
+var m=(e&&e.message)||'';
+var amig=m;
+if(/409|422|fast forward|conflict/i.test(m)) amig='Outra publicação ocorreu ao mesmo tempo. Aguarde alguns segundos e tente novamente.';
+else if(/403|protected|pull request/i.test(m)) amig='O repositório não permitiu o commit directo (verifique as permissões do token e a protecção da branch main).';
+alert('Não foi possível publicar:\n\n'+amig+'\n\nNada foi alterado no site.');
+toast('Publicação não concluída.');
 });
-} else {
-files.forEach(function(f){ baixar(f.path.split('/').pop(), f.content); });
-toast('Ficheiros gerados ('+nDoencas+' doencas). Para publicar sem descarregar, use "Ligacao de publicacao" (configurar a chave uma vez).');
-}
 }
 function ghApi(path, method, body){
 return fetch('https://api.github.com/repos/'+ghRepo()+path, {
@@ -547,6 +567,25 @@ return ghApi('/git/commits','POST',{message:message, tree:newTree.sha, parents:[
 }).then(function(newCommit){
 return ghApi('/git/refs/heads/'+GH_BRANCH,'PATCH',{sha:newCommit.sha});
 });
+}
+/* Confirmacao limpa de publicacao (reclamacoes 2 e 3): sem downloads, com versao/data/autor */
+function publicadoOk(nDoencas, comDdata){
+toast('Publicado com sucesso');
+var quem=(PERFIL&&PERFIL.nome)||(USER&&USER.email)||'—';
+var data=new Date().toLocaleDateString('pt-PT',{day:'2-digit',month:'long',year:'numeric'});
+var url=(emTeste()?'https://insmisau.github.io/manual-surtos-teste/index.html':'https://insmisau.github.io/manual-surtos/index.html');
+document.getElementById('content').innerHTML=
+'<div class="card" style="text-align:center;padding:34px 22px">'+
+'<div style="width:64px;height:64px;border-radius:50%;background:#e5f4ec;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><span style="font-size:34px;color:var(--verde2)">✓</span></div>'+
+'<h1 style="margin:0 0 6px;color:var(--verde2)">Publicação concluída</h1>'+
+'<p class="mut" style="margin:0 0 4px">'+nDoencas+' doenças'+(comDdata?' + fichas':'')+' &middot; '+(emTeste()?'cópia de teste':'manual real')+'</p>'+
+'<p class="mut" style="margin:0 0 2px">'+esc(data)+'</p>'+
+'<p class="mut" style="margin:0 0 16px">Publicou: <b>'+esc(quem)+'</b></p>'+
+'<div class="mut" style="font-size:12px;margin-bottom:16px">O site actualiza em 1–2 minutos.</div>'+
+'<div class="row" style="justify-content:center">'+
+'<a class="btn-g" style="text-decoration:none" href="'+url+'" target="_blank" rel="noopener">Ver versão publicada</a>'+
+'<button class="btn-o" onclick="render()">Voltar ao gestor</button>'+
+'</div></div>';
 }
 window.addEventListener('load', initSb);
 </script>

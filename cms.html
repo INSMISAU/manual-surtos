@@ -460,7 +460,7 @@ var slugsBase={}; (baseMAN.diseases||[]).forEach(function(dis){ slugsBase[dis.sl
 var iconByName={}; (baseMAN.groups||[]).forEach(function(g){ iconByName[g.name]=g.icon; });
 baseMAN.groups=sind.slice().sort(function(a,b){return (a.ordem||0)-(b.ordem||0);}).map(function(s,i){
 var membros=doe.filter(function(d){return d.sindrome_id===s.id && slugsBase[d.slug];}).map(function(d){return d.slug;});
-return { id:i+1, name:s.nome, icon:iconByName[s.nome]||'sindrome', diseases:membros };
+return { id:i+1, name:s.nome, icon:(s.icone||iconByName[s.nome]||'sindrome'), diseases:membros };
 });
 var gidBySlug={}; baseMAN.groups.forEach(function(g){ g.diseases.forEach(function(sl){ gidBySlug[sl]=g.id; }); });
 (baseMAN.diseases||[]).forEach(function(dis){ if(gidBySlug[dis.slug]) dis.group=gidBySlug[dis.slug]; });

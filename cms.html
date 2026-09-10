@@ -34,7 +34,7 @@
   <div class="login-card">
     <div class="brand-badge"><span class="dot">INS</span> MANUAL DE SURTOS</div>
     <h1>Gestor de Conteúdos</h1>
-    <p class="sub">Plataforma de gestão do Manual para Detecção e Investigação de Surtos. Entre com a sua conta para editar e publicar conteúdos.</p>
+    <p class="sub">Plataforma de gestão do Manual de Detecção e Investigação de Surtos em Moçambique. Entre com a sua conta para editar e publicar conteúdos.</p>
     <div id="loginErr" class="hint hide"></div>
     <div class="field"><label>Email</label><input id="email" type="email" placeholder="nome@ins.gov.mz" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Palavra-passe</label><input id="pass" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
@@ -439,7 +439,7 @@ images:(Array.isArray(d.imagens)?d.imagens:[]),
 fields:LBL.filter(function(x){return d[x[0]];}).map(function(x){return {label:x[1],blocks:txtToBlocks(d[x[0]])};})};
 });
 var sections=sec.map(function(s){return {id:s.ordem,title:s.titulo,label:'SECCAO '+s.ordem,blocks:txtToBlocks(s.conteudo),figures:[]};});
-var MAN={meta:{title:'Manual Nacional para Deteccao e Investigacao de Surtos',subtitle:'Instituto Nacional de Saude',version:'V1.0'},
+var MAN={meta:{title:'Manual de Deteccao e Investigacao de Surtos em Mocambique',subtitle:'Instituto Nacional de Saude',version:'V1.0'},
 sections:sections,groups:groups,diseases:diseases,glossary:{abbreviations:ab.map(function(a){return {abbr:a.sigla,meaning:a.significado};})}};
 var contentJs;
 var baseMAN=parseManual(contentTxt);

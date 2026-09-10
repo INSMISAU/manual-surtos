@@ -164,10 +164,10 @@ function renderCover(){
  document.getElementById('app').innerHTML=
  '<div class="cover"><img class="cimg" src="'+COVER+'" alt="Capa do manual">'+
  '<div class="cbody"><div class="flag">República de Moçambique</div>'+
- '<h1>Manual para Detecção e Investigação de Surtos em Moçambique</h1>'+
- '<p class="sub">Orientações práticas para deteção, investigação e resposta a surtos</p>'+
+ '<h1>Manual de Detecção e Investigação de Surtos em Moçambique</h1>'+
+ '<p class="sub">Orientações práticas para detecção, investigação e resposta a surtos</p>'+
  '<div class="org">Instituto Nacional de Saúde · Ministério da Saúde</div>'+
- '<div class="place">Marracuene · 01 de Maio de 2026</div>'+
+ '<div class="place">Marracuene · Junho de 2026</div>'+
  '<button class="cbtn" onclick="renderStructure()">Abrir o manual <svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M9 6l6 6-6 6"/></svg></button>'+
  '</div></div>';
  window.scrollTo(0,0);
@@ -221,7 +221,7 @@ function renderDisease(slug){var d=applyOv(slug);window.CUR=d;
  if(d.cases&&d.cases.length)setCase(slug,0,document.querySelector('.casebtn'));window.scrollTo(0,0);
 }
 function renderFull(slug){var d=DISEASES[slug];var body='',cur=[];function flush(){if(cur.length){body+=renderItems(cur);cur=[];}}(d.full||[]).forEach(function(it){if(it[0]==='h'){flush();body+='<div class="ft-h3">'+it[1]+'</div>';}else cur.push([it[0],it[1]]);});flush();
- document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderDisease(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Ficha</button><span>Texto integral</span><span class="spacer"></span></div><h1 class="page-title">'+d.name+'</h1><p class="page-sub">Texto integral do Manual Nacional</p></header><main class="body">'+body+pagerHTML(slug)+'<p class="foot">INS · MISAU</p></main>'+fab("renderDisease('"+slug+"')");window.scrollTo(0,0);}
+ document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderDisease(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Ficha</button><span>Texto integral</span><span class="spacer"></span></div><h1 class="page-title">'+d.name+'</h1><p class="page-sub">Texto integral do Manual</p></header><main class="body">'+body+pagerHTML(slug)+'<p class="foot">INS · MISAU</p></main>'+fab("renderDisease('"+slug+"')");window.scrollTo(0,0);}
 function setCase(slug,i,btn){var c=(window.CUR||DISEASES[slug]).cases[i];var fig=document.getElementById('casefig');if(c.media){fig.style.display='flex';fig.innerHTML=c.media;}else{fig.style.display='none';fig.innerHTML='';}document.getElementById('casetag').innerHTML='Caso '+c.label.toLowerCase();document.getElementById('casebody').innerHTML=c.body;var cb=document.getElementById('casebox');if(cb){cb.className='casebox';if(/confirmad/i.test(c.label))cb.classList.add('case-confirmado');else if(/suspeit/i.test(c.label))cb.classList.add('case-suspeito');else if(/prov/i.test(c.label))cb.classList.add('case-provavel');}var bs=document.querySelectorAll('.casebtn');for(var j=0;j<bs.length;j++)bs[j].classList.remove('on');if(btn)btn.classList.add('on');}
 function renderEdit(slug){var base=DISEASES[slug];var d=applyOv(slug);var kv=(d.keys||[]).join('\n');var ci=d.cases.map(function(c,i){return '<label class="edlab">Caso — '+c.label+'</label><textarea class="edta" id="ec'+i+'">'+c.body.replace(/&nbsp;/g,' ')+'</textarea>';}).join('');
  document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderDisease(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Ficha</button><span>Editar · demonstração</span><span class="spacer"></span></div><h1 class="page-title">Editar — '+d.name+'</h1></header><main class="body"><div class="note">Modo administrador (demonstração). As alterações ficam guardadas neste navegador e registadas no histórico.</div><label class="edlab">Administrador</label><input class="edin" id="eadmin" value="Admin"><label class="edlab">Pontos-chave (um por linha)</label><textarea class="edta" id="ekeys" style="min-height:120px">'+kv+'</textarea>'+ci+'<button class="fullbtn" style="background:#B02040;border-color:#B02040;color:#fff;margin-top:16px" onclick="saveEdit(\''+slug+'\')">Guardar alterações</button></main>'+fab("renderDisease('"+slug+"')");window.scrollTo(0,0);}

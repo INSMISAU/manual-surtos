@@ -183,7 +183,7 @@ function figHtml(f){return '<figure class="fig"><img src="'+f.file+'" alt="" loa
 function renderSectionContent(sec){ return renderBody((sec.blocks||[]),(sec.figures||[])); }
 function coverBlock(){
   return '<div class="cover"><img class="ph" src="assets/img/cover.jpg" alt="Capa oficial do manual">'+
-    '<div class="cv-title"><b>Manual de Detecção e Investigação de Surtos em Moçambique</b>'+
+    '<div class="cv-title"><b><a href="manual.html" style="color:inherit;text-decoration:none">Manual de Detecção e Investigação de Surtos em Moçambique</a></b>'+
     '<span>Instituto Nacional de Saúde · Ministério da Saúde</span></div></div>';
 }
 /* Navegacao continua (Anterior / Seguinte) — segue a ordem do manual. */
@@ -232,7 +232,7 @@ function pageExplorarSindrome(){
   const body=intro+'<div class="grid">'+cards+'</div>'+tabela+
     '<div class="card" style="margin-top:16px;display:flex;gap:14px;align-items:center">'+
     '<img src="assets/img/cover.jpg" style="width:84px;height:84px;object-fit:cover;border-radius:12px" alt="Capa oficial do manual">'+
-    '<div><div style="font-family:Poppins;font-weight:700;color:var(--petrol);font-size:14px">Manual de Detecção e Investigação de Surtos em Moçambique</div>'+
+    '<div><div style="font-family:Poppins;font-weight:700;color:var(--petrol);font-size:14px"><a href="manual.html" style="color:inherit;text-decoration:none">Manual de Detecção e Investigação de Surtos em Moçambique</a></div>'+
     '<div style="font-size:12px;color:var(--muted);margin:4px 0 8px">Obtenha mais informações sobre as síndromes no manual completo.</div>'+
     '<button class="pill carmine" onclick="location.href=\'explorar-abecedario.html\'">'+I.book+' Ver doenças</button></div></div>';
   mount({crumb:'Explorar',title:'Explorar<br><span class="thin">por Síndrome</span>'},body,'map');

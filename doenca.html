@@ -236,6 +236,15 @@ function formatConfirmedMedia(c){
    '<text x="302" y="79" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#B02040">PCR+</text>'+
    '<text x="302" y="116" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#B02040">Confirmado</text>'+m.slice(end);
  }
+ /* Germano, 28/09: filaríase confirmada por imunocromatografia (ICT+). */
+ if(/confirmad/i.test(c.label) && m.indexOf('Confirmação laboratorial — serologia')>=0 &&
+    m.indexOf('>Serologia</text>')>=0 && m.indexOf('>Resultado positivo</text>')>=0){
+  var start=m.indexOf('<rect x="272" y="44"'),end=m.indexOf('<text x="180" y="156"',start);
+  if(start>=0 && end>start) return m.slice(0,start)+
+   '<rect x="272" y="44" width="60" height="46" rx="8" fill="#fff4f5" stroke="#B02040" stroke-width="1.8"/>'+
+   '<text x="302" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B02040">ICT+</text>'+
+   '<text x="302" y="116" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#B02040">Confirmado</text>'+m.slice(end);
+ }
  if(!/confirmad/i.test(c.label)||m.indexOf('Confirmação laboratorial — PCR')<0||m.indexOf('Resultado positivo')<0)return m;
  var start=m.indexOf('<rect x="272" y="44"'),end=m.indexOf('<text x="180" y="156"',start);
  if(start<0||end<0)return m;

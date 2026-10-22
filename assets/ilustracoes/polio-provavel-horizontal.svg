@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 174" role="img" aria-labelledby="title">
+<title id="title">Caso suspeito mais viagem recente para área com circulação conhecida do poliovírus</title>
+<rect width="460" height="174" rx="12" fill="#faf3e9"/>
+<rect x="10" y="12" width="142" height="150" rx="12" fill="#ffffff" stroke="#e4e9e9"/>
+<rect x="196" y="12" width="254" height="150" rx="12" fill="#ffffff" stroke="#e4e9e9"/>
+<g fill="none" stroke="#426f83" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="61" y="34" width="40" height="52" rx="4"/><rect x="72" y="29" width="18" height="10" rx="3" fill="#fff"/><path d="M71 51h20M71 62h20M71 73h12"/>
+<path transform="translate(323 53) scale(.82)" d="M0-32 C-3-32-4-27-4-20 L-4-8 -29 8 -29 13 -5 5 -4 23 -12 29 -12 33 0 29 12 33 12 29 4 23 5 5 29 13 29 8 4-8 4-20 C4-27 3-32 0-32 Z" fill="#426f83" stroke="#426f83" stroke-width="1.5"/>
+</g>
+<g font-family="Arial,sans-serif" fill="#00566a" text-anchor="middle">
+<text x="81" y="120" font-size="15" font-weight="700">Caso suspeito</text>
+<text x="174" y="98" font-size="30" font-weight="700">+</text>
+<text x="323" y="101" font-size="15" font-weight="700">Viagem recente</text>
+<text x="323" y="121" font-size="13">para área com circulação</text>
+<text x="323" y="140" font-size="13">conhecida do poliovírus</text>
+</g>
+</svg>

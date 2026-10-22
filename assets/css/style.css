@@ -91,7 +91,7 @@ a{color:inherit;text-decoration:none}
 .recent{border:1px solid var(--line);background:#fff;border-radius:13px;padding:13px 16px;color:#8a98a1;font-size:13px;margin-top:14px}
 
 /* ---------- Grelha de sindromes ---------- */
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .syn{background:#fff;border-radius:14px;box-shadow:var(--shadow-s);padding:14px 8px 12px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
 .syn .ico{width:50px;height:50px;margin:2px auto 8px;display:flex;align-items:center;justify-content:center}
 .dico{width:100%;height:100%;object-fit:contain;display:block}
@@ -269,3 +269,39 @@ table.t1 a{color:var(--petrol);text-decoration:none}
 .tbl th, .tbl td{min-width:88px}
 .tbl th:first-child, .tbl td:first-child{min-width:40px}
 .tbl-wrap{position:relative}
+
+.gloss-entry p,.abbr .v,.fig figcaption,.synhero figcaption,.secimg figcaption{text-align:justify!important;line-height:1.65}
+.fig .photo-caption-text{display:block;font-style:normal}
+.fig .photo-source{display:block;margin-top:4px;font-size:11.5px;line-height:1.6;font-style:normal;overflow-wrap:break-word}
+
+/* Grelha de síndromes em ecrãs pequenos. */
+.syn{min-width:0}.syn .nm{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:360px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Revisão do suporte: ajustes locais de leitura, sem alterar os parágrafos corridos. */
+.content .section-six h3,.content .section-six h4{text-align:left!important;font-weight:700!important;line-height:1.4;margin-top:24px;margin-bottom:10px}
+.content .section-six .section-reference{text-align:left!important;overflow-wrap:anywhere;word-break:normal;line-height:1.65}
+.content .section-six li{text-align:left!important;line-height:1.6}
+.syn .syndrome-card-icon{display:flex;align-items:center;justify-content:center;width:64px;height:64px;flex:none}
+.syn .syndrome-card-icon img{display:block;width:64px;height:64px;max-width:100%;object-fit:contain}
+
+/* Benildo 22/10: manter os rótulos das tabelas legíveis em ecrãs estreitos. */
+.tbl th:first-child,.tbl td:first-child{min-width:112px;word-break:normal;overflow-wrap:normal;hyphens:none}
+
+.tbl th,.tbl td{min-width:160px;word-break:normal;overflow-wrap:break-word}
+.tbl th:first-child,.tbl td:first-child{min-width:112px;overflow-wrap:normal}
+
+/* Larguras ajustadas ao conteúdo de cada tabela. */
+.tbl-wrap:focus-visible{outline:2px solid var(--petrol);outline-offset:3px}
+.tbl.tbl-cases{min-width:600px;table-layout:auto}
+.tbl.tbl-cases th,.tbl.tbl-cases td{min-width:96px;text-align:center;white-space:normal;word-break:normal;overflow-wrap:normal;padding:10px}
+.tbl.tbl-cases th:first-child,.tbl.tbl-cases td:first-child{min-width:170px}
+.tbl.tbl-cases thead tr:nth-child(2) th:first-child{min-width:96px}
+.tbl.tbl-cases tbody th{text-align:left;font-weight:600}
+.tbl.tbl-cases tbody td{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl.tbl-cases .table-group th{background:#e6f2f4;color:#0a4a5a;text-align:left}
+.tbl.tbl-cases .table-total th,.tbl.tbl-cases .table-total td{font-weight:700;border-top:2px solid #7396a0}
+.tbl.tbl-criteria{min-width:720px}
+.tbl.tbl-criteria th:first-child,.tbl.tbl-criteria td:first-child{min-width:125px}
+.tbl.tbl-criteria th:not(:first-child),.tbl.tbl-criteria td:not(:first-child){min-width:190px}
+.tbl.tbl-register th:first-child,.tbl.tbl-register td:first-child{min-width:48px;text-align:center}

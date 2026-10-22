@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ficha de Doença — Manual de Surtos · INS</title>
 <meta name="theme-color" content="#007088">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,6 +39,7 @@ svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke
 .casebox.case-provavel .casefig{background:#fdede0}
 /* S4-1: altura fixa para as figuras nao saltarem ao trocar de separador */
 .casefig{line-height:0;background:#faf3ee;height:172px;display:flex;align-items:center;justify-content:center;padding:6px;box-sizing:border-box}
+.case-media-grid{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:100%;line-height:1.3}.case-media-grid>div{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;max-width:46%;flex:1}.case-media-grid img,.case-media-grid svg{max-height:128px!important}.case-media-grid span{font-size:11px;color:#333;text-align:center;margin-top:4px}
 .casefig svg,.casefig img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 .casetxt{padding:13px 15px;font-size:13.5px;line-height:1.65;color:#333;text-align:justify}
 .casebox .casetxt{border-top:1px solid var(--line)}
@@ -84,9 +85,10 @@ svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke
 .rbanner svg,.rbanner img{display:block;width:100%;height:auto}
 /* S4-10: o texto dos grupos de risco herdava 16px do body; alinhar com o resto (13.3px) */
 .riskrow{display:flex;gap:12px;align-items:center;margin:12px 0}
-.riskrow .tx{font-size:13.3px;line-height:1.55;color:#3a3a3a;text-align:justify}
-.riskrow .ill{flex:none;width:78px;height:70px;background:#f7fbfa;border:1px solid #e7efec;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:5px}
-.riskrow .ill svg,.riskrow .ill img{width:100%;height:100%;display:block;object-fit:contain}
+.riskrow .tx{flex:1;min-width:0;font-size:13.3px;line-height:1.55;color:#3a3a3a;text-align:left}
+.riskrow{--risk-media-size:108px}
+.riskrow .ill{box-sizing:border-box;flex:none;width:var(--risk-media-size);height:var(--risk-media-size);padding:0;background:#f7fbfa;border:1px solid #e7efec;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.riskrow .ill svg,.riskrow .ill img{box-sizing:border-box;width:100%;height:100%;max-width:100%;max-height:100%;display:block;object-fit:contain;object-position:center}
 .rtext{font-size:13px;line-height:1.55;color:#3a3a3a;text-align:justify}
 .rtext b,.riskrow .tx b{color:var(--petrol-d)}
 .foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:22px;line-height:1.6}
@@ -105,8 +107,93 @@ svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke
   .cover{min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#eaf3f5,#fff)}.cover .cimg{width:100%;height:auto;display:block;border-bottom:4px solid var(--carmim)}.cover .cbody{padding:20px 22px 30px;text-align:center}.cover .flag{font-size:11.5px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;font-weight:700;margin:14px 0 4px}.cover h1{font-size:23px;line-height:1.25;font-weight:800;color:var(--petrol-d);margin:6px 8px 8px}.cover .sub{font-size:13.5px;color:#444;margin:0 8px 14px;line-height:1.5}.cover .org{font-size:13px;font-weight:700;color:var(--petrol);margin:2px}.cover .place{font-size:12.5px;color:var(--muted);margin:2px 0 18px}.cbtn{display:inline-flex;align-items:center;gap:8px;background:var(--carmim);color:#fff;border:none;font:inherit;font-size:15px;font-weight:700;padding:13px 26px;border-radius:26px;cursor:pointer;box-shadow:0 4px 14px rgba(176,32,64,.28)}.subh{font-size:15px;font-weight:700;color:var(--petrol-d);margin:16px 0 6px}.secp{font-size:13.6px;line-height:1.7;color:#343434;margin:9px 0;text-align:justify}.mono{font-family:monospace;font-weight:700;color:var(--petrol)}.dcard .lt.sm{font-size:14px}
   .fab{position:fixed;bottom:20px;right:max(16px,calc(50% - 214px));z-index:20;background:var(--petrol);color:#fff;border:none;font:inherit;font-size:13px;font-weight:700;padding:11px 16px;border-radius:24px;box-shadow:0 4px 14px rgba(0,0,0,.22);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .backlink{display:none!important}
+.risk-water{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%}.risk-water img{max-width:100%;max-height:100%}.water-unavailable{position:absolute;right:0;bottom:0;border-radius:50%;background:white;color:#B02040;font:700 30px/1 Arial,sans-serif}
+
+/* Ilustrações das fichas. */
+.manual-figure{margin:0;width:100%}
+.manual-figure img{display:block;width:100%;height:auto;max-height:none}
+.casefig .manual-figure:not(.review-case-diagram) figcaption{display:block;margin:0;padding:10px 12px;font-size:12px;line-height:1.5;color:#52616a;text-align:justify;overflow-wrap:anywhere;background:#fff}
+.casebox.case-illustrated .casefig{height:auto;min-height:172px;padding:0;background:#fff}
+.casebox.case-illustrated .casefig .manual-figure img{width:100%;height:auto;max-height:none}
+
+.mpox-epilink{padding:14px;box-sizing:border-box;color:#174b43;background:#fff}
+.mpox-epiheading{padding:12px 10px;background:#eaf4ef;border-radius:10px;text-align:center;line-height:1.45}
+.mpox-epiheading strong{display:block;font-size:18px;font-weight:700}
+.mpox-epiheading span{display:block;font-size:14px;margin-top:4px}
+.mpox-conditions{margin-top:14px}
+.mpox-condition{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:14px;background:#fdfaf2;border:1px solid #e9e4d7;border-radius:12px;overflow:hidden;padding:8px}
+.casebox.case-illustrated .casefig .mpox-condition img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:8px}
+.mpox-condition p{margin:0;font-size:15px;line-height:1.45;text-align:left;overflow-wrap:break-word}
+.mpox-condition p strong{font-weight:700}
+.mpox-condition p span{display:block;font-size:13px;line-height:1.45;margin-top:5px;color:#43564e}
+.mpox-or{width:32px;margin:4px auto;text-align:center;font-size:12px;line-height:24px;font-weight:700;color:#174b43;background:#eaf4ef;border-radius:20px}
+@media(max-width:360px){.mpox-epilink{padding:10px}.mpox-condition{grid-template-columns:76px minmax(0,1fr);gap:10px}.mpox-epiheading strong{font-size:17px}}
+
+/* A mesma área visual para ícones e ilustrações de todos os grupos. */
+@media(max-width:360px){.riskrow{--risk-media-size:88px;gap:10px}}
+
+.review-case-diagram{padding:14px;box-sizing:border-box;color:#174b43}
+.review-case-diagram figcaption{font-size:17px;font-weight:700;line-height:1.45;text-align:center;background:#eaf4ef;padding:12px 8px;border-radius:10px}
+.review-case-rows{padding-top:12px}
+.review-case-row{display:flex;gap:14px;align-items:center;padding:10px;background:#f9fbf9;border:1px solid #dde8e2;border-radius:10px}
+.casebox.case-illustrated .casefig .review-case-row img{flex:none;width:90px;height:90px;object-fit:contain;border-radius:8px}
+.review-case-row p{margin:0;min-width:0;font-size:14px;line-height:1.5;text-align:left;overflow-wrap:break-word}
+.review-case-connector{font-size:12px;line-height:24px;text-align:center;font-weight:700;min-height:8px}
+@media(max-width:360px){.review-case-diagram{padding:10px}.review-case-row{gap:9px;padding:8px}.casebox.case-illustrated .casefig .review-case-row img{width:68px;height:68px}}
+
+/* Ilustrações dos grupos de risco: tamanho compacto, sem cortes. */
+.rbanner img[src$="mpox-contacto-escola-saude.png"],
+.rbanner img[src$="parotidite-escola-quartel.png"],
+.rbanner img[src$="rubeola-viagens-internacionais.png"],
+.rbanner img[src$="risco-imunocomprometidos.png"],
+.rbanner img[src$="polio-criancas-vacinacao.png"],
+.rbanner img[src$="polio-comunidade-saneamento.png"]{width:auto;max-width:100%;height:auto;max-height:150px;object-fit:contain;margin:8px auto;}
+
+
+/* Mesmas imagens dos suspeitos, maiores, sem corte ou deformação. */
+.casebox.case-suspeito.case-size-large .casefig{height:auto;min-height:172px;padding:0;background:#fff}
+.casebox.case-suspeito.case-size-large .casefig>img,
+.casebox.case-suspeito.case-size-large .casefig>.manual-figure:not(.review-case-diagram) img{width:100%;height:auto;max-height:none;object-fit:contain}
+.casebox.case-suspeito.case-size-large .review-case-row{flex-direction:column;gap:12px;padding:12px}
+.casebox.case-suspeito.case-size-large .casefig .review-case-row img{width:min(180px,100%);height:auto;max-height:none;object-fit:contain}
+.casebox.case-suspeito.case-size-large .review-case-row p{width:100%;text-align:left}
+
+
+/* Composições antigas com vários sinais: mesmas imagens, tamanho maior. */
+.casebox.case-suspeito.case-size-large .case-media-grid{display:flex;flex-direction:column;height:auto;gap:10px;padding:10px;box-sizing:border-box}
+.casebox.case-suspeito.case-size-large .case-media-grid>div{height:auto;max-width:100%;width:100%;flex:none}
+.casebox.case-suspeito.case-size-large .case-media-grid img,
+.casebox.case-suspeito.case-size-large .case-media-grid svg{width:min(180px,100%);height:auto;max-height:none!important;object-fit:contain}
+.casebox.case-suspeito.case-size-large .case-media-grid span{font-size:13px;line-height:1.4;margin-top:8px}
+
+.case-heading{padding:10px 14px;border-bottom:1px solid var(--line);background:#fff}
+.case-heading .casetag{margin:0}
+.riskitem{margin:12px 0 16px}
+.riskitem .riskrow{margin:0}
+.risk-credit{margin-top:7px}
+.photo-credit,.casefig .manual-figure:not(.review-case-diagram) figcaption.photo-credit{display:block;margin:0;padding:8px 12px;font:400 12px/1.6 'Raleway',Arial,sans-serif;color:#52616a;background:#fff;text-align:justify;overflow-wrap:break-word;word-break:normal}
+.risk-credit .photo-credit{padding:0;background:transparent}
+.photo-caption-text{display:block;color:#3c4c54}
+.photo-source{display:block;margin-top:3px;font-size:11.5px;line-height:1.6}
+.photo-source a{color:#00566a;text-decoration:underline;overflow-wrap:anywhere}
+.riskrow .tx,.rtext,.mpox-condition p,.review-case-row p,.casebox.case-suspeito.case-size-large .review-case-row p,.secimg figcaption,.media-credit,.evonote{text-align:justify}
+.secimg figcaption{line-height:1.6;overflow-wrap:break-word}
+.casefig .photo-credit{width:100%}
+
+.casebox:not(.case-suspeito) .real-photo img{max-height:260px!important;width:100%!important;object-fit:contain}
+.casefig .real-photo{width:100%;margin:0}
+
+.review-case-diagram .review-case-title{font-size:17px;font-weight:700;line-height:1.45;text-align:center;background:#eaf4ef;padding:12px 8px;border-radius:10px;margin-bottom:10px}
+.lepto-photo{margin:0}.review-case-diagram .lepto-photo figcaption.photo-credit{font:400 12px/1.6 'Raleway',Arial,sans-serif;text-align:justify;background:#fff;padding:8px 0;color:#52616a;border-radius:0}
+
+.disease-hero{margin:0 0 20px;border:1px solid #dce5e7;border-radius:12px;overflow:hidden;background:#fff}
+.disease-hero figure{margin:0}.disease-hero img{display:block;width:100%;height:auto;max-height:480px;object-fit:contain;margin:auto}
+.disease-hero figcaption{padding:12px;font-size:12px;line-height:1.5;color:#52616a;overflow-wrap:anywhere}
+.disease-hero a{color:#00566a}.disease-hero .photo-source{display:block}
+@media(max-width:600px){.disease-hero img{max-height:360px}}
 </style></head>
 <body><div class="app"><div id="app"></div></div>
+<script data-ins-photo-privacy="1" src="assets/js/photo-privacy.js"></script>
 <script src="ddata.js"></script>
 <script src="fiche-assets.js"></script>
 <script>
@@ -207,24 +294,66 @@ function riskHTML(t){t=String(t||'');
  var m=t.match(/^([^:]{3,70}):\s+([\s\S]+)$/);
  if(m) return '<b>'+m[1]+':</b> '+m[2];
  return t;}
+
+function sourceOnly(container){
+ container.querySelectorAll('.photo-caption-text,.image-date').forEach(function(n){n.remove();});
+ container.querySelectorAll('figcaption,.risk-credit,.media-credit').forEach(function(n){
+  if(!/Fonte\s*:/i.test(n.textContent))return;
+  var walker=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),t,found=null,offset=0;
+  while(t=walker.nextNode()){var m=/Fonte\s*:/i.exec(t.nodeValue);if(m){found=t;offset=m.index;break;}}
+  if(found){var range=document.createRange();range.setStart(n,0);range.setEnd(found,offset);range.deleteContents();}
+ });
+}
+function diseaseHero(d){
+ var c=(d.cases||[]).find(function(c){return /suspeit/i.test(c.label)&&c.media;});if(!c)return '';
+ var box=document.createElement('div');box.innerHTML=c.media;
+ if(!box.querySelector('img'))return '';
+ sourceOnly(box);
+ return '<div class="disease-hero">'+box.innerHTML+'</div>';
+}
+
 function renderDisease(slug){var d=applyOv(slug);window.CUR=d;
  var keys='';(d.keys||[]).forEach(function(t,i){keys+='<li><span class="n">'+(i+1)+'</span><span>'+t+'</span></li>';});
  var keysBlock=keys?('<details class="keys" open><summary><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M21 2l-2 2m-7.6 7.6a5 5 0 1 1-7 7 5 5 0 0 1 7-7zm0 0L15 8m0 0l3 3 3-3-3-3"/></svg> Pontos-chave <span class="kchev"><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary><ul>'+keys+'</ul></details>'):'';
- var casesBlock='';if(d.cases&&d.cases.length){var bar='';d.cases.forEach(function(c,i){bar+='<button class="casebtn'+(i===0?' on':'')+'" onclick="setCase(\''+slug+'\','+i+',this)">'+c.label+'</button>';});
-  casesBlock='<div class="sec-h carmim"><svg class="i" viewBox="0 0 24 24"><path d="M8 15a6 6 0 0 0 12 0v-3M8 15V9a4 4 0 1 1 8 0v3M8 15H5a2 2 0 0 0 0 4h1"/></svg> Definição de caso</div><div class="casebar">'+bar+'</div><div class="casebox" id="casebox"><div class="casefig" id="casefig"></div><div class="casetxt"><span class="casetag" id="casetag"></span><div id="casebody"></div></div></div>';}
+ var casesBlock='';if(d.cases&&d.cases.length){var bar='';d.cases.forEach(function(c,i){bar+='<button type="button" aria-controls="casebox" aria-pressed="'+(i===0?'true':'false')+'" class="casebtn'+(i===0?' on':'')+'" onclick="setCase(\''+slug+'\','+i+',this)">'+c.label+'</button>';});
+  casesBlock='<div class="sec-h carmim"><svg class="i" viewBox="0 0 24 24"><path d="M8 15a6 6 0 0 0 12 0v-3M8 15V9a4 4 0 1 1 8 0v3M8 15H5a2 2 0 0 0 0 4h1"/></svg> Definição de caso</div><div class="casebar">'+bar+'</div><div class="casebox" id="casebox" role="region" aria-labelledby="casetag"><div class="case-heading"><span class="casetag" id="casetag" aria-live="polite"></span></div><div class="casefig" id="casefig"></div><div class="casetxt"><div id="casebody"></div></div></div>';}
  var evo='';if(d.evolution){evo='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg> Evolução das lesões</div><div class="evo">'+d.evolution+'</div>';}
- var risksBlock='';if(d.risks&&d.risks.length){var rr='';d.risks.forEach(function(r){if(r.wide){rr+='<div class="riskitem"><div class="rtext">'+riskHTML(r.text)+'</div><div class="rbanner">'+r.media+'</div></div>';}else{rr+='<div class="riskrow"><div class="ill">'+r.media+'</div><div class="tx">'+riskHTML(r.text)+'</div></div>';}});risksBlock='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 21c0-3.3 2.7-5.5 6-5.5M16 11l2 2 4-4"/></svg> Grupos de risco</div>'+rr;}else{var gs=secByTitle(d,'Grupos de risco');if(gs)risksBlock='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 21c0-3.3 2.7-5.5 6-5.5M16 11l2 2 4-4"/></svg> Grupos de risco</div><div class="acc" style="padding:2px 4px">'+renderItems(gs.items)+'</div>';}
+ var risksBlock='';if(d.risks&&d.risks.length){var rr='';d.risks.forEach(function(r){rr+='<div class="riskitem">';if(r.wide){rr+='<div class="rtext">'+riskHTML(r.text)+'</div>'+(r.media?'<div class="rbanner">'+r.media+'</div>':'');}else{rr+='<div class="riskrow'+(/colera-risk-image|review-risk-image/.test(r.media)?' risk-illustrated':'')+'">'+(r.media?'<div class="ill">'+r.media+'</div>':'')+'<div class="tx">'+riskHTML(r.text)+'</div></div>';}rr+=(r.credit?'<div class="risk-credit">'+r.credit+'</div>':'')+'</div>';});risksBlock='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 21c0-3.3 2.7-5.5 6-5.5M16 11l2 2 4-4"/></svg> Grupos de risco</div>'+rr;}else{var gs=secByTitle(d,'Grupos de risco');if(gs)risksBlock='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 21c0-3.3 2.7-5.5 6-5.5M16 11l2 2 4-4"/></svg> Grupos de risco</div><div class="acc" style="padding:2px 4px">'+renderItems(gs.items)+'</div>';}
  var secs='';DETAIL.forEach(function(t){var s=secByTitle(d,t);if(!s)return;var ic=ICONS[t]||'';
-  var fig=s.img?('<figure class="secimg"><img src="'+s.img+'" alt="" loading="lazy">'+(s.alt?'<figcaption>'+s.alt+'</figcaption>':'')+'</figure>'):'';
+  var fig=s.img?('<figure class="secimg"><img src="'+s.img+'" alt="'+captionEscape(d.name+' — '+s.t)+'" loading="lazy">'+(s.alt?'<figcaption>'+s.alt+'</figcaption>':'')+'</figure>'):'';
   secs+='<details class="acc"><summary><span class="ic"><svg class="i" viewBox="0 0 24 24">'+ic+'</svg></span>'+t+chev+'</summary><div class="inner">'+fig+renderItems(s.items)+'</div></details>';});
- document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="goBack()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Manual</button><span>'+d.grp+'</span><span class="spacer"></span></div><h1 class="page-title">'+d.name+'</h1></header><main class="body"><button class="fullbtn" onclick="renderFull(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg> Ver texto integral do manual</button>'+(ADMIN?adminEditBtn(slug):'')+keysBlock+casesBlock+(d.illus||'')+'<div style="height:12px"></div>'+evo+risksBlock+'<div style="height:12px"></div>'+secs+pagerHTML(slug)+'<p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("goBack()");
- if(d.cases&&d.cases.length)setCase(slug,0,document.querySelector('.casebtn'));window.scrollTo(0,0);
+ document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="goBack()"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Manual</button><span>'+d.grp+'</span><span class="spacer"></span></div><h1 class="page-title">'+d.name+'</h1></header><main class="body">'+diseaseHero(d)+'<button class="fullbtn" onclick="renderFull(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg> Ver texto integral do manual</button>'+(ADMIN?adminEditBtn(slug):'')+keysBlock+casesBlock+(d.illus||'')+'<div style="height:12px"></div>'+evo+risksBlock+'<div style="height:12px"></div>'+secs+pagerHTML(slug)+'<p class="foot"><a href="imagens.html?q='+encodeURIComponent(d.name)+'">Ver todas as imagens desta doença</a></p><p class="foot">Instituto Nacional de Saúde · MISAU</p></main>'+fab("goBack()");
+ if(d.cases&&d.cases.length)setCase(slug,0,document.querySelector('.casebtn'));sourceOnly(document.getElementById('app'));window.scrollTo(0,0);
 }
-function renderFull(slug){var d=DISEASES[slug];var body='',cur=[];function flush(){if(cur.length){body+=renderItems(cur);cur=[];}}(d.full||[]).forEach(function(it){if(it[0]==='h'){flush();body+='<div class="ft-h3">'+it[1]+'</div>';}else cur.push([it[0],it[1]]);});flush();
+/* O texto integral usa os mesmos blocos actualizados pelo CMS. Preserva títulos e secções sem correspondência. */
+function integralItems(d){
+ var aliases={'Limiar de notificação e surto':'Número de casos necessários para desencadear a notificação e a investigação','Laboratório e amostras':'Colheita e manuseio de amostras para o diagnóstico laboratorial'};
+ var out=[], a=d.full||[];
+ for(var i=0;i<a.length;){var it=a[i];if(it[0]!=='h'){out.push(it);i++;continue;}
+  var j=i+1;while(j<a.length&&a[j][0]!=='h')j++;
+  var sec=secByTitle(d,aliases[it[1]]||it[1]);out.push(it);
+  if(sec&&sec.items&&sec.items.length)sec.items.forEach(function(x){out.push([x[0],x[1]]);});else for(var n=i+1;n<j;n++)out.push(a[n]);i=j;
+ }return out;
+}
+function renderFull(slug){var d=DISEASES[slug];var body='',cur=[];function flush(){if(cur.length){body+=renderItems(cur);cur=[];}}integralItems(d).forEach(function(it){if(it[0]==='h'){flush();body+='<div class="ft-h3">'+it[1]+'</div>';}else cur.push([it[0],it[1]]);});flush();
  document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderDisease(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Ficha</button><span>Texto integral</span><span class="spacer"></span></div><h1 class="page-title">'+d.name+'</h1><p class="page-sub">Texto integral do Manual</p></header><main class="body">'+body+pagerHTML(slug)+'<p class="foot">INS · MISAU</p></main>'+fab("renderDisease('"+slug+"')");window.scrollTo(0,0);}
 /* Revisão de Germano, 24/09: nos esquemas que JÁ identificam PCR como método,
    mostrar PCR+ dentro da caixa e Confirmado por baixo, em carmim.
    Preservar o rodapé e não atribuir PCR a cultura, serologia ou outros critérios. */
+var IMAGE_CREDITS={};
+function captionEscape(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function captionHTML(media,fallback){
+ var template=document.createElement('template');template.innerHTML=media||'';
+ var images=Array.from(template.content.querySelectorAll('img')).filter(function(im){return /^assets\/(ilustracoes|fig)\//.test(im.getAttribute('src')||'');});
+ if(!images.length)return '';
+ var already=!!template.content.querySelector('figcaption, .review-case-row p, .case-media-grid span');
+ var titles=[],sources=[];
+ images.forEach(function(im){var path=im.getAttribute('src'),alt=(im.getAttribute('alt')||'').trim();if(alt&&!/\.(jpg|jpeg|png|webp|svg)$/i.test(alt)&&titles.indexOf(alt)<0)titles.push(alt);var credit=IMAGE_CREDITS[path];if(credit&&sources.indexOf(credit)<0)sources.push(credit);});
+ var title=already?'':(titles.length===1&&titles[0].length<=90?titles[0]:(fallback||''));
+ if(!title&&!sources.length)return '';
+ return '<div class="media-credit" style="font:11.5px/1.5 Raleway,Arial,sans-serif;color:#52616a;padding:8px 12px;text-align:justify;overflow-wrap:anywhere">'+(title?'<div>'+captionEscape(title)+'</div>':'')+(sources.length?'<div style="margin-top:3px;font-size:10.5px">Fonte: '+captionEscape(sources.join('; '))+'</div>':'')+'</div>';
+}
+
 function formatConfirmedMedia(c){
  var m=c.media||'';
  /* Parotidite: IgM e PCR permanecem alternativas no texto clínico. */
@@ -254,7 +383,16 @@ function formatConfirmedMedia(c){
   '<text x="302" y="116" text-anchor="middle" font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#B02040">Confirmado</text>'+
   m.slice(end);
 }
-function setCase(slug,i,btn){var c=(window.CUR||DISEASES[slug]).cases[i];var fig=document.getElementById('casefig');if(c.media){fig.style.display='flex';fig.innerHTML=formatConfirmedMedia(c);}else{fig.style.display='none';fig.innerHTML='';}document.getElementById('casetag').innerHTML='Caso '+c.label.toLowerCase();document.getElementById('casebody').innerHTML=c.body;var cb=document.getElementById('casebox');if(cb){cb.className='casebox';if(/confirmad/i.test(c.label))cb.classList.add('case-confirmado');else if(/suspeit/i.test(c.label))cb.classList.add('case-suspeito');else if(/prov/i.test(c.label))cb.classList.add('case-provavel');}var bs=document.querySelectorAll('.casebtn');for(var j=0;j<bs.length;j++)bs[j].classList.remove('on');if(btn)btn.classList.add('on');}
+function setCase(slug,i,btn){
+ var c=(window.CUR||DISEASES[slug]).cases[i],fig=document.getElementById('casefig');
+ fig.hidden=true;fig.style.display='none';fig.innerHTML='';
+ document.getElementById('casetag').textContent='Caso '+c.label.toLowerCase();
+ document.getElementById('casebody').innerHTML=c.body;
+ var prior=document.getElementById('case-media-credit');if(prior)prior.remove();
+ var cb=document.getElementById('casebox');cb.className='casebox'+(/confirmad/i.test(c.label)?' case-confirmado':'');
+ document.querySelectorAll('.casebtn').forEach(function(b){b.classList.toggle('on',b===btn);b.setAttribute('aria-pressed',b===btn?'true':'false');});
+}
+
 function renderEdit(slug){var base=DISEASES[slug];var d=applyOv(slug);var kv=(d.keys||[]).join('\n');var ci=d.cases.map(function(c,i){return '<label class="edlab">Caso — '+c.label+'</label><textarea class="edta" id="ec'+i+'">'+c.body.replace(/&nbsp;/g,' ')+'</textarea>';}).join('');
  document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="renderDisease(\''+slug+'\')"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Ficha</button><span>Editar · demonstração</span><span class="spacer"></span></div><h1 class="page-title">Editar — '+d.name+'</h1></header><main class="body"><div class="note">Modo administrador (demonstração). As alterações ficam guardadas neste navegador e registadas no histórico.</div><label class="edlab">Administrador</label><input class="edin" id="eadmin" value="Admin"><label class="edlab">Pontos-chave (um por linha)</label><textarea class="edta" id="ekeys" style="min-height:120px">'+kv+'</textarea>'+ci+'<button class="fullbtn" style="background:#B02040;border-color:#B02040;color:#fff;margin-top:16px" onclick="saveEdit(\''+slug+'\')">Guardar alterações</button></main>'+fab("renderDisease('"+slug+"')");window.scrollTo(0,0);}
 function saveEdit(slug){var base=DISEASES[slug];var cur=applyOv(slug);var o=ovGet(slug);var who=(document.getElementById('eadmin').value||'Admin').trim();var changed=[];var kt=document.getElementById('ekeys').value.split('\n').map(function(x){return x.trim()}).filter(Boolean);if(JSON.stringify(kt)!==JSON.stringify(cur.keys||[])){o.keys=kt;changed.push('Pontos-chave');}o.cases=o.cases||{};base.cases.forEach(function(c,i){var el=document.getElementById('ec'+i);if(!el)return;var v=el.value.trim();var old=(cur.cases[i].body||'').replace(/&nbsp;/g,' ').trim();if(v!==old){o.cases[String(i)]=v;changed.push('Caso '+c.label);}});try{LS().setItem('ins_ov_'+slug,JSON.stringify(o))}catch(e){}if(changed.length)logAdd({t:new Date().toLocaleString('pt-PT'),user:who,disease:base.name,fields:changed.join(', ')});renderDisease(slug);}
@@ -266,4 +404,58 @@ function slugFromURL(){var m=location.search.match(/[?&]slug=([^&]+)/);return m?
 function resolveSlug(s){if(!s)return null;if(DISEASES[s])return s;if(ALIAS[s]&&DISEASES[ALIAS[s]])return ALIAS[s];var t=s.split('-')[0];for(var k in DISEASES){if(k===t||k.split('-')[0]===t||k.indexOf(t)===0)return k;}return null;}
 try{ADMIN=(LS()&&LS().getItem('ins_admin')==='1')||false}catch(e){}
 (function(){var s=resolveSlug(slugFromURL());if(s){renderDisease(s);}else{document.getElementById('app').innerHTML='<header class="hdr"><div class="hdr-top"><button class="backlink" onclick="location.href=\'index.html\'"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> Manual</button><span class="spacer"></span></div><h1 class="page-title">Ficha</h1></header><main class="body"><div class="note">Ficha não encontrada. <a href="index.html" style="color:var(--petrol-d);font-weight:700">Voltar ao manual</a>.</div></main>';}})();
-</script></body></html>
+</script><script>
+/* Progresso de leitura local, separado entre cópia de teste e manual real. */
+(function(){
+ function initReading(){
+  var file=location.pathname.split('/').pop()||'index.html';
+  var allowed=['manual.html','seccao.html','sindrome.html','doenca.html'];
+  var scope=location.pathname.slice(0,location.pathname.lastIndexOf('/')+1),key='ins-reading-v1:'+scope;
+  var store;try{store=window.localStorage;}catch(e){return;}
+  if(!store)return;
+  function load(){try{return JSON.parse(store.getItem(key)||'null');}catch(e){return null;}}
+  function readingLabel(s){return String(s||'Manual').replace(/\s+/g,' ').trim().replace(/^(SECÇÃO\s+\d+)\s*[—–-]?\s*/i,'$1 — ');}
+  var saved=load(),url=file+location.search,last=saved&&saved.last;
+  function valid(v){return v&&typeof v.url==='string'&&/^(manual|seccao|sindrome|doenca)\.html(?:\?[^#]*)?$/.test(v.url)&&!/[<>\\]/.test(v.url);}
+  if(allowed.indexOf(file)<0){
+   if((file==='index.html'||file==='')&&valid(last)){
+    var main=document.querySelector('main')||document.querySelector('.body');if(!main)return;
+    var box=document.createElement('div');box.style.cssText='margin:12px 0;padding:14px;border:1px solid #a9e0cd;border-radius:12px;background:#e3f4ef';
+    var text=document.createElement('p');text.textContent='Continuar a leitura: '+readingLabel(last.label);text.style.margin='0 0 10px';
+    var link=document.createElement('a');link.href=last.url+'#retomar';link.textContent='Retomar leitura';link.className='pill';box.appendChild(text);box.appendChild(link);main.insertBefore(box,main.firstChild);
+   }return;
+  }
+  var nav=window.performance&&typeof window.performance.getEntriesByType==='function'?window.performance.getEntriesByType('navigation')[0]:null;
+  var resume=location.hash==='#retomar'||!!(nav&&(nav.type==='reload'||nav.type==='back_forward'));
+  var prior=saved&&saved.pages&&saved.pages[url],restoring=!!valid(prior)&&(file!=='doenca.html'||resume),moved=false,timer;
+  // Uma nova abertura de ficha começa na imagem; retomar/recarregar preserva a leitura.
+  if(file==='doenca.html'&&!resume&&'scrollRestoration' in history)history.scrollRestoration='manual';
+  function snapshot(){
+   if(restoring)return;
+   var data=load()||{},sub=document.querySelector('.page-sub'),tag=document.querySelector('.casebtn.on');
+   var v={url:url,label:readingLabel((document.querySelector('.page-title')||{}).textContent||document.title),y:Math.max(0,window.scrollY||0),open:Array.from(document.querySelectorAll('details')).map(d=>d.open),full:!!(sub&&/texto integral/i.test(sub.textContent)),caseIndex:tag?Array.from(document.querySelectorAll('.casebtn')).indexOf(tag):-1};
+   data.pages=data.pages||{};data.pages[url]=v;data.last=v;data.updated=Date.now();
+   var ks=Object.keys(data.pages);if(ks.length>80)delete data.pages[ks[0]];
+   try{store.setItem(key,JSON.stringify(data));}catch(e){}
+  }
+  function stop(){moved=true;restoring=false;}
+  ['wheel','touchstart','keydown'].forEach(n=>window.addEventListener(n,stop,{passive:true,once:true}));
+  if(restoring){
+   if(file==='doenca.html'&&prior.full&&typeof window.renderFull==='function')window.renderFull(window.resolveSlug(window.slugFromURL()));
+   else if(file==='doenca.html'&&prior.caseIndex>=0){var b=document.querySelectorAll('.casebtn')[prior.caseIndex];if(b)b.click();}
+   Array.from(document.querySelectorAll('details')).forEach((d,i)=>{if(prior.open&&typeof prior.open[i]==='boolean')d.open=prior.open[i];});
+   [0,150,500,1100].forEach((ms,i)=>setTimeout(function(){if(!moved)window.scrollTo(0,Number.isFinite(prior.y)?Math.max(0,prior.y):0);if(i===3){restoring=false;snapshot();}},ms));
+  }else snapshot();
+  window.addEventListener('scroll',function(){clearTimeout(timer);timer=setTimeout(snapshot,200);},{passive:true});
+  document.addEventListener('toggle',function(){if(!restoring)snapshot();},true);
+  window.addEventListener('pagehide',snapshot);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')snapshot();});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initReading);else initReading();
+})();
+
+</script>
+</body></html>
+
+
+

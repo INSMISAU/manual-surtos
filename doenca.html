@@ -109,6 +109,13 @@ svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke
 .backlink{display:none!important}
 .risk-water{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%}.risk-water img{max-width:100%;max-height:100%}.water-unavailable{position:absolute;right:0;bottom:0;border-radius:50%;background:white;color:#B02040;font:700 30px/1 Arial,sans-serif}
 
+/* Referências das imagens: evitar os espaços excessivos do texto justificado. */
+.photo-source,.photo-credit,.disease-hero figcaption{text-align:left!important;word-spacing:normal;letter-spacing:normal}
+.photo-source a{overflow-wrap:anywhere;word-break:normal}
+
+/* COVID: corrigir espaços excessivos apenas nos pontos-chave. */
+.keys.keys-covid li span:not(.n){text-align:left!important;word-spacing:normal}
+
 /* Ilustrações das fichas. */
 .manual-figure{margin:0;width:100%}
 .manual-figure img{display:block;width:100%;height:auto;max-height:none}
@@ -191,9 +198,11 @@ svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke
 .disease-hero figcaption{padding:12px;font-size:12px;line-height:1.5;color:#52616a;overflow-wrap:anywhere}
 .disease-hero a{color:#00566a}.disease-hero .photo-source{display:block}
 @media(max-width:600px){.disease-hero img{max-height:360px}}
-</style></head>
+</style><link rel="stylesheet" href="assets/css/image-viewer.css">
+</head>
 <body><div class="app"><div id="app"></div></div>
 <script data-ins-photo-privacy="1" src="assets/js/photo-privacy.js"></script>
+<script src="assets/js/image-sources.js"></script>
 <script src="ddata.js"></script>
 <script src="fiche-assets.js"></script>
 <script>
@@ -296,6 +305,7 @@ function riskHTML(t){t=String(t||'');
  return t;}
 
 function sourceOnly(container){
+ window.INSImageSources.clean(container);
  container.querySelectorAll('.photo-caption-text,.image-date').forEach(function(n){n.remove();});
  container.querySelectorAll('figcaption,.risk-credit,.media-credit').forEach(function(n){
   if(!/Fonte\s*:/i.test(n.textContent))return;
@@ -314,7 +324,7 @@ function diseaseHero(d){
 
 function renderDisease(slug){var d=applyOv(slug);window.CUR=d;
  var keys='';(d.keys||[]).forEach(function(t,i){keys+='<li><span class="n">'+(i+1)+'</span><span>'+t+'</span></li>';});
- var keysBlock=keys?('<details class="keys" open><summary><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M21 2l-2 2m-7.6 7.6a5 5 0 1 1-7 7 5 5 0 0 1 7-7zm0 0L15 8m0 0l3 3 3-3-3-3"/></svg> Pontos-chave <span class="kchev"><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary><ul>'+keys+'</ul></details>'):'';
+ var keysBlock=keys?('<details class="keys'+(slug==='covid-19-e-outros-coronavirus'?' keys-covid':'')+'" open><summary><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M21 2l-2 2m-7.6 7.6a5 5 0 1 1-7 7 5 5 0 0 1 7-7zm0 0L15 8m0 0l3 3 3-3-3-3"/></svg> Pontos-chave <span class="kchev"><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary><ul>'+keys+'</ul></details>'):'';
  var casesBlock='';if(d.cases&&d.cases.length){var bar='';d.cases.forEach(function(c,i){bar+='<button type="button" aria-controls="casebox" aria-pressed="'+(i===0?'true':'false')+'" class="casebtn'+(i===0?' on':'')+'" onclick="setCase(\''+slug+'\','+i+',this)">'+c.label+'</button>';});
   casesBlock='<div class="sec-h carmim"><svg class="i" viewBox="0 0 24 24"><path d="M8 15a6 6 0 0 0 12 0v-3M8 15V9a4 4 0 1 1 8 0v3M8 15H5a2 2 0 0 0 0 4h1"/></svg> Definição de caso</div><div class="casebar">'+bar+'</div><div class="casebox" id="casebox" role="region" aria-labelledby="casetag"><div class="case-heading"><span class="casetag" id="casetag" aria-live="polite"></span></div><div class="casefig" id="casefig"></div><div class="casetxt"><div id="casebody"></div></div></div>';}
  var evo='';if(d.evolution){evo='<div class="sec-h"><svg class="i" viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg> Evolução das lesões</div><div class="evo">'+d.evolution+'</div>';}
@@ -455,6 +465,7 @@ try{ADMIN=(LS()&&LS().getItem('ins_admin')==='1')||false}catch(e){}
 })();
 
 </script>
+<script src="assets/js/image-viewer.js"></script>
 </body></html>
 
 

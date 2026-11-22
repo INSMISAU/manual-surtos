@@ -1,0 +1,3 @@
+.fig img[src$="/fig4.png"],.image-card img[src$="/fig4.png"],.figure-canvas img[src$="/fig4.png"],.ins-image-canvas img[src$="/fig4.png"]{filter:url("../fig/chart-palette.svg#fig4")}
+.fig img[src$="/fig5.png"],.image-card img[src$="/fig5.png"],.figure-canvas img[src$="/fig5.png"],.ins-image-canvas img[src$="/fig5.png"]{filter:url("../fig/chart-palette.svg#fig5")}
+.fig img[src$="/fig6.png"],.image-card img[src$="/fig6.png"],.figure-canvas img[src$="/fig6.png"],.ins-image-canvas img[src$="/fig6.png"]{filter:url("../fig/chart-palette.svg#fig6")}

@@ -39,15 +39,16 @@
     <div class="field"><label>Email</label><input id="email" type="email" placeholder="nome@ins.gov.mz" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Palavra-passe</label><input id="pass" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btn-p login-btn" onclick="doLogin()">Entrar</button>
-    <p class="mut login-foot">As contas são criadas pelo <b>Administrador</b> do INS. Se não consegue entrar, contacte o Administrador.</p>
+    <p class="mut login-foot">Esqueceu a palavra-passe? Peça ao administrador que reponha o seu acesso.</p><p class="mut login-foot">As contas são criadas pelo Administrador do INS. Para contas bloqueadas ou outros problemas de acesso, contacte o Administrador.</p>
     <p class="mut login-foot" id="cfgLink" style="display:none"><a href="#" onclick="resetCfg();return false;">Trocar de projecto</a></p>
   </div>
 </div>
 
+<div id="recuperar" class="wrap hide"><div class="card"><h1>Recuperar acesso</h1><p class="mut">Indique o e-mail da sua conta para receber um link de recuperação.</p><div class="field"><label for="recoveryEmail">E-mail</label><input id="recoveryEmail" type="email" autocomplete="email"></div><p id="recoveryMsg" class="mut" role="status" aria-live="polite"></p><div class="row"><button id="recoverySend" class="btn-p" onclick="pedirRecuperacao()">Enviar link</button><button class="btn-o" onclick="show('login')">Voltar à entrada</button></div></div></div>
 <div id="trocar" class="wrap hide">
   <div class="card">
     <h1>Definir nova palavra-passe</h1>
-    <p class="mut">É a sua primeira entrada. Por segurança, defina uma palavra-passe pessoal antes de continuar.</p>
+    <p class="mut" id="trocarIntro">É a sua primeira entrada. Por segurança, defina uma palavra-passe pessoal antes de continuar.</p>
     <div id="trocarErr" class="hint hide"></div>
     <div class="field"><label>Nova palavra-passe</label><input id="np1" type="password" placeholder="mínimo 8 caracteres"></div>
     <div class="field"><label>Confirmar palavra-passe</label><input id="np2" type="password"></div>
@@ -85,7 +86,7 @@ var FIELDS=[
 ['protocolo_investigacao','Protocolo de investigação'],['colheita_manuseio_amostras','Colheita e manuseio de amostras para o diagnóstico laboratorial']
 ];
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2800);}
-function show(id){['cfg','login','trocar','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
+function show(id){['cfg','login','recuperar','trocar','app'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function mensagemEstadoEditorial(etapa,estado){
 var mensagens={revisao:{rascunho:'Revisão: aguarda submissão.',revisao:'Em revisão.',aprovado:'Revisão concluída.',publicado:'Conteúdo já publicado.'},publicacao:{rascunho:'Publicação: aguarda submissão e aprovação.',revisao:'Publicação: aguarda aprovação.',aprovado:'Pronto para publicação.',publicado:'Conteúdo já publicado.'}};
@@ -100,11 +101,40 @@ localStorage.setItem(CFG_KEY,JSON.stringify({url:url,key:key})); initSb();
 }
 function resetCfg(){ if(!confirm('Isto apaga a ligacao guardada ao Supabase e volta ao ecra de configuracao. Continuar?')) return; localStorage.removeItem(CFG_KEY); location.reload(); }
 if(/[?&]config=1/.test(location.search)){ var _cl=document.getElementById('cfgLink'); if(_cl) _cl.style.display='block'; }
+var RECOVERY_MODE=false;
+var RECOVERY_REQUESTED=new URLSearchParams(location.search).get('recuperar')==='1'||new URLSearchParams(location.hash.replace(/^#/, '')).get('type')==='recovery';
+function mostrarRecuperacao(){
+ document.getElementById('recoveryEmail').value=document.getElementById('email').value.trim();
+ document.getElementById('recoveryMsg').textContent='';show('recuperar');
+}
+async function pedirRecuperacao(){
+ var email=document.getElementById('recoveryEmail'),msg=document.getElementById('recoveryMsg'),btn=document.getElementById('recoverySend');
+ if(!email.value.trim()||!email.checkValidity()){msg.textContent='Introduza um e-mail válido.';return;}
+ if(btn.disabled)return;btn.disabled=true;msg.textContent='A processar…';
+ try{
+  var destino=new URL(location.href);destino.hash='';destino.search='?recuperar=1';
+  var r=await sb.auth.resetPasswordForEmail(email.value.trim(),{redirectTo:destino.href});
+  if(r.error){msg.textContent='Não foi possível enviar o pedido. Tente mais tarde ou contacte o administrador.';return;}
+  msg.textContent='Se o e-mail corresponder a uma conta, receberá um link para definir uma nova palavra-passe. Verifique também o correio não solicitado.';
+ }catch(e){msg.textContent='Não foi possível enviar o pedido. Verifique a ligação e tente novamente.';}
+ finally{btn.disabled=false;}
+}
+function abrirNovaSenha(user){
+ USER=user;RECOVERY_MODE=true;
+ document.getElementById('trocarIntro').textContent='Defina e confirme a sua nova palavra-passe.';
+ document.getElementById('trocarErr').classList.add('hide');
+ document.getElementById('np1').value='';document.getElementById('np2').value='';
+ show('trocar');
+}
+
 function initSb(){
 var c=loadCfg(); if(!c){show('cfg');return;}
 sb=supabase.createClient(c.url,c.key);
+sb.auth.onAuthStateChange(function(event,session){
+ if(event==='PASSWORD_RECOVERY'&&session){abrirNovaSenha(session.user);}
+});
 sb.auth.getSession().then(function(r){
-if(r.data.session){ afterLogin(r.data.session.user); } else { show('login'); }
+if(r.data.session){if(RECOVERY_MODE||RECOVERY_REQUESTED){abrirNovaSenha(r.data.session.user);}else{afterLogin(r.data.session.user);}}else{show('login');if(RECOVERY_REQUESTED){var e=document.getElementById('loginErr');e.textContent='O link de recuperação não é válido ou expirou. Peça um novo link em Esqueci a palavra-passe.';e.classList.remove('hide');}}
 });
 }
 function doLogin(){
@@ -115,20 +145,29 @@ afterLogin(r.data.user);
 });
 }
 function doLogout(){ sb.auth.signOut().then(function(){ location.reload(); }); }
-function precisaTrocar(){ return !!(USER && USER.user_metadata && USER.user_metadata.senha_temporaria===true); }
+function precisaTrocar(){ return !!(USER && ((USER.app_metadata&&USER.app_metadata.cms_reset_required===true)||(USER.user_metadata&&USER.user_metadata.senha_temporaria===true))); }
 function trocarSenha(){
 var p1=document.getElementById('np1').value, p2=document.getElementById('np2').value;
 var e=document.getElementById('trocarErr'); e.classList.add('hide');
 if((p1||'').length<8){ e.textContent='A palavra-passe deve ter pelo menos 8 caracteres.'; e.classList.remove('hide'); return; }
 if(p1!==p2){ e.textContent='As palavras-passe não coincidem.'; e.classList.remove('hide'); return; }
+if(USER&&USER.app_metadata&&USER.app_metadata.cms_reset_required){
+ if(p1.length<12){e.textContent='A palavra-passe deve ter pelo menos 12 caracteres.';e.classList.remove('hide');return;}
+ sb.functions.invoke('cms-acessos',{body:{action:'complete',password:p1}}).then(function(r){
+  if(r.error||r.data.error){e.textContent=(r.data&&r.data.error)||'Não foi possível alterar a palavra-passe.';e.classList.remove('hide');return;}
+  sb.auth.signOut({scope:'local'}).then(function(){document.getElementById('np1').value='';document.getElementById('np2').value='';location.replace(location.pathname);});
+ });return;
+}
 sb.auth.updateUser({password:p1, data:{senha_temporaria:false}}).then(function(r){
 if(r.error){ e.textContent=r.error.message; e.classList.remove('hide'); return; }
 if(r.data && r.data.user) USER=r.data.user;
+if(RECOVERY_MODE){sb.auth.signOut({scope:'local'}).then(function(){USER=null;RECOVERY_MODE=false;RECOVERY_REQUESTED=false;history.replaceState(null,'',location.pathname);document.getElementById('pass').value='';document.getElementById('np1').value='';document.getElementById('np2').value='';show('login');var msg=document.getElementById('loginErr');msg.textContent='Palavra-passe actualizada. Entre com a nova palavra-passe.';msg.classList.remove('hide');});return;}
 toast('Palavra-passe actualizada.'); carregarPerfil();
 });
 }
 function afterLogin(user){
 USER=user;
+if(RECOVERY_MODE){abrirNovaSenha(user);return;}
 if(precisaTrocar()){ show('trocar'); return; }
 carregarPerfil();
 }
@@ -161,17 +200,39 @@ c.innerHTML='<div class="card"><div class="hint">A sua conta ainda não tem perm
 return;
 }
 var tabs=[['doencas','Doenças'],['sindromes','Síndromes'],['seccoes','Secções']];
+if(PERFIL.papel==='admin')tabs.push(['utilizadores','Utilizadores']);
+tabs.push(['ajuda','Ajuda']);
 var nav='<div class="row" style="gap:6px;margin-bottom:12px;align-items:center">'+tabs.map(function(t){return '<button class="'+(VIEW===t[0]?'btn-p':'btn-o')+'" onclick="irPara(\''+t[0]+'\')">'+t[1]+'</button>';}).join('')+'<span style="flex:1"></span><button class="btn-o" onclick="loadEmendas()">Ver emendas</button></div>';
 /* Publicacao (solucao A'): o token vem de system_settings (Supabase, via RLS) e o
    commit e feito directamente. O utilizador autorizado so ve "Publicar". */
 var actions=(can('publish')?'<div class="row" style="margin-bottom:10px;align-items:center"><button class="btn-g" onclick="publicarSite()">↥ Publicar para o site</button></div>':'');
 c.innerHTML='<div class="card"><h1 style="margin:0 0 14px;font-size:19px;color:var(--azul2);text-align:center">Administração — Gestor de Conteúdos</h1>'+
 nav+actions+'<div id="viewbox">A carregar…</div></div>';
-if(VIEW==='sindromes') viewSindromes();
+if(VIEW==='ajuda')viewAjudaCMS();
+else if(VIEW==='utilizadores'&&PERFIL.papel==='admin') viewUtilizadores();
+else if(VIEW==='sindromes') viewSindromes();
 else if(VIEW==='seccoes') viewSeccoes();
 else viewDoencas();
 }
 function toggleDef(){ var d=document.getElementById('defBox'); if(d) d.style.display=(d.style.display==='none'||!d.style.display)?'block':'none'; }
+async function viewUtilizadores(){
+ var vb=document.getElementById('viewbox');vb.textContent='A carregar…';
+ var r=await sb.functions.invoke('cms-acessos',{body:{action:'list'}});
+ if(r.error||r.data.error){vb.textContent='Não foi possível carregar utilizadores. Verifique a sessão e as permissões.';return;}
+ vb.innerHTML='<h2 style="font-size:17px">Utilizadores</h2><p class="mut">Reponha o acesso de uma conta existente. Entregue a senha temporária apenas ao titular confirmado.</p><div id="resetResult" role="status"></div><table><thead><tr><th>Utilizador</th><th>Perfil</th><th></th></tr></thead><tbody>'+r.data.users.map(function(u){return '<tr><td>'+esc(u.nome||u.email)+'<br><span class="mut">'+esc(u.email)+'</span></td><td>'+esc(u.papel)+'</td><td>'+(u.id!==USER.id?'<button class="btn-o" data-id="'+esc(u.id)+'" onclick="reporAcessoCMS(this)">Repor palavra-passe</button>':'')+'</td></tr>';}).join('')+'</tbody></table>';
+}
+async function reporAcessoCMS(btn){
+ if(!confirm('Confirmou a identidade do titular? A senha actual será substituída por uma temporária.'))return;
+ btn.disabled=true;var box=document.getElementById('resetResult');box.textContent='A repor…';
+ try{
+  var r=await sb.functions.invoke('cms-acessos',{body:{action:'reset',id:btn.getAttribute('data-id')}});
+  if(r.error||r.data.error){box.textContent=(r.data&&r.data.error)||'Não foi possível repor o acesso.';return;}
+  box.innerHTML='<div class="hint"><b>Senha temporária para '+esc(r.data.email)+'</b><input id="temporaryPassword" readonly autocomplete="off"><p>Copie e entregue apenas ao titular. Ao entrar no CMS, deverá definir uma senha pessoal.</p><button class="btn-o" onclick="document.getElementById(\'resetResult\').textContent=\'\'">Ocultar</button></div>';
+  document.getElementById('temporaryPassword').value=r.data.password;
+ }catch(e){box.textContent='Não foi possível concluir o pedido.';}finally{btn.disabled=false;}
+}
+
+function viewAjudaCMS(){document.getElementById('viewbox').innerHTML="<h2 style=\"font-size:20px\">Ajuda — Gestão de conteúdos</h2>\n<p>As opções disponíveis dependem do seu perfil: edição, revisão, publicação ou administração.</p>\n<h3>Alterar textos</h3>\n<ol><li>Em <b>Doenças</b>, abra a ficha e edite os campos necessários. Para capítulos, utilize <b>Secções</b>.</li><li><b>Guardar</b> conserva o trabalho. <b>Guardar &amp; submeter</b> envia-o à revisão.</li><li>O revisor usa <b>Aprovar</b> ou <b>Devolver</b>.</li><li>Após aprovação, o responsável usa <b>Publicar</b> na ficha.</li></ol>\n<h3>Substituir imagens</h3>\n<ol><li>Abra a ficha e desça até <b>Imagens da ficha</b>.</li><li>Em <b>Onde substituir a imagem</b>, escolha o caso ou grupo de risco exacto. Confira a imagem actualmente publicada.</li><li>Carregue <b>JPG, PNG ou WebP, até 3 MB</b>. Confira a pré-visualização e indique uma descrição breve quando necessária.</li><li>Se já existir uma substituição para a posição, remova a entrada anterior da lista antes de carregar a nova.</li><li>Guarde, submeta à revisão e siga a aprovação e publicação da ficha.</li></ol>\n<p>As proporções e as regras de tamanho do leitor são preservadas. As restantes posições não são substituídas automaticamente. Se o caso ou grupo de risco mudar, reabra a ficha e atribua a imagem à posição correcta antes de publicar.</p>\n<h3>Quando aparece no manual?</h3>\n<p><b>Guardar</b> grava no gestor. <b>Publicar</b> na ficha torna o conteúdo elegível para publicação. Para actualizar o leitor, o responsável clica em <b>Publicar para o site</b> no painel geral.</p>\n<p>Esse botão gera o conjunto dos conteúdos elegíveis. Confirme o destino indicado, aguarde a conclusão e depois verifique a ficha no leitor. Se ainda vir a imagem anterior, recarregue a página antes de repetir a edição.</p>\n<h3>Repor acesso — Administrador</h3>\n<p>Em <b>Utilizadores</b>, escolha a conta e clique em <b>Repor palavra-passe</b>. Confirme a identidade do titular e entregue a senha temporária em privado. Ao entrar, o titular deve definir a sua senha pessoal. A reposição não altera o perfil nem desbloqueia uma conta suspensa.</p>\n<p>Não partilhe senhas, links de acesso ou capturas com credenciais.</p>\n";}
 function viewDoencas(){
 var vb=document.getElementById('viewbox');
 vb.innerHTML='<div style="text-align:center;font-weight:700;font-size:16px;margin:0 0 8px">Doenças</div>'+(can('edit')?'<div style="text-align:center;margin:0 0 12px"><button class="btn-p" onclick="novaDoenca()">+ Nova doença</button></div>':'')+'<div id="novaBox"></div><div id="lista">A carregar…</div>';
@@ -351,6 +412,29 @@ CURRENT_IMGS.push({url:pub.data.publicUrl,caption:'',target:target});
 renderImgs(); inp.value=''; toast('Imagem carregada. Clique em Guardar para gravar.');
 });
 }
+function validarCorreccaoFicha(p,slug){
+ if(!p||Array.isArray(p)||p.formato!=='ins-correccao-ficha-v1')throw new Error('Formato de correcção inválido.');
+ if(typeof p.slug!=='string'||p.slug!==slug)throw new Error('Este ficheiro não corresponde à ficha aberta.');
+ if(p.campo!=='pontos_chave')throw new Error('Este carregamento só permite corrigir Pontos-chave.');
+ if(typeof p.texto!=='string'||!p.texto.trim()||p.texto.length>20000||/[<>]/.test(p.texto))throw new Error('Texto de correcção inválido.');
+ if(Object.keys(p).some(function(k){return ['formato','slug','campo','texto'].indexOf(k)<0;}))throw new Error('O ficheiro contém campos não permitidos.');
+ return p.texto;
+}
+function carregarCorreccaoFicha(inp){
+ if(!can('edit')){toast('Sem permissão para editar.');inp.value='';return;}
+ var file=inp.files&&inp.files[0],slug=inp.getAttribute('data-slug');
+ if(!file)return;
+ if(file.size>50000){toast('Ficheiro demasiado grande.');inp.value='';return;}
+ file.text().then(function(text){
+  var valor=validarCorreccaoFicha(JSON.parse(text),slug);
+  if(!document.body.contains(inp))return;
+  var field=document.getElementById('f_pontos_chave');if(!field)throw new Error('Abra novamente a ficha.');
+  field.value=valor;
+  var status=document.getElementById('correccaoStatus');if(status)status.textContent='Pontos-chave carregados. Confira o texto abaixo e clique em Guardar.';
+  toast('Correcção carregada — falta Guardar.');
+ }).catch(function(e){toast(e.message||'Não foi possível ler a correcção.');}).finally(function(){inp.value='';});
+}
+
 function editDoe(id){
 sb.from('doencas').select('*').eq('id',id).single().then(function(r){
 if(r.error){toast('Erro a carregar');return;}
@@ -364,7 +448,7 @@ document.getElementById('content').innerHTML=
 '<h1 style="flex:1;margin:0;font-size:18px">'+esc(d.nome)+'</h1>'+badge(d.estado)+' <span class="mut">v'+d.versao+'</span></div></div>'+
 '<div class="card">'+
 '<div class="field"><label>Nome</label><input id="f_nome" value="'+esc(d.nome)+'" '+(can('edit')?'':'readonly')+'></div>'+
-f+imgHTML()+
+(can('edit')?'<div class="field"><label>Carregar correcção de pontos-chave</label><input type="file" accept=".json,application/json" data-slug="'+esc(d.slug)+'" onchange="carregarCorreccaoFicha(this)"><div id="correccaoStatus" class="mut">Seleccione o ficheiro da ficha. O texto será preenchido para conferir antes de Guardar.</div></div>':'')+f+imgHTML()+
 '<div class="row" style="border-top:1px solid var(--linha);padding-top:12px;margin-top:6px;flex-wrap:wrap;gap:6px;align-items:center">'+
 (can('edit')?'<button class="btn-o" onclick="saveDoe(\''+id+'\',null)">Guardar</button><button class="btn-w" onclick="saveDoe(\''+id+'\',\'revisao\')">Guardar &amp; submeter</button>':'')+
 (can('review')?(d.estado==='revisao'?'<button class="btn-g" onclick="setEstado(\''+id+'\',\'aprovado\')">✔ Aprovar</button><button class="btn-r" onclick="setEstado(\''+id+'\',\'rascunho\')">↩ Devolver</button>':'<span class="mut" style="font-size:12px;margin-left:8px">'+esc(mensagemEstadoEditorial('revisao',d.estado))+'</span>'):'')+

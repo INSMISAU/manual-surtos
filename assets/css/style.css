@@ -326,3 +326,6 @@ table.t1 a{color:var(--petrol);text-decoration:none}
 /* Imagens documentadas das categorias sindrómicas. */
 .syn .syndrome-card-photo{display:flex;align-items:center;justify-content:center;width:100%;height:112px;flex:none;background:#f5f8f8;border-radius:8px}
 .syn .syndrome-card-photo img{display:block;max-width:100%;width:100%;height:100%;object-fit:contain}
+
+.syn .syndrome-card-symbol{display:flex;align-items:center;justify-content:center;width:100%;height:112px;flex:none;background:#fff;border-radius:8px;overflow:hidden}
+.syn .syndrome-card-symbol svg{display:block;width:100%;height:100%;overflow:hidden}

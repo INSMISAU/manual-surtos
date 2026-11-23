@@ -39,7 +39,7 @@
     <div class="field"><label>Email</label><input id="email" type="email" placeholder="nome@ins.gov.mz" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="field"><label>Palavra-passe</label><input id="pass" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btn-p login-btn" onclick="doLogin()">Entrar</button>
-    <p class="mut login-foot">Esqueceu a palavra-passe? Peça ao administrador que reponha o seu acesso.</p><p class="mut login-foot">As contas são criadas pelo Administrador do INS. Para contas bloqueadas ou outros problemas de acesso, contacte o Administrador.</p>
+    <p class="mut login-foot"><a href="#" onclick="mostrarRecuperacao();return false;">Esqueci a palavra-passe</a></p><p class="mut login-foot">As contas são criadas pelo Administrador do INS. Para contas bloqueadas ou outros problemas de acesso, contacte o Administrador.</p>
     <p class="mut login-foot" id="cfgLink" style="display:none"><a href="#" onclick="resetCfg();return false;">Trocar de projecto</a></p>
   </div>
 </div>
@@ -721,3 +721,4 @@ window.addEventListener('load', initSb);
 </script>
 </body>
 </html>
+

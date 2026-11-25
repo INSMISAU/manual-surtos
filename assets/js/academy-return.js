@@ -11,3 +11,6 @@
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
+
+/* Acesso ao guia; não altera o conteúdo das fichas nem os acessos. */
+(function(){function guide(){var back=document.querySelector('a[href*="academia-digital-ins"]');if(document.querySelector('[data-ins-help]'))return;var link=document.createElement("a");link.href=new URL("../../ajuda.html",document.currentScript&&document.currentScript.src||new URL("assets/js/academy-return.js",location.href)).href;link.textContent="Ajuda e guias";link.setAttribute("data-ins-help","");link.style.cssText="display:block;max-width:440px;margin:16px auto 90px;padding:12px 18px;border:1px solid #bdd2d9;border-radius:10px;background:#edf4f5;color:#07576b;text-align:center;font:15px/1.5 Arial,sans-serif;position:relative;z-index:1";document.body.appendChild(link);}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",guide);else guide();})();
